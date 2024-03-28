@@ -21,7 +21,7 @@ endef
 
 LOG__PREL			= @echo "$(PURPLE) \nMAKEFILE $(RESET)\n"
 LOG__SUCCESS		= @printf "$(GREEN)\rDONE $(RESET)\n"
-LOG__ALLSUCCESS		= @printf "\033[1;92m\n\rALL DONE $(RESET)\n\n"
+LOG__ALLSUCCESS		= @printf "\033[1;92m\n\rLIBFT DONE $(RESET)\n\n"
 
 #			DIRECTORIES
 SRC_DIR				= src/
@@ -54,7 +54,7 @@ LIB					= $(wildcard $(PREFIX_LIB))
 OBJ					= $(patsubst %.c, $(OBJ_DIR)%.o, $(notdir $(ALL_SRC)))
 DEP					= $(OBJ:.o=.d)
 
-DIRS				= $(dir $(OBJ))
+DIRS				= $(sort $(dir $(OBJ)))
 
 #			UTILITIES
 ALIB				= ar crs
@@ -67,34 +67,22 @@ all : $(NAME)
 	$(LOG__ALLSUCCESS)
 
 $(NAME): $(DIRS) $(OBJ)
-	$(call logs, $(CYAN),"Compiling\ Executable")
 	$(ALIB) $(NAME) $(OBJ)
-	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	$(call logs, $(CYAN),"Compiling\ OBJ\ files")
 	$(CC) $(CFLAGS) -c $< -o $@
-	$(LOG__SUCCESS)
 
 $(LIB) : force
-	$(call logs, $(CYAN),"Compiling\ LIBS")
 	@make -sC $(LIB_DIR)
-	$(LOG__SUCCESS)
 
 $(DIRS) :
-	$(call logs, $(CYAN),"Creating\ directories")
 	@mkdir -p $(DIRS)
-	$(LOG__SUCCESS)
 
 clean : 
-	$(call logs, $(YELLOW),"Cleaning\ OBJ\ files")
 	rm -rf $(OBJ_DIR)
-	$(LOG__SUCCESS)
 
 fclean : clean
-	$(call logs, $(YELLOW),"Cleaning\ Executable")
 	rm -f $(NAME)
-	$(LOG__SUCCESS)
 
 re : fclean all
 

@@ -30,48 +30,52 @@ LIB_DIR				= lib/
 OBJ_DIR				= $(SRC_DIR)OBJ/
 
 #			FILES
-ALL_SRC				= main.c \
+ALL_SRC				= main.c init.c \
+					parser.c error.c \
+					memory.c math_ft.c graphics_ft.c \
+					keys_bindings.c \
+					\
 					debug.c
 
-ALL_HEADERS			= cub3D.h
+ALL_HEADERS			= cub3d.h
 
 ALL_LIBS			= libft/libft.a \
 					gnl/gnl.a \
-					mlx/libmlx.a
+					# mlx/libmlx.a
 
 PREFIX_SRC			= $(addprefix $(SRC_DIR), $(ALL_SRC))
 PREFIX_LIB			= $(addprefix $(LIB_DIR), $(ALL_LIBS))
 PREFIX_HEADER		= $(addprefix $(HEAD_DIR), $(ALL_HEADERS))
 SRC					= $(wildcard $(PREFIX_SRC))
 HEADER				= $(wildcard $(PREFIX_HEADER))
-LIB					= $(wildcard $(PREFIX_LIB))
-OBJ					= $(patsubst %.c, $(OBJ_DIR)%.o, $(notdir $(ALL_SRC)))
+LIB					= $(PREFIX_LIB)
+OBJ					= $(sort $(patsubst %.c, $(OBJ_DIR)%.o, $(notdir $(ALL_SRC))))
 DEP					= $(OBJ:.o=.d)
 
-DIRS				= $(dir $(OBJ))
+DIRS				= $(sort $(dir $(OBJ)))
 
 #			UTILITIES
 CC					= cc
 CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
+EXFLAGS				= -L lib/mlx -lmlx -lXext -lX11 -lm -lbsd
 
 #					RULES
 
 all : $(NAME)
 	$(LOG__ALLSUCCESS)
 
-$(NAME): $(DIRS) $(OBJ)
+$(NAME): $(DIRS) $(LIB) $(OBJ)
 	$(call logs, $(CYAN),"Compiling\ Executable")
-	$(CC) $(CFLAGS) $(OBJ) -I . -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
 	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	$(call logs, $(CYAN),"Compiling\ OBJ\ files")
 	$(CC) $(CFLAGS) -c $< -o $@
-	$(LOG__SUCCESS)
 
 $(LIB) : force
+	@make -sC lib/libft
+	@make -sC lib/gnl
 	$(call logs, $(CYAN),"Compiling\ LIBS")
-	@make -sC $(LIB_DIR)
 	$(LOG__SUCCESS)
 
 $(DIRS) :
@@ -80,14 +84,20 @@ $(DIRS) :
 	$(LOG__SUCCESS)
 
 clean : 
+	@make clean -sC lib/libft
+	@make clean -sC lib/gnl
+	# @make clean -sC lib/mlx
 	$(call logs, $(YELLOW),"Cleaning\ OBJ\ files")
 	rm -rf $(OBJ_DIR)
 	$(LOG__SUCCESS)
 
 fclean : clean
+	@make fclean -sC lib/libft
+	@make fclean -sC lib/gnl
 	$(call logs, $(YELLOW),"Cleaning\ Executable")
 	rm -f $(NAME)
 	$(LOG__SUCCESS)
+	rm -rf lib/mlx/libmlx.a
 
 re : fclean all
 
