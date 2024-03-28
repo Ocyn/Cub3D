@@ -1,49 +1,98 @@
-NAME			= cub3D
+#					MACRO INITIALIZATION
 
-SRCC_DIR		= src/
+NAME				= Cub3D
 
-SRCS			= main.c
+#		DEBUG TOOLS
 
-CC 				= cc
+RESET				= \033[0m
+UNDERLINE			= \033[4m
+BOLD				= \033[1m
+RED					= \033[0;91m
+GREEN				= \033[0;92m
+YELLOW				= \033[0;93m
+BLUE				= \033[0;94m
+PURPLE				= \033[0;35m
+CYAN				= \033[0;96m
+WHITE				= \033[0;37m
 
-CFLAGS			= -Wextra -Wall -Werror -gdwarf-4
+define	logs
+	@printf "$(1)\r\t $(2) $(RESET)"
+endef
 
-HEADERS			= $(SRCC_DIR)cub3D.h
+LOG__PREL			= @echo "$(PURPLE) \nMAKEFILE $(RESET)\n"
+LOG__SUCCESS		= @printf "$(GREEN)\rDONE $(RESET)\n"
+LOG__ALLSUCCESS		= @printf "\033[1;92m\n\rALL DONE $(RESET)\n\n"
 
-LIB_DIR = lib/
+#			DIRECTORIES
+SRC_DIR				= src/
+HEAD_DIR			= src/
+LIB_DIR				= lib/
+OBJ_DIR				= $(SRC_DIR)OBJ/
 
-LIBFT = $(LIB_DIR)libft.a
-MLX = $(LIB_DIR)mlx/libmlx.a
-INCLUDE_MLX = ./mlx/mlx.h ./mlx/mlx_int.h
-MLXFLAGS = -L ./mlx -lmlx -lXext -lX11 -lm -lbsd
+#			FILES
+ALL_SRC				= main.c \
+					debug.c
 
-OBJ_DIR = OBJ/
+ALL_HEADERS			= cub3D.h
 
-vpath %.c $(SRCC_DIR)
+ALL_LIBS			= libft/libft.a \
+					gnl/gnl.a \
+					mlx/libmlx.a
 
-OBJ_PATH 		= $(SRCC_DIR)$(OBJ_DIR)
+PREFIX_SRC			= $(addprefix $(SRC_DIR), $(ALL_SRC))
+PREFIX_LIB			= $(addprefix $(LIB_DIR), $(ALL_LIBS))
+PREFIX_HEADER		= $(addprefix $(HEAD_DIR), $(ALL_HEADERS))
+SRC					= $(wildcard $(PREFIX_SRC))
+HEADER				= $(wildcard $(PREFIX_HEADER))
+LIB					= $(wildcard $(PREFIX_LIB))
+OBJ					= $(patsubst %.c, $(OBJ_DIR)%.o, $(notdir $(ALL_SRC)))
+DEP					= $(OBJ:.o=.d)
 
-OBJ 			= $(patsubst %.c, $(OBJ_PATH)%.o, $(SRCS))
+DIRS				= $(dir $(OBJ))
+
+#			UTILITIES
+CC					= cc
+CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
+
+#					RULES
 
 all : $(NAME)
+	$(LOG__ALLSUCCESS)
 
-$(NAME): $(OBJ) $(LIB) $(HEADERS)
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -I $(MLXFLAGS) . -o $(NAME)
+$(NAME): $(DIRS) $(OBJ)
+	$(call logs, $(CYAN),"Compiling\ Executable")
+	$(CC) $(CFLAGS) $(OBJ) -I . -o $(NAME)
+	$(LOG__SUCCESS)
 
-$(LIB): force
-	@make -sC $(LIB_DIR)/libft
-	@make -sC $(LIB_DIR)/mlx
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c
+	$(call logs, $(CYAN),"Compiling\ OBJ\ files")
+	$(CC) $(CFLAGS) -c $< -o $@
+	$(LOG__SUCCESS)
 
-clean :
-	rm -f $(OBJ)
-	make clean -C $(LIB_DIR)/libft
-	make clean -C $(LIB_DIR)/mlx
+$(LIB) : force
+	$(call logs, $(CYAN),"Compiling\ LIBS")
+	@make -sC $(LIB_DIR)
+	$(LOG__SUCCESS)
+
+$(DIRS) :
+	$(call logs, $(CYAN),"Creating\ directories")
+	@mkdir -p $(DIRS)
+	$(LOG__SUCCESS)
+
+clean : 
+	$(call logs, $(YELLOW),"Cleaning\ OBJ\ files")
+	rm -rf $(OBJ_DIR)
+	$(LOG__SUCCESS)
 
 fclean : clean
+	$(call logs, $(YELLOW),"Cleaning\ Executable")
 	rm -f $(NAME)
-	make fclean -C $(LIB_DIR)/libft
-	make fclean -C $(LIB_DIR)/mlx
+	$(LOG__SUCCESS)
 
 re : fclean all
+
+-include $(DEP)
+
+.SILENT:
 
 .PHONY: all clean re fclean force

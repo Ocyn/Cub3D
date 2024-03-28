@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 19:26:58 by jcuzin            #+#    #+#             */
-/*   Updated: 2022/12/07 15:08:30 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:33:16 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	unsigned char		*dst0;
 	unsigned const char	*src0;
-	size_t				d;
 
-	d = 0;
 	if (!dst && !src)
 		return (dst);
 	dst0 = (unsigned char *)dst;

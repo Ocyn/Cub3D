@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/03/28 18:08:57 by jcuzin           ###   ########.fr       */
+/*   Created: 2024/03/28 16:45:16 by jcuzin            #+#    #+#             */
+/*   Updated: 2024/03/28 18:06:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef GNL_H
+# define GNL_H
 
-#include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# define BUFFER_SIZE 25
 
-int	main(int argc, char **argv)
-{
-	if (argc != 2 || !argv)
-		return (1);
-	// printf("\nCUB3D #####\n\n");
-	// printf("\tFile:\t%s\n", argv[1]);
-	db_readfile(argv[1]);
-	return (0);
-}
+size_t	ft_gnl_strlen(char *s);
+char	*get_next_line(int fd);
+char	*ft_gnl_strchr(char *s, char c);
+char	*ft_gnl_strncpy(char *dst, char *src, size_t len);
+char	*ft_gnl_strdup(char *src);
+char	*ft_gnl_strjoin(char *s1, char *s2);
+
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:48:56 by jcuzin            #+#    #+#             */
-/*   Updated: 2022/12/07 17:00:59 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:33:04 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ static char	*conv_to_char(int n, char *result, int sign)
 
 char	*ft_itoa(int n)
 {
-	size_t	index;
 	int		sign;
 	char	*result;
 
-	index = 0;
 	if (n == 0)
 		return (ft_strdup((const char *)"0"));
 	if (n == INT_MIN)
