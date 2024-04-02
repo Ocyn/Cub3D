@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:45:16 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/03/28 23:50:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:25:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdlib.h>
 # define BUFFER_SIZE 25
 
-size_t	ft_gnl_strlen(char *s);
+size_t	gnl_strlen(char *s);
 char	*get_next_line(int fd);
-char	*ft_gnl_strchr(char *s, char c);
-char	*ft_gnl_strncpy(char *dst, char *src, size_t len);
-char	*ft_gnl_strdup(char *src);
-char	*ft_gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(char *s, char c);
+char	*gnl_strncpy(char *dst, char *src, size_t len);
+char	*gnl_strdup(char *src);
+char	*gnl_strjoin(char *s1, char *s2);
 
 #endif

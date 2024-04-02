@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/03/28 23:33:19 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:31:46 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	db_readfile(char *file)
 	printf("\tFile:\t[%s]", file);
 	fd = open(file, O_RDONLY);
 	if (fd > 2)
-		printf("\rOK\n");
+		printf("\nOK\n%s####SOF%s\n", "\033[1m", "\033[0m");
 	else
 		printf("\rKO\n");
 	while (fd > 2)
@@ -42,5 +42,6 @@ int	db_readfile(char *file)
 		i++;
 	}
 	close(fd);
+	printf("\n%s####EOF%s\n\n", "\033[1m", "\033[0m");
 	return (EXIT_SUCCESS);
 }

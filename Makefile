@@ -30,9 +30,9 @@ LIB_DIR				= lib/
 OBJ_DIR				= $(SRC_DIR)OBJ/
 
 #			FILES
-ALL_SRC				= main.c init.c \
+ALL_SRC				= main.c init.c reset.c \
 					parser.c error.c \
-					memory.c math_ft.c graphics_ft.c \
+					convert.c memory_scan.c math_ft.c graphics_ft.c \
 					keys_bindings.c \
 					\
 					debug.c

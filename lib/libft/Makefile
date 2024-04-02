@@ -41,7 +41,7 @@ ALL_SRC				= ft_atoi.c ft_bzero.c ft_calloc.c \
 					ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c \
 					ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c
 
-ALL_HEADERS			= libft.h.h
+ALL_HEADERS			= libft.h
 
 ALL_LIBS			= lib.a
 
@@ -64,7 +64,6 @@ CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
 #					RULES
 
 all : $(NAME)
-	$(LOG__ALLSUCCESS)
 
 $(NAME): $(DIRS) $(OBJ)
 	$(ALIB) $(NAME) $(OBJ)

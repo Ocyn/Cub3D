@@ -56,7 +56,6 @@ CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
 #					RULES
 
 all : $(NAME)
-	$(LOG__ALLSUCCESS)
 
 $(NAME): $(DIRS) $(OBJ)
 	$(ALIB) $(NAME) $(OBJ)

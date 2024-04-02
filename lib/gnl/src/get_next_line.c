@@ -6,41 +6,51 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 13:24:26 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/03/28 23:50:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/02 21:25:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gnl.h"
 
-size_t	s_read(int fd, char *buff, size_t len)
+void	*gnl_bzero(char *s, size_t len)
 {
 	size_t	i;
 
 	i = 0;
-	if (!buff)
-		return (0);
-	while (buff[i] && i < len)
+	while (i < len)
 	{
-		buff[i] = 0;
+		s[i] = 0;
 		i++;
 	}
-	i = read(fd, buff, len);
-	return (i);
+	return (NULL);
 }
 
-char	*ft_parser(int fd, char *line, char *nbuff, size_t *rlen)
+void	*gnl_free(void *data)
 {
-	char	*buff;
+	if (data)
+		free(data);
+	return (NULL);
+}
 
-	buff = nbuff;
-	*rlen = s_read(fd, buff, BUFFER_SIZE);
-	while (!ft_gnl_strchr(line, '\n') && *rlen > 0)
+size_t	gnl_read(int fd, char *buff, size_t len)
+{
+	size_t	rlen;
+
+	rlen = 0;
+	gnl_bzero(buff, len);
+	rlen = read(fd, buff, len);
+	return (rlen);
+}
+
+size_t	gnl_parse(int fd, char *line, char *buff, size_t *rlen)
+{
+	*rlen = gnl_read(fd, buff, BUFFER_SIZE);
+	while (!gnl_strchr(line, '\n') && *rlen > 0)
 	{
-		line = ft_gnl_strjoin(line, buff);
-		*rlen = s_read(fd, buff, BUFFER_SIZE);
+		line = gnl_strjoin(line, buff);
+		*rlen = gnl_read(fd, buff, BUFFER_SIZE);
 	}
-	nbuff = buff;
-	return (line);
+	return (gnl_strlen(line));
 }
 
 char	*get_next_line(int fd)
@@ -51,21 +61,24 @@ char	*get_next_line(int fd)
 
 	line = NULL;
 	rlen = 0;
-	if (ft_gnl_strlen(buff))
-		line = ft_gnl_strdup(buff);
-	line = ft_parser(fd, line, buff, &rlen);
-	if (!ft_gnl_strlen(line))
-		return (free(line), NULL);
-	rlen = ft_gnl_strlen(ft_gnl_strchr(line, '\n'));
+	if (fd < 2)
+		return (NULL);
+	if (gnl_strlen(buff))
+		line = gnl_strdup(buff);
+	while (!gnl_strchr(line, '\n') && (rlen = gnl_read(fd, buff, BUFFER_SIZE)) > 0)
+		line = gnl_strjoin(line, buff);
+	if (!gnl_strlen(line))
+		return (gnl_free(line), gnl_bzero(buff, BUFFER_SIZE));
+	rlen = gnl_strlen(gnl_strchr(line, '\n'));
 	if (rlen)
 	{
-		ft_gnl_strncpy(buff, ft_gnl_strchr(line, '\n') + 1, rlen);
-		rlen = (ft_gnl_strlen(line) + 1) - rlen;
+		gnl_strncpy(buff, gnl_strchr(line, '\n') + 1, rlen);
+		rlen = (gnl_strlen(line) + 1) - rlen;
 	}
 	else
 	{
-		ft_gnl_strncpy(buff, "", rlen);
-		rlen = ft_gnl_strlen(line);
+		gnl_bzero(buff, BUFFER_SIZE);
+		rlen = gnl_strlen(line);
 	}
 	line[rlen] = 0;
 	return (line);
