@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:30:34 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:38:58 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,15 @@ size_t	me_tablen(char **tab)
 	return (i);
 }
 
-size_t	me_filelen(int fd, int closefile)
+size_t	me_filelen(char *file)
 {
+	int		fd;
 	size_t	len;
 	char	*line;
 
 	len = 0;
 	line = NULL;
+	fd = open(file, O_RDONLY);
 	if (fd < 2)
 		return (0);
 	while (fd > 1)
@@ -124,7 +126,6 @@ size_t	me_filelen(int fd, int closefile)
 		free(line);
 		len++;
 	}
-	if (closefile)
-		close(fd);
+	close(fd);
 	return (len);
 }

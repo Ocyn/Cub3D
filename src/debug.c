@@ -6,24 +6,34 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:05:19 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:28:52 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	db_write_title(void)
+void	db_ascii_title(char *tab)
 {
-	printf("\n\n");
-	printf("_________________________________________\n\n");
-	printf(" ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ \n");
-	printf("██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗\n");
-	printf("██║     ██║   ██║██████╔╝ █████╔╝██║  ██║\n");
-	printf("██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║\n");
-	printf("╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝\n");
-	printf(" ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝\n");
-	printf("          By Jcuzin x Aammirat          \n\n");
-	printf("_________________________________________\n\n");
+	printf("%s\n", F_DEFAULT);
+	printf("%s_________________________________________\n\n", tab);
+	printf("%s%s ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ \n", tab, F_LGREY2);
+	printf("%s%s██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗\n", tab, F_WHITE);
+	printf("%s%s██║     ██║   ██║██████╔╝ █████╔╝██║  ██║\n", tab, F_BLACK3);
+	printf("%s%s██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║\n", tab, F_DRED);
+	printf("%s%s╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝\n", tab, F_RED2);
+	printf("%s%s ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ \n", tab, F_WHITE);
+	printf("%s%s          By Jcuzin x Aammirat          \n", tab, F_BOLD);
+	printf("%s%s_________________________________________\n", tab, F_WHITE);
+	printf("%s\n", F_DEFAULT);
+}
+
+void	db_ascii_dbmode(char *tab)
+{
+	printf("%s\n", F_DEFAULT);
+	printf("%s%s┳┓┏┓┳┓┳┳┏┓  ┳┳┓┏┓┳┓┏┓\n", tab, F_DEFAULT);
+	printf("%s%s┃┃┣ ┣┫┃┃┃┓  ┃┃┃┃┃┃┃┣\n", tab, F_DEFAULT);
+	printf("%s%s┻┛┗┛┻┛┗┛┗┛  ┛ ┗┗┛┻┛┗┛\n", tab, F_DEFAULT);
+	printf("%s\n", F_DEFAULT);
 }
 
 void	db_testft(char *ft_name, int ret_int, char *ret_char)

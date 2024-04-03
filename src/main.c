@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:37:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:29:02 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	db_write_title();
+	db_ascii_title("");
 	if (init_data_struct(&data, argc, argv))
 		return (EXIT_FAILURE);
 	if (parse_main(&data))

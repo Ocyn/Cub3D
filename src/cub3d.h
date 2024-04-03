@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:52:47 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 23:40:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,25 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define F_RESET		"\033[0m"
+# define F_DEFAULT		"\033[0m"
 # define F_UNDERLINE	"\033[4m"
 # define F_BOLD			"\033[1m"
+# define F_REVERSE		"\033[2m"
+# define F_BLACK		"\033[0;30m"
+# define F_WHITE		"\033[0;15m"
+# define F_DGREY		"\033[0;100m"
 # define F_RED			"\033[0;91m"
 # define F_GREEN		"\033[0;92m"
 # define F_YELLOW		"\033[0;93m"
 # define F_BLUE			"\033[0;94m"
 # define F_PURPLE		"\033[0;35m"
 # define F_CYAN			"\033[0;96m"
-# define F_WHITE		"\033[0;37m"
+# define F_LGREY		"\033[0;37m"
+# define F_DRED			"\033[38;5;160m"
+# define F_BLACK2		"\033[38;5;235m"
+# define F_BLACK3		"\033[38;5;16m"
+# define F_LGREY2		"\033[38;5;248m"
+# define F_RED2			"\033[38;5;1m"
 
 typedef struct s_player
 {
@@ -58,7 +67,8 @@ typedef struct s_data
 	t_player	player;
 }				t_data;
 
-void		db_write_title(void);
+void		db_ascii_title(char *tab);
+void		db_ascii_dbmode(char *tab);
 int			db_readfile(char *file);
 void		db_testft(char *ft_name, int ret_int, char *ret_char);
 
@@ -79,7 +89,7 @@ int			parse_map(t_map *map);
 int			parse_file(char *file);
 
 void		me_free_tab(char **tab, int i);
-size_t		me_filelen(int fd, int closefile);
+size_t		me_filelen(char *file);
 size_t		me_tablen(char **tab);
 int			me_strcmp(char *s1, char *s2);
 int			me_str2strcmp(char *src, char *reg);
@@ -89,6 +99,6 @@ int			me_find_str_in_str(const char *src, const char *seek);
 void		s_free(char **ptr_memory);
 void		*s_malloc(unsigned long size);
 
-char		**conv_file2tab(int fd);
+char		**conv_file2tab(char *file);
 
 #endif
