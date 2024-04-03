@@ -6,11 +6,36 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/02 22:17:54 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 20:30:34 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	me_str2strcmp(char *src, char *reg)
+{
+	size_t	i;
+	size_t	i2;
+
+	i = 0;
+	i2 = 0;
+	if (!src || !reg)
+		return (1);
+	while (src[i])
+	{
+		i2 = 0;
+		while (reg[i2])
+		{
+			if (src[i] == reg[i2])
+				break ;
+			else if (!reg[i2 + 1])
+				return (1);
+			i2++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	me_strcmp(char *s1, char *s2)
 {
@@ -82,7 +107,7 @@ size_t	me_tablen(char **tab)
 	return (i);
 }
 
-size_t	me_filelen(int fd)
+size_t	me_filelen(int fd, int closefile)
 {
 	size_t	len;
 	char	*line;
@@ -99,6 +124,7 @@ size_t	me_filelen(int fd)
 		free(line);
 		len++;
 	}
-	close(fd);
+	if (closefile)
+		close(fd);
 	return (len);
 }

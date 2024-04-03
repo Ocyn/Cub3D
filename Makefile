@@ -31,8 +31,9 @@ OBJ_DIR				= $(SRC_DIR)OBJ/
 
 #			FILES
 ALL_SRC				= main.c init.c reset.c \
+					memory_edit.c memory_scan.c secure_ft.c \
 					parser.c error.c \
-					convert.c memory_scan.c math_ft.c graphics_ft.c \
+					convert.c math_ft.c graphics_ft.c \
 					keys_bindings.c \
 					\
 					debug.c
@@ -40,8 +41,8 @@ ALL_SRC				= main.c init.c reset.c \
 ALL_HEADERS			= cub3d.h
 
 ALL_LIBS			= libft/libft.a \
-					gnl/gnl.a \
-					# mlx/libmlx.a
+					gnl/gnl.a
+
 
 PREFIX_SRC			= $(addprefix $(SRC_DIR), $(ALL_SRC))
 PREFIX_LIB			= $(addprefix $(LIB_DIR), $(ALL_LIBS))
@@ -59,6 +60,8 @@ CC					= cc
 CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
 EXFLAGS				= -L lib/mlx -lmlx -lXext -lX11 -lm -lbsd
 
+FLAGS				= $(CFLAGS) $(EXFLAGS)
+
 #					RULES
 
 all : $(NAME)
@@ -66,7 +69,7 @@ all : $(NAME)
 
 $(NAME): $(DIRS) $(LIB) $(OBJ)
 	$(call logs, $(CYAN),"Compiling\ Executable")
-	$(CC) $(CFLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
 	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
@@ -75,6 +78,7 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c
 $(LIB) : force
 	@make -sC lib/libft
 	@make -sC lib/gnl
+	@make -sC lib/mlx
 	$(call logs, $(CYAN),"Compiling\ LIBS")
 	$(LOG__SUCCESS)
 

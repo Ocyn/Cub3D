@@ -6,11 +6,35 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/02 21:31:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 20:05:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	db_write_title(void)
+{
+	printf("\n\n");
+	printf("_________________________________________\n\n");
+	printf(" ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ \n");
+	printf("██╔════╝██║   ██║██╔══██╗╚════██╗██╔══██╗\n");
+	printf("██║     ██║   ██║██████╔╝ █████╔╝██║  ██║\n");
+	printf("██║     ██║   ██║██╔══██╗ ╚═══██╗██║  ██║\n");
+	printf("╚██████╗╚██████╔╝██████╔╝██████╔╝██████╔╝\n");
+	printf(" ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚═════╝\n");
+	printf("          By Jcuzin x Aammirat          \n\n");
+	printf("_________________________________________\n\n");
+}
+
+void	db_testft(char *ft_name, int ret_int, char *ret_char)
+{
+	if (!ft_name)
+		return ;
+	printf("# DB_TESTFT: [%s]\n", ft_name);
+	printf("\tINT - [%d]\n", ret_int);
+	if (ret_char)
+		printf("\tSTR - [%s]\n", ret_char);
+}
 
 int	db_readfile(char *file)
 {
@@ -18,7 +42,7 @@ int	db_readfile(char *file)
 	int		fd;
 	size_t	i;
 
-	printf("#\tDB_READFILE\n");
+	printf("# DB_READFILE\n");
 	if (!file)
 		return (EXIT_FAILURE);
 	i = 0;

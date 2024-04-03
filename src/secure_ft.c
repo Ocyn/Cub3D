@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   secure_ft.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:37:43 by jcuzin           ###   ########.fr       */
+/*   Created: 2024/04/03 20:45:00 by jcuzin            #+#    #+#             */
+/*   Updated: 2024/04/03 20:45:13 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	s_free(char **ptr_memory)
 {
-	t_data	data;
+	if (*ptr_memory)
+	{
+		free(*ptr_memory);
+		*ptr_memory = NULL;
+	}
+}
 
-	db_write_title();
-	if (init_data_struct(&data, argc, argv))
-		return (EXIT_FAILURE);
-	if (parse_main(&data))
-		return (EXIT_FAILURE);
-	db_readfile(argv[1]);
-	return (EXIT_SUCCESS);
+void	*s_malloc(unsigned long size)
+{
+	unsigned char	*byte_arr;
+	void			*array;
+
+	array = NULL;
+	byte_arr = NULL;
+	if (!size)
+		return (NULL);
+	array = malloc(size);
+	if (!array)
+		return (NULL);
+	byte_arr = (unsigned char *)array;
+	ft_memset(byte_arr, 0, size);
+	return (byte_arr);
 }

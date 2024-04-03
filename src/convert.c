@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:37:32 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/02 22:13:09 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 20:20:32 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**conv_file2tab(int fd)
 	char	**tab;
 
 	id = 0;
-	tlen = me_filelen(fd);
+	tlen = me_filelen(fd, 0);
 	if (!tlen)
 		return (NULL);
 	tab = NULL;

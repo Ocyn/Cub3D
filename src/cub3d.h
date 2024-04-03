@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/02 23:05:32 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/03 20:52:47 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,18 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-
 # include <stdio.h>
+
+# define F_RESET		"\033[0m"
+# define F_UNDERLINE	"\033[4m"
+# define F_BOLD			"\033[1m"
+# define F_RED			"\033[0;91m"
+# define F_GREEN		"\033[0;92m"
+# define F_YELLOW		"\033[0;93m"
+# define F_BLUE			"\033[0;94m"
+# define F_PURPLE		"\033[0;35m"
+# define F_CYAN			"\033[0;96m"
+# define F_WHITE		"\033[0;37m"
 
 typedef struct s_player
 {
@@ -48,7 +58,9 @@ typedef struct s_data
 	t_player	player;
 }				t_data;
 
+void		db_write_title(void);
 int			db_readfile(char *file);
+void		db_testft(char *ft_name, int ret_int, char *ret_char);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, char *font);
@@ -62,14 +74,20 @@ void		res_map_struct(t_map *map);
 void		res_player_struct(t_player *player);
 void		res_data_struct(t_data *data);
 
-int			pa_main(t_data *data);
-int			pa_checkfile(char *file);
+int			parse_main(t_data *data);
+int			parse_map(t_map *map);
+int			parse_file(char *file);
 
-size_t		me_filelen(int fd);
+void		me_free_tab(char **tab, int i);
+size_t		me_filelen(int fd, int closefile);
 size_t		me_tablen(char **tab);
 int			me_strcmp(char *s1, char *s2);
+int			me_str2strcmp(char *src, char *reg);
 int			me_find_str_in_tab(int strict_mode, char *find, char **tab);
 int			me_find_str_in_str(const char *src, const char *seek);
+
+void		s_free(char **ptr_memory);
+void		*s_malloc(unsigned long size);
 
 char		**conv_file2tab(int fd);
 
