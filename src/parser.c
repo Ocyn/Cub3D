@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/04 21:55:17 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/04 21:56:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	parse_file(char *file)
 	fd = 0;
 	if (!file)
 		return (EXIT_FAILURE);
-	printf("\nTEST FILE [%d]\n", ft_strlen(file) - me_find_str_in_str(file, ".cub"));
 	if (ft_strlen(file) - me_find_str_in_str(file, ".cub") != 4)
 		return (db_return(EXIT_FAILURE, "Invalid file name"));
 	fd = open(file, O_RDONLY);
