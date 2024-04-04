@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 23:49:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/04 21:14:21 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_data_struct(t_data *data, int argc, char **argv)
 	res_data_struct(data);
 	data->arg_nb = argc;
 	data->arg_tab = argv;
-	if (err_custom((argc != 2), "Invalid argument format", "\033[0;91m"))
+	if (err_custom((argc != 2), "Invalid argument format", 0))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -34,15 +34,12 @@ int	init_map_struct(t_map *map, char *file)
 	if (!map)
 		return (EXIT_FAILURE);
 	res_map_struct(map);
-	/* DEBUG */	printf("\tImporting map");
 	map->map = conv_file2tab(file);
 	map->ylen = me_tablen(map->map);
-	if (map->map)
-		printf("\r%sOK%s\n", "\033[0;92m", "\033[0m");
-	else
-		printf("\r%sKO%s\n", "\033[0;91m", "\033[0m");
 	while (my < map->ylen)
 	{
+		if (ft_strchr(map->map[my], '\n'))
+			map->map[my][ft_strlen(map->map[my]) - 1] = 0;
 		if (ft_strlen(map->map[my]) > xmax)
 			xmax = ft_strlen(map->map[my]);
 		my++;

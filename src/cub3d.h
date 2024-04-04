@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 23:40:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/04 21:33:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,13 @@ typedef struct s_data
 
 void		db_ascii_title(char *tab);
 void		db_ascii_dbmode(char *tab);
-int			db_readfile(char *file);
 void		db_testft(char *ft_name, int ret_int, char *ret_char);
+int			db_readfile(char *file);
+int			db_return(int value, char *log);
+void		db_showmap(t_map map);
 
 size_t		err_putstr_fd(char *str, int fd);
-int			err_custom(int launch, char *log, char *font);
+int			err_custom(int launch, char *log, int tab);
 int			err_stderr(int launch);
 
 int			init_data_struct(t_data *data, int argc, char **argv);
@@ -91,6 +93,7 @@ int			parse_file(char *file);
 void		me_free_tab(char **tab, int i);
 size_t		me_filelen(char *file);
 size_t		me_tablen(char **tab);
+size_t		me_strchrn(char *src, char seek);
 int			me_strcmp(char *s1, char *s2);
 int			me_str2strcmp(char *src, char *reg);
 int			me_find_str_in_tab(int strict_mode, char *find, char **tab);

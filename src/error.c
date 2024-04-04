@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:46:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:26:16 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/04 19:51:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ int	err_stderr(int launch)
 	return (EXIT_SUCCESS);
 }
 
-int	err_custom(int launch, char *log, char *font)
+int	err_custom(int launch, char *log, int tab)
 {
 	if (!launch)
 		return (EXIT_SUCCESS);
-	if (!font)
-		err_putstr_fd("\033[0;91m", 2);
-	else
-		err_putstr_fd(font, 2);
+	while (tab-- > 0)
+		err_putstr_fd("\t", 2);
+	err_putstr_fd(F_BOLD, 2);
+	err_putstr_fd(F_RED, 2);
 	err_putstr_fd("ERROR", 2);
-	err_putstr_fd("\033[0m", 2);
+	err_putstr_fd(F_DEFAULT, 2);
 	err_putstr_fd(" - ", 2);
 	err_putstr_fd(log, 2);
 	err_putstr_fd("\n", 2);
