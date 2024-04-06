@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/04 21:28:24 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/06 23:51:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	me_find_str_in_tab(int strict_mode, char *find, char **tab)
 		return (-1);
 	while (find && tab && tab[++i])
 	{
-		if (me_find_str_in_str(tab[i], find))
+		if (me_find_str_in_str(tab[i], find) != -1)
 			if (!strict_mode || (strict_mode && !me_strcmp(tab[i], find)))
 				return (i);
 	}

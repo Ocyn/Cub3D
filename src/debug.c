@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/04 22:01:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/06 22:57:31 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	db_testft(char *ft_name, int ret_int, char *ret_char)
 int	db_return(int value, char *log)
 {
 	if (value)
-		printf("\r%sKO - %s%s\n", "\033[0;91m", log, "\033[0m");
+		printf("\n%sError\n%s%s\n", "\033[4m\033[1;91m", F_DEFAULT, log);
 	else
-		printf("\r%sOK%s\n", "\033[0;92m", "\033[0m");
+		printf("\t%sOK%s\n", F_GREEN, F_DEFAULT);
 	return (value);
 }
 
@@ -61,9 +61,9 @@ void	db_showmap(t_map map)
 
 	my = 0;
 	printf("\n# DB_SHOWMAP\n\n");
-	while (my < map.ylen)
+	while (my <= map.ylen)
 	{
-		printf("%ld   |%s|\n", my + 1, map.map[my]);
+		printf("%ld\t|%s|\n", my + 1, map.map[my]);
 		my++;
 	}
 	printf("\n\n");

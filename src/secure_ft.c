@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:45:00 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 20:45:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 00:56:02 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,16 @@ void	*s_malloc(unsigned long size)
 	byte_arr = (unsigned char *)array;
 	ft_memset(byte_arr, 0, size);
 	return (byte_arr);
+}
+
+void	s_freetab(char **tab, long i)
+{
+	if (!tab)
+		return ;
+	while (i >= 0)
+	{
+		s_free(&tab[i]);
+		i--;
+	}
+	s_free((char **)&tab);
 }

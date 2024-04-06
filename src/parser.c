@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/04 21:56:08 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 01:04:10 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	parse_file(char *file)
 	if (!file)
 		return (EXIT_FAILURE);
 	if (ft_strlen(file) - me_find_str_in_str(file, ".cub") != 4)
-		return (db_return(EXIT_FAILURE, "Invalid file name"));
+		return (err_return(EXIT_FAILURE, "Invalid file name", 1));
 	fd = open(file, O_RDONLY);
 	if (fd < 2)
 	{
@@ -49,17 +49,17 @@ int	parse_map(t_map *map)
 	my = 0;
 	ct = 0;
 	if (!map)
-		return (db_return(EXIT_FAILURE, "Map address not found"));
+		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	if (parse_map_borders(map))
-		return (db_return(EXIT_FAILURE, "Map's borders open"));
+		return (err_return(EXIT_FAILURE, "Map's borders open", 1));
 	while (my < map->ylen)
 	{
 		if (me_str2strcmp(map->map[my], "01NSWE \n\t"))
-			return (db_return(EXIT_FAILURE, "Invalid character detected"));
+			return (err_return(EXIT_FAILURE, "Invalid character detected", 1));
 		ct += me_strchrn(map->map[my], 'N') + me_strchrn(map->map[my], 'S') \
 		+ me_strchrn(map->map[my], 'W') + me_strchrn(map->map[my], 'E');
 		if (ct > 1)
-			return (db_return(EXIT_FAILURE, "Many players detected"));
+			return (err_return(EXIT_FAILURE, "Many players detected", 1));
 		my++;
 	}
 	return (EXIT_SUCCESS);
@@ -68,17 +68,17 @@ int	parse_map(t_map *map)
 int	parse_main(t_data *data)
 {
 	if (!data)
-		return (EXIT_FAILURE);
+		return (err_return(EXIT_FAILURE, "Memory issue", 0));
 	if (parse_file(data->arg_tab[1]))
-		return (EXIT_FAILURE);
-	/* DEBUG */	printf("\t\t\t\tImporting map");
+		return (err_return(EXIT_FAILURE, "Parse file failed", 0));
+	/* DEBUG */	printf("Importing map");
 	if (init_map_struct(&data->map, data->arg_tab[1]))
-		return (EXIT_FAILURE);
-	db_return(EXIT_SUCCESS, "");
+		return (err_return(EXIT_FAILURE, "Map init failed", 0));
+	err_return(EXIT_SUCCESS, "", 0);
 	db_showmap(data->map);
-	/* DEBUG */	printf("\t\t\t\tParsing map");
+	/* DEBUG */	printf("Parsing map");
 	if (parse_map(&data->map))
-		return (EXIT_FAILURE);
-	db_return(EXIT_SUCCESS, "");
+		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
+	err_return(EXIT_SUCCESS, "", 0);
 	return (EXIT_SUCCESS);
 }
