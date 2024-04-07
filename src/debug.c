@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:58:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 03:08:03 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,18 @@ void	db_ascii_dbmode(char *tab)
 	printf("%s\n", F_DEFAULT);
 }
 
-void	db_beacon(char *title)
+void	db_beacon(char *title, long size)
 {
 	long	len;
 	long	id;
 
-	id = -1;
+	id = 0;
 	len = ft_strlen(title);
 	printf("%s\n", F_BOLD);
-	while (++id < (41 - len) / 2)
+	while (++id < (size - len) / 2)
 		printf("#");
-	printf("%s", title);
-	id = -1;
-	while (++id < (41 - len) / 2)
+	printf(" %s ", title);
+	while (--id > 0)
 		printf("#");
 	printf("%s\n", F_DEFAULT);
 }
@@ -80,16 +79,16 @@ static void	db_showtexturebis(int *tex, char *id)
 	printf("RGB\t[%d]", tex[0]);
 	printf("[%d]", tex[1]);
 	printf("[%d]", tex[2]);
-	printf("\n");
+	printf("\n\n");
 }
 
 static void	db_showtexture(t_tex tex, char *id)
 {
 	printf("%sTexture %s%s\n", F_UNDERLINE, id, F_DEFAULT);
 	printf("fd file\t[%d][%s]\n", tex.fd, tex.file);
-	printf("id\t[%p]\n", tex.id);
-	printf("x/y len\t[%d][%d]\n", tex.xlen, tex.ylen);
-	printf("lorem\t[%d]\n", tex.lorem);
+	printf("mlx id\t[%p]\n", tex.id);
+	printf("size\t[%d][%d]\n", tex.xlen, tex.ylen);
+	//printf("lorem\t[%d]\n", tex.lorem);
 	printf("\n");
 }
 
@@ -98,10 +97,10 @@ void	db_showmap(t_map map, int mode)
 	size_t	my;
 
 	my = 0;
-	db_beacon("DB_SHOWMAP");
+	db_beacon("DB_SHOWMAP", 42);
 	if (!mode || mode == 1)
 	{
-		printf("%sProperties%s\n\n", F_BOLD, F_DEFAULT);
+		printf("\n%s# Properties%s\n\n", F_BOLD, F_DEFAULT);
 		db_showtexture(map.tex_no, "North");
 		db_showtexture(map.tex_so, "South");
 		db_showtexture(map.tex_ea, "East");
@@ -111,7 +110,7 @@ void	db_showmap(t_map map, int mode)
 	}
 	if (!mode || mode == 2)
 	{
-		printf("\n%sFormat%s\n", F_BOLD, F_DEFAULT);
+		printf("\n%s# Format%s\n\n", F_BOLD, F_DEFAULT);
 		while (my <= map.ylen)
 		{
 			printf("%ld\t|%s|\n", my + 1, map.map[my]);

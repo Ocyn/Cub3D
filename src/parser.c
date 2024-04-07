@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 01:18:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 02:59:44 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	parse_main(t_data *data)
 	/* DEBUG */	printf("Importing map");
 	if (init_map_struct(&data->map, data->arg_tab[1]))
 		return (err_return(EXIT_FAILURE, "Map init failed", 0));
-	db_showmap(data->map);
+	/* DEBUG */	db_showmap(data->map, 0);
 	/* DEBUG */	printf("Parsing map");
 	if (parse_map(&data->map))
 		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
