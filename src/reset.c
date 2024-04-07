@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 01:46:32 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 09:56:27 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	res_player_struct(t_player *player)
 	player->xpos = 0;
 	player->ypos = 0;
 	player->b_move = 0;
-	player->b_interact = 0;
+	player->b_touch = 0;
 }
 
 void	res_data_struct(t_data *data)

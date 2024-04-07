@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 05:26:26 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 09:48:02 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	parse_map_borders(t_map map)
 
 int	parse_map(t_map map)
 {
-	size_t	my;
-	size_t	ct;
+	long long	my;
+	size_t		ct;
 
 	my = 0;
 	ct = 0;
@@ -80,6 +80,5 @@ int	parse_main(t_data *data)
 		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
 	if (init_player_struct(&data->player, data->map))
 		return (err_return(EXIT_FAILURE, "Player init failed", 0));
-	printf("\nDB Player: [%f][%f]\n\n", data->player.ypos, data->player.xpos);
 	return (EXIT_SUCCESS);
 }

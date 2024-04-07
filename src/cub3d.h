@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 05:26:16 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 09:56:15 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@
 typedef struct s_player
 {
 	char		compass;
-	double		xpos;
-	double		ypos;
-	int			b_interact;
+	long long	xpos;
+	long long	ypos;
+	int			b_touch;
 	int			b_move;
 }				t_player;
 
@@ -70,8 +70,8 @@ typedef struct s_map
 	t_tex		tex_we;
 	int			floor[3];
 	int			roof[3];
-	double		xlen;
-	double		ylen;
+	long long	xlen;
+	long long	ylen;
 }				t_map;
 
 typedef struct s_data
@@ -90,6 +90,7 @@ int			db_readfile(char *file);
 int			db_return(int value, char *log);
 void		db_showmap(t_map map, int mode);
 void		db_showtab(char **tab);
+void		db_showplayer(t_player ply);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);

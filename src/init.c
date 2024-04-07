@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 05:22:57 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 09:54:33 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,25 @@ int	init_map_struct(t_map *map, char *file)
 	return (EXIT_SUCCESS);
 }
 
-int	init_player_struct(t_player *player, t_map map)
+int	init_player_struct(t_player *ply, t_map map)
 {
-	if (!player)
+	if (!ply || !map.map)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
-	res_player_struct(player);
-	player->ypos = me_find_str_in_tab(0, "N", map.map);
-	if (player->ypos == -1)
-		player->ypos = me_find_str_in_tab(0, "E", map.map);
-	if (player->ypos == -1)
-		player->ypos = me_find_str_in_tab(0, "W", map.map);
-	if (player->ypos == -1)
-		player->ypos = me_find_str_in_tab(0, "S", map.map);
-	if (player->ypos == -1)
+	res_player_struct(ply);
+	while (!ft_strchr(map.map[ply->ypos], 'N') \
+	&& !ft_strchr(map.map[ply->ypos], 'S') \
+	&& !ft_strchr(map.map[ply->ypos], 'E') \
+	&& !ft_strchr(map.map[ply->ypos], 'W') && ply->ypos <= map.ylen)
+		ply->ypos++;
+	printf("\nC418 - %lld\n\n", ply->ypos);
+	while (map.map[ply->ypos][ply->xpos] != 'N' \
+	&& map.map[ply->ypos][ply->xpos] != 'S' \
+	&& map.map[ply->ypos][ply->xpos] != 'E' \
+	&& map.map[ply->ypos][ply->xpos] != 'W' && map.map[ply->ypos][ply->xpos])
+		ply->xpos++;
+	printf("\nC419 - %lld\n\n", ply->xpos);
+	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
-	player->xpos = me_find_str_in_str(map.map[(long)player->ypos], "N");
-	if (player->xpos == -1)
-		player->xpos = me_find_str_in_str(map.map[(long)player->ypos], "E");
-	if (player->xpos == -1)
-		player->xpos = me_find_str_in_str(map.map[(long)player->ypos], "W");
-	if (player->xpos == -1)
-		player->xpos = me_find_str_in_str(map.map[(long)player->ypos], "S");
-	if (player->xpos == -1)
-		return (err_return(EXIT_FAILURE, "Player position not found", 1));
+	ply->compass = map.map[ply->ypos][ply->xpos];
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 05:26:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 09:56:45 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,17 @@ void	db_showtab(char **tab)
 	printf("\n\n");
 }
 
+void	db_showplayer(t_player ply)
+{
+	db_beacon("DB_SHOWPLAYER", 42);
+	printf("\n");
+	printf("Compass\t[%c]\n", ply.compass);
+	printf("X / Y\t[%lld][%lld]\n", ply.xpos, ply.ypos);
+	printf("B_touch\t[%d]\n", ply.b_touch);
+	printf("B_move\t[%d]\n", ply.b_move);
+	printf("\n");
+}
+
 void	db_showmap(t_map map, int mode)
 {
 	size_t	my;
@@ -125,7 +136,7 @@ void	db_showmap(t_map map, int mode)
 	if (!mode || mode == 2)
 	{
 		printf("\n%s# Format%s\n\n", F_BOLD, F_DEFAULT);
-		while (my <= map.ylen)
+		while ((long long)my <= map.ylen)
 		{
 			printf("%ld\t|%s|\n", my + 1, map.map[my]);
 			my++;
