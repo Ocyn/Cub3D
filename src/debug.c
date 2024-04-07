@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 03:08:03 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 04:05:51 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,20 @@ static void	db_showtexture(t_tex tex, char *id)
 	printf("size\t[%d][%d]\n", tex.xlen, tex.ylen);
 	//printf("lorem\t[%d]\n", tex.lorem);
 	printf("\n");
+}
+
+void	db_showtab(char **tab)
+{
+	size_t	my;
+
+	my = 0;
+	db_beacon("DB_SHOWTAB", 42);
+	while (tab[my])
+	{
+		printf("%ld\t|%s|\n", my + 1, tab[my]);
+		my++;
+	}
+	printf("\n\n");
 }
 
 void	db_showmap(t_map map, int mode)

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 03:29:25 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 04:01:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,34 +31,33 @@ int	parse_file(char *file)
 	return (EXIT_SUCCESS);
 }
 
-int	parse_map_borders(t_map *map)
+int	parse_map_borders(t_map map)
 {
-	if (ft_strlen(map->map[0]) != me_strchrn(map->map[0], '1') \
-	+ me_strchrn(map->map[0], ' '))
-		return (EXIT_FAILURE);
-	if (ft_strlen(map->map[(size_t)map->ylen - 1]) \
-	!= me_strchrn(map->map[(size_t)map->ylen - 1], '1'))
-		return (EXIT_FAILURE);
+	if (ft_strlen(map.map[0]) != me_strchrn(map.map[0], '1') \
+	+ me_strchrn(map.map[0], ' '))
+		return (err_return(EXIT_FAILURE, "Invalid char in top wall", 2));
+	if (ft_strlen(map.map[(size_t)map.ylen - 1]) \
+	!= me_strchrn(map.map[(size_t)map.ylen - 1], '1')\
+	+ me_strchrn(map.map[(size_t)map.ylen - 1], ' '))
+		return (err_return(EXIT_FAILURE, "Invalid char in bottom wall", 2));
 	return (EXIT_SUCCESS);
 }
 
-int	parse_map(t_map *map)
+int	parse_map(t_map map)
 {
 	size_t	my;
 	size_t	ct;
 
 	my = 0;
 	ct = 0;
-	if (!map)
-		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	if (parse_map_borders(map))
-		return (err_return(EXIT_FAILURE, "Map's borders open", 1));
-	while (my < map->ylen)
+		return (err_return(EXIT_FAILURE, "Map's borders issue", 1));
+	while (my < map.ylen)
 	{
-		if (me_str2strcmp(map->map[my], "01NSWE \n\t"))
+		if (me_str2strcmp(map.map[my], "01NSWE \n"))
 			return (err_return(EXIT_FAILURE, "Invalid character detected", 1));
-		ct += me_strchrn(map->map[my], 'N') + me_strchrn(map->map[my], 'S') \
-		+ me_strchrn(map->map[my], 'W') + me_strchrn(map->map[my], 'E');
+		ct += me_strchrn(map.map[my], 'N') + me_strchrn(map.map[my], 'S') \
+		+ me_strchrn(map.map[my], 'W') + me_strchrn(map.map[my], 'E');
 		if (ct > 1)
 			return (err_return(EXIT_FAILURE, "Many players detected", 1));
 		my++;
@@ -75,9 +74,9 @@ int	parse_main(t_data *data)
 	/* DEBUG */	printf("Importing map");
 	if (init_map_struct(&data->map, data->arg_tab[1]))
 		return (err_return(EXIT_FAILURE, "Map init failed", 0));
-	/* DEBUG */	db_showmap(data->map, 0);
+	/* DEBUG */	db_showmap(data->map, 2);
 	/* DEBUG */	printf("Parsing map");
-	if (parse_map(&data->map))
+	if (parse_map(data->map))
 		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
 	return (EXIT_SUCCESS);
 }

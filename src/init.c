@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:18:15 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 04:58:28 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	init_map_struct(t_map *map, char *file)
 
 	my = -1;
 	xmax = 0;
-	temp = conv_file2tab(file); 
+	temp = conv_file2tab(file);
 	if (!map || !temp)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	res_map_struct(map);

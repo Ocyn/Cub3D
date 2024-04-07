@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 03:26:34 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 04:58:09 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,3 @@ int	init_map_trim(t_map *map, char **temp)
 	map->ylen = me_tablen(map->map);
 	return (EXIT_SUCCESS);
 }
-

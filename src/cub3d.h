@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 03:04:05 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 04:31:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void		db_testft(char *ft_name, int ret_int, char *ret_char);
 int			db_readfile(char *file);
 int			db_return(int value, char *log);
 void		db_showmap(t_map map, int mode);
+void		db_showtab(char **tab);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -107,10 +108,11 @@ void		res_player_struct(t_player *player);
 void		res_data_struct(t_data *data);
 
 int			parse_main(t_data *data);
-int			parse_map(t_map *map);
+int			parse_map(t_map map);
 int			parse_file(char *file);
 
 char		**me_tabdup(char **src, size_t src_len);
+char		**me_diffusion(char **tab, long my, long mx, char limit);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);
 void		me_str_edit(char **src, char *seek, char *replace);
 void		me_set_color(int *src, size_t red, size_t green, size_t blue);
