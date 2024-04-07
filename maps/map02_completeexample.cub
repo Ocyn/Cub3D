@@ -1,18 +1,17 @@
 
+EA ./east_texture
 
 NO ./north_texture
 
-SO ./south_texture
-
-
+WE ./west_texture
 WE ./west_texture
 
-EA ./east_texture
+SO ./south_texture
 
-F 220    ,100  ,0   
+F 123    ,256  ,   +211
 
 
-C     225  ,30   ,0
+C     999  ,30   ,-8
 
 
 
