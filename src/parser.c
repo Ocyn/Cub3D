@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:59:44 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 03:29:25 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	parse_file(char *file)
 
 int	parse_map_borders(t_map *map)
 {
-	if (ft_strlen(map->map[0]) != me_strchrn(map->map[0], '1'))
+	if (ft_strlen(map->map[0]) != me_strchrn(map->map[0], '1') \
+	+ me_strchrn(map->map[0], ' '))
 		return (EXIT_FAILURE);
 	if (ft_strlen(map->map[(size_t)map->ylen - 1]) \
 	!= me_strchrn(map->map[(size_t)map->ylen - 1], '1'))

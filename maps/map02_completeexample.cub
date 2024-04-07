@@ -4,7 +4,6 @@ EA ./east_texture
 NO ./north_texture
 
 WE ./west_texture
-WE ./west_texture
 
 SO ./south_texture
 
