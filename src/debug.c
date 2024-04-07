@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/06 22:57:31 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 02:30:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,45 @@ int	db_return(int value, char *log)
 	return (value);
 }
 
+static void	db_showtexturebis(int *tex, char *id)
+{
+	if (!tex)
+		return ;
+	printf("\tTexture %s\n", id);
+	printf("\t\tRGB [%d]", tex[0]);
+	printf("[%d]", tex[1]);
+	printf("[%d]", tex[2]);
+	printf("\n");
+}
+
+static void	db_showtexture(t_tex tex, char *id)
+{
+	if (!tex)
+		return ;
+	printf("\tTexture %s\n", id);
+	printf("\t\tfd [%d]\n", tex.fd);
+	printf("\t\tfile [%s]\n", tex.file);
+	printf("\t\tid [%p]\n", tex.id);
+	printf("\t\txlen [%d]\n", tex.xlen);
+	printf("\t\tylen [%d]\n", tex.ylen);
+	printf("\t\tlorem [%d]\n", tex.lorem);
+	printf("\n");
+}
+
 void	db_showmap(t_map map)
 {
 	size_t	my;
 
 	my = 0;
 	printf("\n# DB_SHOWMAP\n\n");
+	printf("%sProperties%s\n", F_BOLD, F_DEFAULT);
+	db_showtexture(map.tex_no, "North");
+	db_showtexture(map.tex_so, "South");
+	db_showtexture(map.tex_ea, "East");
+	db_showtexture(map.tex_we, "West");
+	db_showtexturebis(map.floor, "Floor");
+	db_showtexturebis(map.roof, "Roof");
+	printf("\nMap format:\n");
 	while (my <= map.ylen)
 	{
 		printf("%ld\t|%s|\n", my + 1, map.map[my]);
