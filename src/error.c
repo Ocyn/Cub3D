@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:46:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 01:02:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 01:12:00 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ int	err_return(int value, char *log, int level)
 		printf("%sError L%d\n%s", "\033[4m\033[1;91m", level, F_DEFAULT);
 		while (--ilev > 0)
 			printf("\t");
-		printf("%s\n", log);
+		printf("%s", log);
+		if (level <= 0)
+			printf("\n");
 	}
 	return (value);
 }

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/06 23:55:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 01:46:32 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	res_map_struct(t_map *map)
 	res_tex_struct(&map->tex_so);
 	res_tex_struct(&map->tex_ea);
 	res_tex_struct(&map->tex_we);
-	me_set_color(map->flour, 0, 0, 0);
+	me_set_color(map->floor, 0, 0, 0);
 	me_set_color(map->roof, 0, 0, 0);
-	map->flour[0] = 0;
+	map->floor[0] = 0;
 }
 
 void	res_player_struct(t_player *player)

@@ -30,7 +30,7 @@ LIB_DIR				= lib/
 OBJ_DIR				= $(SRC_DIR)OBJ/
 
 #			FILES
-ALL_SRC				= main.c init.c reset.c \
+ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_edit.c memory_edit_bis.c memory_scan.c \
 					secure_ft.c \
 					parser.c error.c \

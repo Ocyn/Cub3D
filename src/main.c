@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/04 21:27:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 01:11:16 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (parse_main(&data))
 		return (EXIT_FAILURE);
-	//db_readfile(argv[1]);
 	return (EXIT_SUCCESS);
 }

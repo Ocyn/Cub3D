@@ -6,19 +6,20 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:45:00 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 00:56:02 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 02:12:46 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	s_free(char **ptr_memory)
+void	*s_free(char **ptr_memory)
 {
 	if (*ptr_memory)
 	{
 		free(*ptr_memory);
 		*ptr_memory = NULL;
 	}
+	return (NULL);
 }
 
 void	*s_malloc(unsigned long size)
@@ -38,14 +39,16 @@ void	*s_malloc(unsigned long size)
 	return (byte_arr);
 }
 
-void	s_freetab(char **tab, long i)
+void	*s_freetab(char **tab, long i)
 {
-	if (!tab)
-		return ;
-	while (i >= 0)
+	if (tab)
 	{
-		s_free(&tab[i]);
-		i--;
+		while (i >= 0)
+		{
+			s_free(&tab[i]);
+			i--;
+		}
+		s_free((char **)&tab);
 	}
-	s_free((char **)&tab);
+	return (NULL);
 }
