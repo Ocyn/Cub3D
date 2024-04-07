@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:11:24 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 02:57:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_data
 
 void		db_ascii_title(char *tab);
 void		db_ascii_dbmode(char *tab);
+void		db_beacon(char *title);
 void		db_testft(char *ft_name, int ret_int, char *ret_char);
 int			db_readfile(char *file);
 int			db_return(int value, char *log);

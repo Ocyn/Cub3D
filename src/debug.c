@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:42:23 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 02:58:56 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ void	db_ascii_dbmode(char *tab)
 	printf("%s%s┳┓┏┓┳┓┳┳┏┓  ┳┳┓┏┓┳┓┏┓\n", tab, F_DEFAULT);
 	printf("%s%s┃┃┣ ┣┫┃┃┃┓  ┃┃┃┃┃┃┃┣\n", tab, F_DEFAULT);
 	printf("%s%s┻┛┗┛┻┛┗┛┗┛  ┛ ┗┗┛┻┛┗┛\n", tab, F_DEFAULT);
+	printf("%s\n", F_DEFAULT);
+}
+
+void	db_beacon(char *title)
+{
+	long	len;
+	long	id;
+
+	id = -1;
+	len = ft_strlen(title);
+	printf("%s\n", F_BOLD);
+	while (++id < (41 - len) / 2)
+		printf("#");
+	printf("%s", title);
+	id = -1;
+	while (++id < (41 - len) / 2)
+		printf("#");
 	printf("%s\n", F_DEFAULT);
 }
 
@@ -76,24 +93,30 @@ static void	db_showtexture(t_tex tex, char *id)
 	printf("\n");
 }
 
-void	db_showmap(t_map map)
+void	db_showmap(t_map map, int mode)
 {
 	size_t	my;
 
 	my = 0;
-	printf("\n# DB_SHOWMAP\n\n");
-	printf("%sProperties%s\n\n", F_BOLD, F_DEFAULT);
-	db_showtexture(map.tex_no, "North");
-	db_showtexture(map.tex_so, "South");
-	db_showtexture(map.tex_ea, "East");
-	db_showtexture(map.tex_we, "West");
-	db_showtexturebis(map.floor, "Floor");
-	db_showtexturebis(map.roof, "Roof");
-	printf("\n%sFormat%s\n", F_BOLD, F_DEFAULT);
-	while (my <= map.ylen)
+	db_beacon("DB_SHOWMAP");
+	if (!mode || mode == 1)
 	{
-		printf("%ld\t|%s|\n", my + 1, map.map[my]);
-		my++;
+		printf("%sProperties%s\n\n", F_BOLD, F_DEFAULT);
+		db_showtexture(map.tex_no, "North");
+		db_showtexture(map.tex_so, "South");
+		db_showtexture(map.tex_ea, "East");
+		db_showtexture(map.tex_we, "West");
+		db_showtexturebis(map.floor, "Floor");
+		db_showtexturebis(map.roof, "Roof");
+	}
+	if (!mode || mode == 2)
+	{
+		printf("\n%sFormat%s\n", F_BOLD, F_DEFAULT);
+		while (my <= map.ylen)
+		{
+			printf("%ld\t|%s|\n", my + 1, map.map[my]);
+			my++;
+		}
 	}
 	printf("\n\n");
 }
