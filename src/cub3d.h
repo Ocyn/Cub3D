@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 04:31:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/07 05:26:16 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int			init_data_struct(t_data *data, int argc, char **argv);
 int			init_map_struct(t_map *map, char *file);
 int			init_map_texture(t_tex *asset, char **map, char *set, size_t *pos);
 int			init_map_trim(t_map *map, char **temp);
-int			init_player_struct(t_player *player);
+int			init_player_struct(t_player *player, t_map map);
 
 void		res_tex_struct(t_tex *tex);
 void		res_map_struct(t_map *map);
