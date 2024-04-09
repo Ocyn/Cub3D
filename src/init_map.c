@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 00:39:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 01:52:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_map_texture(t_tex *asset, char **map, char *set, size_t *pos)
 	id = -1;
 	if (!asset)
 		return (err_return(EXIT_FAILURE, "Memory issue", 3));
-	res_tex_struct(asset);
+	res_tex_struct(asset, 0);
 	id = me_find_str_in_tab(0, set, map);
 	if (id == -1)
 		return (err_return(EXIT_FAILURE, "Missing declaration", 3));

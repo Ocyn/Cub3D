@@ -6,17 +6,19 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:56:27 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 01:51:58 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	res_tex_struct(t_tex *tex)
+void	res_tex_struct(t_tex *tex, int free)
 {
 	if (!tex)
 		return ;
-	tex->fd = 0;
+	tex->fd = -1;
+	if (free && tex->file)
+		tex->file = s_free(&tex->file);
 	tex->file = NULL;
 	tex->id = NULL;
 	tex->xlen = 0;
@@ -24,24 +26,27 @@ void	res_tex_struct(t_tex *tex)
 	tex->lorem = 0;
 }
 
-void	res_map_struct(t_map *map)
+void	res_map_struct(t_map *map, int free)
 {
 	if (!map)
 		return ;
+	if (free && map->map)
+		map->map = s_freetab(map->map, me_tablen(map->map));
 	map->map = NULL;
 	map->xlen = 0;
 	map->ylen = 0;
-	res_tex_struct(&map->tex_no);
-	res_tex_struct(&map->tex_so);
-	res_tex_struct(&map->tex_ea);
-	res_tex_struct(&map->tex_we);
+	res_tex_struct(&map->tex_no, free);
+	res_tex_struct(&map->tex_so, free);
+	res_tex_struct(&map->tex_ea, free);
+	res_tex_struct(&map->tex_we, free);
 	me_set_color(map->floor, 0, 0, 0);
 	me_set_color(map->roof, 0, 0, 0);
 	map->floor[0] = 0;
 }
 
-void	res_player_struct(t_player *player)
+void	res_player_struct(t_player *player, int free)
 {
+	(void)free;
 	if (!player)
 		return ;
 	player->compass = 0;
@@ -51,12 +56,12 @@ void	res_player_struct(t_player *player)
 	player->b_touch = 0;
 }
 
-void	res_data_struct(t_data *data)
+void	res_data_struct(t_data *data, int free)
 {
 	if (!data)
 		return ;
 	data->arg_nb = 0;
 	data->arg_tab = NULL;
-	res_map_struct(&data->map);
-	res_player_struct(&data->player);
+	res_map_struct(&data->map, free);
+	res_player_struct(&data->player, free);
 }

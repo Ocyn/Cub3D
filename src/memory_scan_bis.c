@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 04:00:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 01:41:10 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ size_t	me_tablen(char **tab)
 	size_t	i;
 
 	i = 0;
-	if (!tab)
+	if (!tab || !tab[0])
 		return (0);
 	while (tab[i])
 		i++;
