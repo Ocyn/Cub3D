@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:33:28 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 00:01:33 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (parse_main(&data))
 		return (EXIT_FAILURE);
-	db_showplayer(data.player);
+	//sf_safemode(data);
 	return (EXIT_SUCCESS);
 }

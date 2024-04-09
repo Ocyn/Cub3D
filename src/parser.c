@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:48:02 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 01:00:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,38 @@ int	parse_file(char *file)
 	return (EXIT_SUCCESS);
 }
 
-int	parse_map_borders(t_map map)
+int	parse_map_borders(t_map map, t_player player)
 {
-	if (ft_strlen(map.map[0]) != me_strchrn(map.map[0], '1') \
-	+ me_strchrn(map.map[0], ' '))
-		return (err_return(EXIT_FAILURE, "Invalid char in top wall", 2));
-	if (ft_strlen(map.map[(size_t)map.ylen - 1]) \
-	!= me_strchrn(map.map[(size_t)map.ylen - 1], '1')\
-	+ me_strchrn(map.map[(size_t)map.ylen - 1], ' '))
-		return (err_return(EXIT_FAILURE, "Invalid char in bottom wall", 2));
+	char		**temp;
+	long long	y;
+
+	y = 0;
+	temp = me_tabdup(map.map, me_tablen(map.map));
+	if (!temp)
+		return (err_return(EXIT_FAILURE, "Map cloning failed", 2));
+	me_diffusion(temp, player.ypos, player.xpos, '1');
+	db_showtab(temp);
+	if (!temp)
+		return (err_return(EXIT_FAILURE, "Diffusion failed", 2));
+	while (temp && temp[y] && temp[y])
+	{
+		if (temp[y][0] == '*' || temp[y][ft_strlen(temp[y]) - 1] == '*')
+			return (err_return(EXIT_FAILURE, "Side wall breach", 2));
+		y++;
+	}
+	if (ft_strchr(temp[0], '*') || ft_strchr(temp[y - 1], '*'))
+		return (err_return(EXIT_FAILURE, "Top / Bottom wall breach", 2));
+	temp = s_freetab(temp, me_tablen(temp));
 	return (EXIT_SUCCESS);
 }
 
-int	parse_map(t_map map)
+int	parse_map(t_map map, t_player player)
 {
 	long long	my;
 	size_t		ct;
 
 	my = 0;
 	ct = 0;
-	if (parse_map_borders(map))
-		return (err_return(EXIT_FAILURE, "Map's borders issue", 1));
 	while (my < map.ylen)
 	{
 		if (me_str2strcmp(map.map[my], "01NSWE \n"))
@@ -62,23 +73,25 @@ int	parse_map(t_map map)
 			return (err_return(EXIT_FAILURE, "Many players detected", 1));
 		my++;
 	}
+	if (parse_map_borders(map, player))
+		return (err_return(EXIT_FAILURE, "Map not fully closed", 1));
 	return (EXIT_SUCCESS);
 }
 
 int	parse_main(t_data *data)
 {
+	char	*file;
+
 	if (!data)
 		return (err_return(EXIT_FAILURE, "Memory issue", 0));
-	if (parse_file(data->arg_tab[1]))
+	file = data->arg_tab[1];
+	if (parse_file(file))
 		return (err_return(EXIT_FAILURE, "Parse file failed", 0));
-	/* DEBUG */	printf("Importing map");
-	if (init_map_struct(&data->map, data->arg_tab[1]))
+	if (init_map_struct(&data->map, file))
 		return (err_return(EXIT_FAILURE, "Map init failed", 0));
-	/* DEBUG */	db_showmap(data->map, 2);
-	/* DEBUG */	printf("Parsing map");
-	if (parse_map(data->map))
-		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
 	if (init_player_struct(&data->player, data->map))
 		return (err_return(EXIT_FAILURE, "Player init failed", 0));
+	if (parse_map(data->map, data->player))
+		return (err_return(EXIT_FAILURE, "Parse map failed", 0));
 	return (EXIT_SUCCESS);
 }

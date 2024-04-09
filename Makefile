@@ -32,11 +32,13 @@ OBJ_DIR				= $(SRC_DIR)OBJ/
 #			FILES
 ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_edit.c memory_edit_bis.c memory_scan.c memory_scan_bis.c \
+					memory_str_edit.c \
 					secure_ft.c \
 					parser.c error.c \
 					convert.c math_ft.c graphics_ft.c \
 					keys_bindings.c \
 					\
+					safemode.c \
 					debug.c
 
 ALL_HEADERS			= cub3d.h

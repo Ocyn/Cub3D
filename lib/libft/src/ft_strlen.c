@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:11:48 by jcuzin            #+#    #+#             */
-/*   Updated: 2022/12/06 19:29:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/09 23:33:32 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t	cursor;
+	size_t	id;
 
-	cursor = 0;
-	while (str[cursor] != '\0')
-	{
-		cursor++;
-	}
-	return (cursor);
+	id = 0;
+	while (str && str[id])
+		id++;
+	return (id);
 }

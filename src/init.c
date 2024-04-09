@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:54:33 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/09 22:43:05 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,11 @@ int	init_player_struct(t_player *ply, t_map map)
 	&& !ft_strchr(map.map[ply->ypos], 'E') \
 	&& !ft_strchr(map.map[ply->ypos], 'W') && ply->ypos <= map.ylen)
 		ply->ypos++;
-	printf("\nC418 - %lld\n\n", ply->ypos);
 	while (map.map[ply->ypos][ply->xpos] != 'N' \
 	&& map.map[ply->ypos][ply->xpos] != 'S' \
 	&& map.map[ply->ypos][ply->xpos] != 'E' \
 	&& map.map[ply->ypos][ply->xpos] != 'W' && map.map[ply->ypos][ply->xpos])
 		ply->xpos++;
-	printf("\nC419 - %lld\n\n", ply->xpos);
 	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
 	ply->compass = map.map[ply->ypos][ply->xpos];

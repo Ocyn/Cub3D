@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 04:58:09 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 00:39:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	init_map_trim(t_map *map, char **temp)
 	trim += (trim > 0);
 	while (!ft_strlen(temp[trim]))
 		trim++;
-	map->map = me_tabdup(temp + trim, me_tablen(temp + trim));
+	map->map = me_tabdup_ratio(temp + trim, me_tablen(temp + trim));
 	if (!map->map)
 		return (err_return(EXIT_FAILURE, "Map dup failed", 2));
 	map->ylen = me_tablen(map->map);

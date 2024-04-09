@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:56:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/09 22:58:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	db_ascii_title(char *tab)
 	printf("%s_________________________________________\n\n", tab);
 	printf("%s%s ██████ ██    ██ ██████  ██████╗ ██████╗ \n", tab, F_LGREY2);
 	printf("%s%s██      ██    ██ ██   ██ ╚════██╗██╔══██╗\n", tab, F_WHITE);
-	printf("%s%s██      ██    ██ ██████   █████╔╝██║  ██║\n", tab, F_BLACK3);
+	printf("%s%s██      ██    ██ █████    █████╔╝██║  ██║\n", tab, F_BLACK);
 	printf("%s%s██      ██    ██ ██   ██  ╚═══██╗██║  ██║\n", tab, F_DRED);
 	printf("%s%s ██████  ██████  ██████  ██████╔╝██████╔╝\n", tab, F_RED2);
 	printf("%s%s                         ╚═════╝ ╚═════╝ \n", tab, F_WHITE);
@@ -27,12 +27,10 @@ void	db_ascii_title(char *tab)
 	printf("%s\n", F_DEFAULT);
 }
 
-void	db_ascii_dbmode(char *tab)
+void	db_ascii_safemode(char *tab)
 {
 	printf("%s\n", F_DEFAULT);
-	printf("%s%s┳┓┏┓┳┓┳┳┏┓  ┳┳┓┏┓┳┓┏┓\n", tab, F_DEFAULT);
-	printf("%s%s┃┃┣ ┣┫┃┃┃┓  ┃┃┃┃┃┃┃┣\n", tab, F_DEFAULT);
-	printf("%s%s┻┛┗┛┻┛┗┛┗┛  ┛ ┗┗┛┻┛┗┛\n", tab, F_DEFAULT);
+	printf("%s%ssaf mud\n", tab, F_DEFAULT);
 	printf("%s\n", F_DEFAULT);
 }
 

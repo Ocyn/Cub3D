@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 04:58:37 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/09 23:10:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t	me_strchrn(char *src, char seek)
 	return (occur);
 }
 
-char	**me_diffusion(char **tab, long my, long mx, char limit)
+void	me_diffusion(char **tab, long my, long mx, char limit)
 {
 	if (tab && tab[my] && tab[my][mx] \
 	&& tab[my][mx] != limit && tab[my][mx] != '*')
@@ -58,7 +58,7 @@ char	**me_diffusion(char **tab, long my, long mx, char limit)
 		me_diffusion(tab, my + 1, mx, limit);
 		me_diffusion(tab, my - (my > 0), mx, limit);
 	}
-	return (tab);
+	return ;
 }
 
 int	me_str2strcmp(char *src, char *reg)

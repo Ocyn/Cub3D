@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 09:56:15 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 00:39:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 }				t_data;
 
 void		db_ascii_title(char *tab);
-void		db_ascii_dbmode(char *tab);
+void		db_ascii_safemode(char *tab);
 void		db_beacon(char *title, long size);
 void		db_testft(char *ft_name, int ret_int, char *ret_char);
 int			db_readfile(char *file);
@@ -109,17 +109,18 @@ void		res_player_struct(t_player *player);
 void		res_data_struct(t_data *data);
 
 int			parse_main(t_data *data);
-int			parse_map(t_map map);
+int			parse_map(t_map map, t_player player);
 int			parse_file(char *file);
 
 char		**me_tabdup(char **src, size_t src_len);
-char		**me_diffusion(char **tab, long my, long mx, char limit);
+char		**me_tabdup_ratio(char **src, long long src_len);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);
 void		me_str_edit(char **src, char *seek, char *replace);
 void		me_set_color(int *src, size_t red, size_t green, size_t blue);
 size_t		me_filelen(char *file);
 size_t		me_tablen(char **tab);
 size_t		me_strchrn(char *src, char seek);
+void		me_diffusion(char **tab, long my, long mx, char limit);
 int			me_strcmp(char *s1, char *s2);
 int			me_strcat(char *dest, char *src);
 int			me_str2strcmp(char *src, char *reg);
@@ -131,5 +132,7 @@ void		*s_malloc(unsigned long size);
 void		*s_freetab(char **tab, long i);
 
 char		**conv_file2tab(char *file);
+
+void		sf_safemode(t_data data);
 
 #endif
