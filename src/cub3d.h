@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 03:43:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 04:36:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ typedef struct s_data
 {
 	int			arg_nb;
 	char		**arg_tab;
+	void		*mlxinit;
+	void		*win;
+	void		*extra;
+	int			win_w;
+	int			win_h;
+	int			win_w_center;
+	int			win_h_center;
 	t_map		map;
 	t_player	player;
 }				t_data;
@@ -112,6 +119,8 @@ void		res_data_struct(t_data *data, int free);
 int			parse_main(t_data *data);
 int			parse_map(t_map map, t_player player);
 int			parse_file(char *file);
+
+int			graph_main(t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 

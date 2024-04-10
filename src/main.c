@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 02:49:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 04:38:16 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 		res_data_struct(&data, 1);
 		return (EXIT_FAILURE);
 	}
-	//sf_safemode(data);
+	graph_main(&data);
 	res_data_struct(&data, 1);
 	return (EXIT_SUCCESS);
 }

@@ -72,7 +72,7 @@ all : $(NAME)
 
 $(NAME): $(DIRS) $(LIB) $(OBJ)
 	$(call logs, $(CYAN),"Compiling\ Executable")
-	$(CC) $(FLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIB) lib/mlx/libmlx.a -I . -o $(NAME)
 	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c
