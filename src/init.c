@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 03:42:09 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:54:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	init_map_struct(t_map *map, char *file)
 			xmax = ft_strlen(temp[my]);
 	}
 	if (init_map_trim(map, temp))
-	{
-		temp = s_freetab(temp, me_tablen(temp));
-		return (err_return(EXIT_FAILURE, "Map trim failed", 1));
-	}
-	temp = s_freetab(temp, me_tablen(temp));
-	return (EXIT_SUCCESS);
+		return (s_freetab(temp, me_tablen(temp)) \
+		, err_return(EXIT_FAILURE, "Map trim failed", 1));
+	map->map_bis = me_tabdup(map->map, me_tablen(map->map));
+	if (!map->map_bis)
+		err_return(EXIT_FAILURE, "Failed to clone", 1);
+	return (s_freetab(temp, me_tablen(temp)), !map->map_bis);
 }
 
 int	init_player_struct(t_player *ply, t_map map)

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 03:39:24 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:56:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	parse_map_borders(t_map map, t_player player)
 	long long	y;
 
 	y = 0;
-	temp = me_tabdup(map.map, me_tablen(map.map));
+	temp = map.map_bis;
 	if (!temp)
 		return (err_return(EXIT_FAILURE, "Map cloning failed", 2));
 	me_diffusion(temp, player.ypos, player.xpos, '1');

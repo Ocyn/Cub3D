@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 02:29:39 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:43:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_tex
 typedef struct s_map
 {
 	char		**map;
+	char		**map_bis;
 	t_tex		tex_no;
 	t_tex		tex_so;
 	t_tex		tex_ea;
