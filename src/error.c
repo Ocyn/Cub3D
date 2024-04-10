@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:46:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 01:12:00 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 02:06:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	err_stderr(int launch)
 {
 	if (!launch)
 		return (EXIT_FAILURE);
-	perror("Cub3D");
+	perror("""\033[4m\033[1;91m""\tError"F_DEFAULT"\n\t");
 	return (EXIT_SUCCESS);
 }
 
@@ -49,23 +49,29 @@ int	err_custom(int launch, char *log, int tab)
 	return (EXIT_FAILURE);
 }
 
-//Ne pas oublier de faire en sorte que les printfs impriment dans la sortie d'erreur
 int	err_return(int value, char *log, int level)
 {
+	char	*temp;
 	int	ilev;
 
 	ilev = 0;
 	if (value) 
 	{
-		printf("\n");
+		temp = ft_itoa(level);
+		err_putstr_fd("\n", 2);
 		while (ilev++ < level)
-			printf("\t");
-		printf("%sError L%d\n%s", "\033[4m\033[1;91m", level, F_DEFAULT);
+			err_putstr_fd("\t", 2);
+		err_putstr_fd("\033[4m\033[1;91m", 2);
+		err_putstr_fd("Error L", 2);
+		err_putstr_fd(temp, 2);
+		err_putstr_fd("\n", 2);
+		err_putstr_fd(F_DEFAULT, 2);
 		while (--ilev > 0)
-			printf("\t");
-		printf("%s", log);
+			err_putstr_fd("\t", 2);
+		err_putstr_fd(log, 2);
 		if (level <= 0)
-			printf("\n");
+			err_putstr_fd("\n", 2);
+		temp = s_free(&temp);
 	}
 	return (value);
 }
