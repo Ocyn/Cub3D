@@ -35,7 +35,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_str_edit.c \
 					secure_ft.c \
 					parser.c error.c \
-					misc.c convert.c math_ft.c graphics_ft.c \
+					misc.c convert.c math_ft.c \
 					keys_bindings.c \
 					\
 					safemode.c \
@@ -72,7 +72,7 @@ all : $(NAME)
 
 $(NAME): $(DIRS) $(LIB) $(OBJ)
 	$(call logs, $(CYAN),"Compiling\ Executable")
-	$(CC) $(FLAGS) $(OBJ) $(LIB) lib/mlx/libmlx.a -I . -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
 	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c

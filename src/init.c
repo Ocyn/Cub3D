@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 04:37:51 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 12:41:13 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	init_player_struct(t_player *ply, t_map map)
 	&& !ft_strchr(map.map[ply->ypos], 'E') \
 	&& !ft_strchr(map.map[ply->ypos], 'W'))
 		ply->ypos++;
-	while (ply->xpos < map.xlen && map.map[ply->ypos][ply->xpos] != 'N' \
+	while (map.map[ply->ypos][ply->xpos] \
+	&& map.map[ply->ypos][ply->xpos] != 'N' \
 	&& map.map[ply->ypos][ply->xpos] != 'S' \
 	&& map.map[ply->ypos][ply->xpos] != 'E' \
 	&& map.map[ply->ypos][ply->xpos] != 'W')
