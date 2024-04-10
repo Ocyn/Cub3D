@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 22:36:41 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/09 23:46:44 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 02:47:45 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,13 @@ void	sf_while(char **tab)
 
 void	sf_safemode(t_data data)
 {
-	char	**tmap;
+	long long	cord[2];
 
-	tmap = NULL;
 	(void)data;
 	printf("\n");
 	db_beacon("Safe Mode", 41);
-	printf("Cloning map\t");
-	tmap = me_tabdup(data.map.map, me_tablen(data.map.map));
-	if (!tmap)
-		return ((void)printf("KO\n"));
-	printf("OK\n");
-	db_showtab(tmap);
-	printf("Launching diffusion\t");
-	me_diffusion(tmap, data.player.ypos, data.player.xpos, '1');
-	if (!tmap)
-		return ((void)printf("KO\n"));
-	printf("OK\n");
-	db_showtab(tmap);
-	sf_while(tmap);
-	tmap = s_freetab(tmap, me_tablen(tmap));
+	db_showplayer(data.player);
+	misc_player_location(data.map, &cord[0], &cord[1]);
+	printf("\nCoord = [%lld][%lld]\n", cord[0], cord[1]);
 	db_beacon("END", 41);
 }

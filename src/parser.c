@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 01:00:08 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:39:24 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ int	parse_map(t_map map, t_player player)
 	while (my < map.ylen)
 	{
 		if (me_str2strcmp(map.map[my], "01NSWE \n"))
-			return (err_return(EXIT_FAILURE, "Invalid character detected", 1));
+			return (err_return(EXIT_FAILURE, "Invalid character", 1));
 		ct += me_strchrn(map.map[my], 'N') + me_strchrn(map.map[my], 'S') \
 		+ me_strchrn(map.map[my], 'W') + me_strchrn(map.map[my], 'E');
 		if (ct > 1)
-			return (err_return(EXIT_FAILURE, "Many players detected", 1));
+			return (err_return(EXIT_FAILURE, "Invalid player number", 1));
 		my++;
 	}
 	if (parse_map_borders(map, player))

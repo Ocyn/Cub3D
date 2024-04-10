@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 01:50:15 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 02:29:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void		res_data_struct(t_data *data, int free);
 int			parse_main(t_data *data);
 int			parse_map(t_map map, t_player player);
 int			parse_file(char *file);
+
+int			misc_player_location(t_map map, long long *y, long long *x);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);

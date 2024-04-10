@@ -35,7 +35,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_str_edit.c \
 					secure_ft.c \
 					parser.c error.c \
-					convert.c math_ft.c graphics_ft.c \
+					misc.c convert.c math_ft.c graphics_ft.c \
 					keys_bindings.c \
 					\
 					safemode.c \

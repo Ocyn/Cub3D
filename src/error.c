@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:46:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 02:06:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:38:10 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	err_custom(int launch, char *log, int tab)
 int	err_return(int value, char *log, int level)
 {
 	char	*temp;
-	int	ilev;
+	int		ilev;
 
 	ilev = 0;
-	if (value) 
+	if (value)
 	{
 		temp = ft_itoa(level);
 		err_putstr_fd("\n", 2);

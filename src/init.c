@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 01:54:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 03:42:09 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ int	init_map_struct(t_map *map, char *file)
 
 int	init_player_struct(t_player *ply, t_map map)
 {
-	if (!ply || !map.map)
+	if (!ply || !map.map || !map.map[0])
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	res_player_struct(ply, 0);
-	while (!ft_strchr(map.map[ply->ypos], 'N') \
+	while (ply->ypos < map.ylen && !ft_strchr(map.map[ply->ypos], 'N') \
 	&& !ft_strchr(map.map[ply->ypos], 'S') \
 	&& !ft_strchr(map.map[ply->ypos], 'E') \
-	&& !ft_strchr(map.map[ply->ypos], 'W') && ply->ypos <= map.ylen)
+	&& !ft_strchr(map.map[ply->ypos], 'W'))
 		ply->ypos++;
-	while (map.map[ply->ypos][ply->xpos] != 'N' \
+	while (ply->xpos < map.xlen && map.map[ply->ypos][ply->xpos] != 'N' \
 	&& map.map[ply->ypos][ply->xpos] != 'S' \
 	&& map.map[ply->ypos][ply->xpos] != 'E' \
-	&& map.map[ply->ypos][ply->xpos] != 'W' && map.map[ply->ypos][ply->xpos])
+	&& map.map[ply->ypos][ply->xpos] != 'W')
 		ply->xpos++;
 	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
