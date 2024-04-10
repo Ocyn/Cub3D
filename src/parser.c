@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 03:56:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/10 04:04:53 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,26 @@ int	parse_map_borders(t_map map, t_player player)
 	long long	y;
 
 	y = 0;
-	temp = map.map_bis;
+	temp = me_tabdup(map.map, me_tablen(map.map));
 	if (!temp)
 		return (err_return(EXIT_FAILURE, "Map cloning failed", 2));
+	if (misc_player_location(map, &player.ypos, &player.xpos))
+		return (s_freetab(temp, me_tablen(temp)) \
+		, err_return(EXIT_FAILURE, "No player found", 2));
 	me_diffusion(temp, player.ypos, player.xpos, '1');
-	db_showtab(temp);
+	/* DEBUG */	db_showtab(temp);
 	if (!temp)
 		return (err_return(EXIT_FAILURE, "Diffusion failed", 2));
 	while (temp && temp[y] && temp[y])
 	{
 		if (temp[y][0] == '*' || temp[y][ft_strlen(temp[y]) - 1] == '*')
-			return (err_return(EXIT_FAILURE, "Side wall breach", 2));
+			return (s_freetab(temp, me_tablen(temp)) \
+			, err_return(EXIT_FAILURE, "Side wall breach", 2));
 		y++;
 	}
 	if (ft_strchr(temp[0], '*') || ft_strchr(temp[y - 1], '*'))
-		return (err_return(EXIT_FAILURE, "Top / Bottom wall breach", 2));
+		return (s_freetab(temp, me_tablen(temp)) \
+		, err_return(EXIT_FAILURE, "Top / Bottom wall breach", 2));
 	temp = s_freetab(temp, me_tablen(temp));
 	return (EXIT_SUCCESS);
 }
