@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 07:33:54 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 09:01:20 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,8 @@ int			graph_test(t_data *data);
 int			graph_render(t_data *data);
 
 int			gp_gameplay(int key, t_data *data);
+
+void		key_keybinds(int key, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 
