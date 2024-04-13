@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 03:21:55 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 04:44:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	db_showmap(t_map map, int mode)
 	}
 	if (!mode || mode == 2)
 	{
-		printf("\n%s# Format%s\n\n", F_BOLD, F_DEFAULT);
+		printf("\n%s# Format%s (Y/X: %lld/%lld)\n\n", F_BOLD, F_DEFAULT, map.ylen, map.xlen);
 		while ((long long)my <= map.ylen)
 		{
 			printf("%ld\t|%s|\n", my + 1, map.map[my]);

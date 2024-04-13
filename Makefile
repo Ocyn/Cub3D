@@ -43,7 +43,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					parser.c error.c \
 					misc.c convert.c math_ft.c \
 					keys_bindings.c \
-					graphics_ft.c \
+					graphics_ft.c gameplay.c \
 					\
 					safemode.c \
 					debug.c

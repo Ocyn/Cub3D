@@ -6,20 +6,22 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 03:48:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 05:23:41 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	graph_window_size(t_data *data)
+int	graph_close(t_data *data)
 {
-	if (data->map.xlen == 0 || data->map.xlen == 0)
-		return (err_return(EXIT_FAILURE, "Invalid map size", 2));
-	data->win_h = 1000;
-	data->win_w = 1000;
-	data->win_h_center = (data->win_h / 2);
-	data->win_w_center = (data->win_w / 2);
+	if (!data)
+		return (err_return(EXIT_FAILURE, "Memory issue", 1));
+	mlx_destroy_window(data->mlxinit, data->win);
+	mlx_destroy_display(data->mlxinit);
+	free(data->mlxinit);
+	data->mlxinit = NULL;
+	res_data_struct(data, 1);
+	exit(EXIT_SUCCESS);
 	return (EXIT_SUCCESS);
 }
 
@@ -27,9 +29,8 @@ int	graph_init(t_data *data)
 {
 	char	title[] = "Cub3D";
 
-	(void)data;
 	data->mlxinit = mlx_init();
-	if (!data->mlxinit || graph_window_size(data))
+	if (!data->mlxinit)
 		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
 	data->win = mlx_new_window(data->mlxinit, data->win_w, data->win_h, title);
 	if (!data->win)
@@ -51,6 +52,11 @@ int	graph_main(t_data *data)
 {
 	(void)data;
 	db_beacon("MLX", 41);
-
+	if (graph_init(data))
+	if (!data->mlxinit)
+		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
+	mlx_hook(data->win, 17, 0, graph_close, data);
+	mlx_key_hook(data->win, gp_gameplay, data);
+	mlx_loop(data->mlxinit);
 	return (EXIT_SUCCESS);
 }

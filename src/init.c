@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 04:28:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 05:12:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ int	init_data_struct(t_data *data, int argc, char **argv)
 		return (err_return(EXIT_FAILURE, "Invalid argument format", 0));
 	data->arg_nb = argc;
 	data->arg_tab = argv;
+	data->win_h = WIN_HEIGHT;
+	data->win_w = WIN_WIDTH;
+	data->win_h_center = (data->win_h / 2);
+	data->win_w_center = (data->win_w / 2);
 	return (EXIT_SUCCESS);
 }
 
@@ -28,10 +32,8 @@ int	init_map_struct(t_map *map, char *file)
 {
 	char		**temp;
 	long long	my;
-	long long	xmax;
 
 	my = -1;
-	xmax = 0;
 	temp = conv_file2tab(file);
 	if (!map || !temp)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
@@ -41,8 +43,8 @@ int	init_map_struct(t_map *map, char *file)
 	{
 		if (ft_strchr(temp[my], '\n'))
 			temp[my][ft_strlen(temp[my]) - 1] = 0;
-		if ((long long)ft_strlen(temp[my]) > xmax)
-			xmax = ft_strlen(temp[my]);
+		if ((long long)ft_strlen(temp[my]) > map->xlen)
+			map->xlen = ft_strlen(temp[my]);
 	}
 	if (init_map_trim(map, temp))
 		return (s_freetab(temp, me_tablen(temp)) \

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 03:14:08 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 05:12:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,21 @@
 # define F_LGREY2		"\033[38;5;248m"
 # define F_RED2			"\033[38;5;1m"
 
-# define W_KEY 119
-# define A_KEY 97
-# define S_KEY 115
-# define D_KEY 100
-# define Z_KEY 122
-# define Q_KEY 113
-# define UP_ARROW_KEY 65362
-# define RIGHT_ARROW_KEY 65363
-# define LEFT_ARROW_KEY 65361
-# define DOWN_ARROW_KEY 65364
-# define TAB_KEY 65289
-# define ESC_KEY 65307
+# define W_KEY				119
+# define A_KEY				97
+# define S_KEY				115
+# define D_KEY				100
+# define Z_KEY				122
+# define Q_KEY				113
+# define UP_ARROW_KEY		65362
+# define RIGHT_ARROW_KEY	65363
+# define LEFT_ARROW_KEY		65361
+# define DOWN_ARROW_KEY		65364
+# define TAB_KEY 			65289
+# define ESC_KEY 			65307
+
+# define WIN_HEIGHT			1800
+# define WIN_WIDTH			3200
 
 typedef struct s_player
 {
@@ -133,6 +136,9 @@ int			parse_map(t_map map, t_player player);
 int			parse_file(char *file);
 
 int			graph_main(t_data *data);
+int			graph_close(t_data *data);
+
+int			gp_gameplay(int key, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 
