@@ -6,14 +6,15 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 09:01:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 13:19:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../lib/mlx_linux/mlx.h" 
+# include "../lib/mlx_linux/mlx.h"
+# include "../lib/mlx_linux/mlx_int.h"
 # include "../lib/libft/src/libft.h"
 # include "../lib/gnl/src/gnl.h"
 # include <unistd.h>
@@ -102,6 +103,7 @@ typedef struct s_data
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
+	long long	ips;
 	t_map		map;
 	t_player	player;
 }				t_data;
@@ -142,11 +144,15 @@ int			parse_file(char *file);
 int			graph_main(t_data *data);
 int			graph_close(t_data *data);
 int			graph_test(t_data *data);
-int			graph_render(t_data *data);
+int			re_render(t_data *data);
+int			re_nothing(void *data);
+int			re_pixeltoimg(t_img *img, int x, int y, int color);
 
-int			gp_gameplay(int key, t_data *data);
+int			gp_gameplay(t_data *data);
 
-void		key_keybinds(int key, t_data *data);
+int			bind_bindings(int key, t_data *data);
+int			bind_keyboard(int key, t_data *data);
+int			bind_mouse(int x, int y, void *vdata);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 

@@ -1,5 +1,6 @@
 {
 	"recommendations": [
-		"ms-ceintl.vscode-language-pack-fr"
+		"ms-ceintl.vscode-language-pack-fr",
+		"robbowen.synthwave-vscode"
 	]
 }

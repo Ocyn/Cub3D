@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 09:02:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 13:11:42 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	graph_close(t_data *data)
 {
 	if (!data)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
-	db_showmap(data->map, 0);
+	// db_showmap(data->map, 0);
 	if (data->map.tex_no.id)
 		mlx_destroy_image(data->mlxinit, data->map.tex_no.id);
 	if (data->map.tex_so.id)
@@ -34,20 +34,6 @@ int	graph_close(t_data *data)
 	}
 	res_data_struct(data, 1);
 	exit(EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
-}
-
-int	graph_render(t_data *data)
-{
-	t_map	*map;
-	t_tex	*img;
-
-	(void)data;
-	(void)map;
-	map = &data->map;
-	img = &data->map.tex_no;
-	printf("Ldurieux X[%d] Y[%d]\n", img->lorem, img->ipsum);
-	mlx_put_image_to_window(data->mlxinit, data->win, img->id, img->lorem, img->ipsum);
 	return (EXIT_SUCCESS);
 }
 
@@ -76,9 +62,11 @@ int	graph_test(t_data *data) //Testing image openning
 	t_tex	*north;
 
 	north = &data->map.tex_no;
-	north->lorem = data->win_wmid - (north->wi / 2);
-	north->ipsum = data->win_hmid - (north->he / 2);
-	graph_render(data);
+	// north->lorem = data->win_wmid - (north->wi / 2);
+	// north->ipsum = data->win_hmid - (north->he / 2);
+	mlx_mouse_get_pos(data->mlxinit, data->win, &north->lorem, &north->ipsum);
+	north->lorem -= (north->wi / 2);
+	north->ipsum -= (north->he / 2);
 	return (EXIT_SUCCESS);
 }
 
@@ -92,9 +80,10 @@ int	graph_main(t_data *data)
 		graph_close(data);
 		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
 	}
-	graph_test(data);
+	//graph_test(data);
 	mlx_hook(data->win, 17, 0, graph_close, data);
-	mlx_key_hook(data->win, gp_gameplay, data);
+	mlx_loop_hook(data->mlxinit, re_render, data);
+	gp_gameplay(data);
 	mlx_loop(data->mlxinit);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,9 @@
 	"terminal.integrated.allowMnemonics": true,
 	"terminal.integrated.cursorStyle": "block",
 	"files.associations": {
-		"libft.h": "c"
+		"libft.h": "c",
+		"cub3d.h": "c",
+		"mlx.h": "c"
 	},
 	"terminal.integrated.profiles.linux": {
 		"zsh": {
@@ -14,4 +16,5 @@
 			"args": ["--host", "--env=TERM=xterm-256color", "zsh"]
 		}
 	},
+	"discord.enabled": true,
 }
