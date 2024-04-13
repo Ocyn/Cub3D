@@ -97,7 +97,7 @@ $(NAME): $(LIB) $(OBJ)
 	$(LOG__SUCCESS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(DIRS)
-	$(CC) $(CFLAGS) $(ALL_INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIB) : force
 	make -sC lib/libft

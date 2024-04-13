@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 12:41:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 04:28:46 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_data_struct(t_data *data, int argc, char **argv)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	res_data_struct(data, 0);
 	if (argc != 2)
-		return (err_return(EXIT_FAILURE, "Invalid argument format", 1));
+		return (err_return(EXIT_FAILURE, "Invalid argument format", 0));
 	data->arg_nb = argc;
 	data->arg_tab = argv;
 	return (EXIT_SUCCESS);
