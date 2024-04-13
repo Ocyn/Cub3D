@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 13:19:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 14:44:28 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,15 +143,17 @@ int			parse_file(char *file);
 
 int			graph_main(t_data *data);
 int			graph_close(t_data *data);
-int			graph_test(t_data *data);
 int			re_render(t_data *data);
 int			re_nothing(void *data);
 int			re_pixeltoimg(t_img *img, int x, int y, int color);
 
 int			gp_gameplay(t_data *data);
+int			gp_move(t_data *data);
+int			gp_test(t_data *data);
 
 int			bind_bindings(int key, t_data *data);
-int			bind_keyboard(int key, t_data *data);
+int			bind_keyboard_press(int key, t_data *data);
+int			bind_keyboard_release(int key, t_data *data);
 int			bind_mouse(int x, int y, void *vdata);
 
 int			misc_player_location(t_map map, long long *y, long long *x);

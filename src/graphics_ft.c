@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 13:11:42 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 14:22:33 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,6 @@ int	graph_init(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	graph_test(t_data *data) //Testing image openning
-{
-	t_tex	*north;
-
-	north = &data->map.tex_no;
-	// north->lorem = data->win_wmid - (north->wi / 2);
-	// north->ipsum = data->win_hmid - (north->he / 2);
-	mlx_mouse_get_pos(data->mlxinit, data->win, &north->lorem, &north->ipsum);
-	north->lorem -= (north->wi / 2);
-	north->ipsum -= (north->he / 2);
-	return (EXIT_SUCCESS);
-}
-
-
 int	graph_main(t_data *data)
 {
 	(void)data;
@@ -80,10 +66,9 @@ int	graph_main(t_data *data)
 		graph_close(data);
 		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
 	}
-	//graph_test(data);
 	mlx_hook(data->win, 17, 0, graph_close, data);
-	mlx_loop_hook(data->mlxinit, re_render, data);
 	gp_gameplay(data);
+	mlx_loop_hook(data->mlxinit, re_render, data);
 	mlx_loop(data->mlxinit);
 	return (EXIT_SUCCESS);
 }

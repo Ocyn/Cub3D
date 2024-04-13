@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 13:18:51 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 14:41:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	re_render(t_data *data)
 	(void)map;
 	map = &data->map;
 	img = &data->map.tex_no;
-	graph_test(data);
+	gp_move(data);
 	mlx_put_image_to_window(data->mlxinit, data->win, img->id, img->lorem, img->ipsum);
 	data->ips++;
 	printf("\rips [%lld]\t\tMouse (X/Y): %d/%d", data->ips, img->lorem, img->ipsum);
