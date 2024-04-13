@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 18:12:09 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 18:22:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	gp_gameplay(t_data *data)
 	map = &data->map;
 	mlxp = data->mlxinit;
 	winp = data->win;
-	//mlx_key_hook(winp, bind_keyboard, data);
+	mlx_key_hook(winp, bind_bindings, data);
 	mlx_hook(data->win, 02, 1L<<0, bind_keyboard_press, data);
 	mlx_hook(data->win, 03, 1L<<1, bind_keyboard_release, data);
 	//mlx_mouse_move(mlxp, winp, data->win_wmid, data->win_hmid);

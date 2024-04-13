@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 18:16:26 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 18:26:57 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 # define WIN_HEIGHT			1800
 # define WIN_WIDTH			3200
 
-# define PLAYER_SPEED		2
+# define PLAYER_SPEED		1
 # define PLAYER_FOV			110
 
 
