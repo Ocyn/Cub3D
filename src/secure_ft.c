@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   secure_ft.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:45:00 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/07 02:12:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 05:54:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*s_free(char **ptr_memory)
 {
-	if (*ptr_memory)
+	if (*ptr_memory && ptr_memory)
 	{
 		free(*ptr_memory);
 		*ptr_memory = NULL;

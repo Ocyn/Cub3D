@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 05:12:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 07:33:54 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ typedef struct s_player
 
 typedef struct s_tex
 {
-	int			fd;
+	int			life;
 	char		*file;
 	void		*id;
-	int			xlen;
-	int			ylen;
+	int			he;
+	int			wi;
 	int			lorem;
+	int			ipsum;
 }				t_tex;
 
 typedef struct s_map
@@ -99,8 +100,8 @@ typedef struct s_data
 	void		*extra;
 	int			win_w;
 	int			win_h;
-	int			win_w_center;
-	int			win_h_center;
+	int			win_wmid;
+	int			win_hmid;
 	t_map		map;
 	t_player	player;
 }				t_data;
@@ -114,6 +115,7 @@ int			db_return(int value, char *log);
 void		db_showmap(t_map map, int mode);
 void		db_showtab(char **tab);
 void		db_showplayer(t_player ply);
+void		db_keylog(int key);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -125,6 +127,8 @@ int			init_map_struct(t_map *map, char *file);
 int			init_map_texture(t_tex *asset, char **map, char *set, size_t *pos);
 int			init_map_trim(t_map *map, char **temp);
 int			init_player_struct(t_player *player, t_map map);
+int			init_texture_struct(t_data *data, t_tex	*texture);
+int			init_mlx_struct(t_data *data);
 
 void		res_tex_struct(t_tex *tex, int free);
 void		res_map_struct(t_map *map, int free);
@@ -137,6 +141,8 @@ int			parse_file(char *file);
 
 int			graph_main(t_data *data);
 int			graph_close(t_data *data);
+int			graph_test(t_data *data);
+int			graph_render(t_data *data);
 
 int			gp_gameplay(int key, t_data *data);
 

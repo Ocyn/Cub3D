@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 04:46:29 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 06:13:49 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int	main(int argc, char **argv)
 		res_data_struct(&data, 1);
 		return (EXIT_FAILURE);
 	}
-	//db_showmap(data.map, 0);
+	db_showplayer(data.player);
 	graph_main(&data);
-	//db_showplayer(data.player);
 	res_data_struct(&data, 1);
 	return (EXIT_SUCCESS);
 }

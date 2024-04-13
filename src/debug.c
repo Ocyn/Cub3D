@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 04:44:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 06:40:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,31 @@ static void	db_showtexturebis(int *tex, char *id)
 	printf("\n\n");
 }
 
+void	db_keylog(int key)
+{
+	if (key == ESC_KEY)
+		printf("Escape\t\t[%d]\n", key);
+	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY)
+		printf("Left\t\t[%d]\n", key);
+	if (key == D_KEY || key == RIGHT_ARROW_KEY)
+		printf("Right\t\t[%d]\n", key);
+	if (key == Z_KEY || key == W_KEY || key == UP_ARROW_KEY)
+		printf("Forward\t\t[%d]\n", key);
+	if (key == S_KEY || key == DOWN_ARROW_KEY)
+		printf("Backward\t\t[%d]\n", key);
+	if (key == TAB_KEY)
+		printf("Tab\t\t[%d]\n", key);
+}
+
 static void	db_showtexture(t_tex tex, char *id)
 {
 	printf("%sTexture %s%s\n", F_UNDERLINE, id, F_DEFAULT);
-	printf("fd file\t[%d][%s]\n", tex.fd, tex.file);
-	printf("mlx id\t[%p]\n", tex.id);
-	printf("size\t[%d][%d]\n", tex.xlen, tex.ylen);
+	printf("file\t[%s]\n", tex.file);
+	if (tex.life)
+	{
+		printf("mlx id\t[%p]\n", tex.id);
+		printf("size\t[%d][%d]\n", tex.wi, tex.he);
+	}
 	//printf("lorem\t[%d]\n", tex.lorem);
 	printf("\n");
 }

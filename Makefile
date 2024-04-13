@@ -82,7 +82,7 @@ MLX_DIR				= $(LIB_DIR)mlx_linux
 MLX_LIB				= $(MLX_DIR)/libmlx.a
 MLX_HEAD			= $(MLX_DIR)/mlx.h
 MLX_INCLUDE			= -I $(MLX_DIR)
-MLX_FLAGS			= -L $(MLX_DIR) $(MLX_INCLUDE) -lmlx -lXext -lX11 -lm -lz
+MLX_FLAGS			= -L $(MLX_DIR) $(MLX_INCLUDE) -lmlx -lXext -lX11 -lm -lbsd -lz
 
 MLX_ALL				= $(MLX_LIB) $(MLX_FLAGS)
 

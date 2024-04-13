@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 04:37:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 07:34:01 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,15 @@ void	res_tex_struct(t_tex *tex, int free)
 {
 	if (!tex)
 		return ;
-	tex->fd = -1;
+	tex->life = 0;
 	if (free && tex->file)
 		tex->file = s_free(&tex->file);
 	tex->file = NULL;
 	tex->id = NULL;
-	tex->xlen = 0;
-	tex->ylen = 0;
+	tex->he = 0;
+	tex->wi = 0;
 	tex->lorem = 0;
+	tex->ipsum = 0;
 }
 
 void	res_map_struct(t_map *map, int free)
@@ -70,8 +71,8 @@ void	res_data_struct(t_data *data, int free)
 	data->extra = NULL;
 	data->win_w = 0;
 	data->win_h = 0;
-	data->win_w_center = 0;
-	data->win_h_center = 0;
+	data->win_wmid = 0;
+	data->win_hmid = 0;
 	res_map_struct(&data->map, free);
 	res_player_struct(&data->player, free);
 }
