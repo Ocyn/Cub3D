@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 14:45:53 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 18:12:09 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,21 @@ int	gp_test(t_data *data) //Sandbox function
 
 int	gp_move(t_data *data)
 {
-	t_player *player;
+	t_player	*player;
+	size_t		speed;
 
 	player = &data->player;
-	if (player->b_move == 'u')
-		data->map.tex_no.ipsum -= 1;
-	if (player->b_move == 'd')
-		data->map.tex_no.ipsum += 1;
-	if (player->b_move == 'r')
-		data->map.tex_no.lorem += 1;
-	if (player->b_move == 'l')
-		data->map.tex_no.lorem -= 1;
+	speed = PLAYER_SPEED;
+	if (!player->b_move)
+		return (EXIT_SUCCESS);
+	if (player->move_up)
+		data->map.tex_no.ipsum -= speed;
+	if (player->move_down)
+		data->map.tex_no.ipsum += speed;
+	if (player->move_right)
+		data->map.tex_no.lorem += speed;
+	if (player->move_left)
+		data->map.tex_no.lorem -= speed;
 	return (EXIT_SUCCESS);
 }
 

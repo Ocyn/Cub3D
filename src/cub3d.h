@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 14:44:28 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 18:16:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@
 # define WIN_HEIGHT			1800
 # define WIN_WIDTH			3200
 
+# define PLAYER_SPEED		2
+# define PLAYER_FOV			110
+
+
+
 typedef struct s_player
 {
 	char		compass;
@@ -65,6 +70,10 @@ typedef struct s_player
 	long long	ypos;
 	int			b_touch;
 	int			b_move;
+	int			move_up;
+	int			move_down;
+	int			move_right;
+	int			move_left;
 }				t_player;
 
 typedef struct s_tex
@@ -154,7 +163,6 @@ int			gp_test(t_data *data);
 int			bind_bindings(int key, t_data *data);
 int			bind_keyboard_press(int key, t_data *data);
 int			bind_keyboard_release(int key, t_data *data);
-int			bind_mouse(int x, int y, void *vdata);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 
