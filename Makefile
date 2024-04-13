@@ -69,7 +69,7 @@ DIRS				= $(sort $(dir $(OBJ)))
 #			UTILITIES
 
 CC					= cc
-CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
+CFLAGS				= -Wextra -Wall -Werror -MMD
 
 FLAGS				= $(CFLAGS)
 ALL_INCLUDE			= -I $(SRC_DIR) \
