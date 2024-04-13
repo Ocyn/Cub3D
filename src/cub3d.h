@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 04:36:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/13 03:14:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../lib/mlx/mlx.h" 
-# include "../lib/mlx/mlx_int.h"
+# include "../lib/mlx_linux/mlx.h" 
 # include "../lib/libft/src/libft.h"
 # include "../lib/gnl/src/gnl.h"
 # include <unistd.h>
@@ -41,6 +40,19 @@
 # define F_BLACK3		"\033[38;5;16m"
 # define F_LGREY2		"\033[38;5;248m"
 # define F_RED2			"\033[38;5;1m"
+
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
+# define Z_KEY 122
+# define Q_KEY 113
+# define UP_ARROW_KEY 65362
+# define RIGHT_ARROW_KEY 65363
+# define LEFT_ARROW_KEY 65361
+# define DOWN_ARROW_KEY 65364
+# define TAB_KEY 65289
+# define ESC_KEY 65307
 
 typedef struct s_player
 {

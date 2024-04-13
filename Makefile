@@ -2,6 +2,7 @@
 
 NAME				= Cub3D
 
+
 #		DEBUG TOOLS
 
 RESET				= \033[0m
@@ -19,17 +20,22 @@ define	logs
 	@printf "$(1)\r\t $(2) $(RESET)"
 endef
 
+LOG__TITLE			= @echo "$(BOLD) \nULTIMAKEFILE - CUB3D $(RESET)\n\n\n"
 LOG__PREL			= @echo "$(PURPLE) \nMAKEFILE $(RESET)\n"
 LOG__SUCCESS		= @printf "$(GREEN)\rDONE $(RESET)\n"
 LOG__ALLSUCCESS		= @printf "\033[1;92m\n\rALL DONE $(RESET)\n\n"
 
+
 #			DIRECTORIES
+
 SRC_DIR				= src/
 HEAD_DIR			= src/
 LIB_DIR				= lib/
 OBJ_DIR				= $(SRC_DIR)OBJ/
 
+
 #			FILES
+
 ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_edit.c memory_edit_bis.c memory_scan.c memory_scan_bis.c \
 					memory_str_edit.c \
@@ -37,6 +43,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					parser.c error.c \
 					misc.c convert.c math_ft.c \
 					keys_bindings.c \
+					graphics_ft.c \
 					\
 					safemode.c \
 					debug.c
@@ -58,30 +65,44 @@ DEP					= $(OBJ:.o=.d)
 
 DIRS				= $(sort $(dir $(OBJ)))
 
+
 #			UTILITIES
+
 CC					= cc
 CFLAGS				= -Wextra -Wall -Werror -MMD -gdwarf-4
-EXFLAGS				= -L lib/mlx -lmlx -lXext -lX11 -lm -lbsd
 
-FLAGS				= $(CFLAGS) $(EXFLAGS)
+FLAGS				= $(CFLAGS)
+ALL_INCLUDE			= -I $(SRC_DIR) \
+					-I /usr/include \
+					$(MLX_INCLUDE)
+
+
+#			MLX
+MLX_DIR				= $(LIB_DIR)mlx_linux
+MLX_LIB				= $(MLX_DIR)/libmlx.a
+MLX_HEAD			= $(MLX_DIR)/mlx.h
+MLX_INCLUDE			= -I $(MLX_DIR)
+MLX_FLAGS			= -L $(MLX_DIR) $(MLX_INCLUDE) -lmlx -lXext -lX11 -lm -lz
+
+MLX_ALL				= $(MLX_LIB) $(MLX_FLAGS)
 
 #					RULES
 
 all : $(NAME)
 	$(LOG__ALLSUCCESS)
 
-$(NAME): $(DIRS) $(LIB) $(OBJ)
+$(NAME): $(LIB) $(OBJ)
 	$(call logs, $(CYAN),"Compiling\ Executable")
-	$(CC) $(FLAGS) $(OBJ) $(LIB) -I . -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(LIB) $(MLX_ALL) $(ALL_INCLUDE) -o $(NAME)
 	$(LOG__SUCCESS)
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c | $(DIRS)
+	$(CC) $(CFLAGS) $(ALL_INCLUDE) -c $< -o $@
 
 $(LIB) : force
-	@make -sC lib/libft
-	@make -sC lib/gnl
-	@make -sC lib/mlx
+	make -sC lib/libft
+	make -sC lib/gnl
+	make -sC $(MLX_DIR)
 	$(call logs, $(CYAN),"Compiling\ LIBS")
 	$(LOG__SUCCESS)
 
@@ -91,16 +112,16 @@ $(DIRS) :
 	$(LOG__SUCCESS)
 
 clean : 
-	@make clean -sC lib/libft
-	@make clean -sC lib/gnl
-	# @make clean -sC lib/mlx
+	make clean -sC lib/libft
+	make clean -sC lib/gnl
+	# @make clean -sC $(MLX_DIR)
 	$(call logs, $(YELLOW),"Cleaning\ OBJ\ files")
 	rm -rf $(OBJ_DIR)
 	$(LOG__SUCCESS)
 
 fclean : clean
-	@make fclean -sC lib/libft
-	@make fclean -sC lib/gnl
+	make fclean -sC lib/libft
+	make fclean -sC lib/gnl
 	$(call logs, $(YELLOW),"Cleaning\ Executable")
 	rm -f $(NAME)
 	$(LOG__SUCCESS)

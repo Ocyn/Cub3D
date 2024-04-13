@@ -1,0 +1,11 @@
+{
+	"files.autoSave": "onFocusChange",
+	"terminal.explorerKind": "integrated",
+	"terminal.integrated.accessibleViewPreserveCursorPosition": true,
+	"terminal.integrated.accessibleViewFocusOnCommandExecution": true,
+	"terminal.integrated.allowMnemonics": true,
+	"terminal.integrated.cursorStyle": "block",
+	"files.associations": {
+		"libft.h": "c"
+	},
+}
