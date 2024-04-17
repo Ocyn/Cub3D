@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 08:33:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:56:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ int	init_data_struct(t_data *data, int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
+int	init_texture_struct(t_data *data, t_tex	*texture)
+{
+	texture->id = mlx_xpm_file_to_image(data->mlxinit, texture->file, &texture->wi, &texture->he);
+	if (!texture->id)
+		return (err_return(EXIT_FAILURE, "XPM file failed to load", 3));
+	texture->life = (texture->id != NULL);
+	return (EXIT_SUCCESS);
+}
+
 int	init_mlx_struct(t_data *data)
 {
 	if (!data)
@@ -31,7 +40,6 @@ int	init_mlx_struct(t_data *data)
 	data->mlxinit = mlx_init();
 	if (!data->mlxinit)
 		return (err_return(EXIT_FAILURE, "MLX init failed", 3));
-	mlx_do_key_autorepeaton(data->mlxinit);
 	mlx_get_screen_size(data->mlxinit, &data->win_w, &data->win_h);
 	data->win_h /= 2;
 	data->win_w /= 2;
@@ -86,14 +94,5 @@ int	init_player_struct(t_player *ply, t_map map)
 	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
 	ply->compass = map.map[ply->ypos][ply->xpos];
-	return (EXIT_SUCCESS);
-}
-
-int	init_texture_struct(t_data *data, t_tex	*texture)
-{
-	texture->id = mlx_xpm_file_to_image(data->mlxinit, texture->file, &texture->wi, &texture->he);
-	if (!texture->id)
-		return (err_return(EXIT_FAILURE, "XPM file failed to load", 3));
-	texture->life = (texture->id != NULL);
 	return (EXIT_SUCCESS);
 }

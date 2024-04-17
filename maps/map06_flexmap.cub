@@ -3,7 +3,7 @@ EA ./maps/assets/aammirat.xpm
 WE ./maps/assets/jcuzin.xpm
 SO ./maps/assets/llevasse.xpm
 
-F 153, 153, 153
+F 0, 255, 35 
 
 C 182, 247, 255
 

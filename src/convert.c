@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:37:32 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/03 23:40:21 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:50:20 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	conv_rgb(int i[3])
+{
+	return (i[0] << 16 | i[1] << 8 | i[2]);
+}
 
 char	**conv_file2tab(char *file)
 {

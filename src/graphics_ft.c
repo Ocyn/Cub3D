@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 14:22:33 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:56:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	graph_close(t_data *data)
 		mlx_destroy_image(data->mlxinit, data->map.tex_ea.id);
 	if (data->map.tex_we.id)
 		mlx_destroy_image(data->mlxinit, data->map.tex_we.id);
+	if (data->game)
+		mlx_destroy_image(data->mlxinit, data->game);
 	if (data->mlxinit)
 	{
 		if (data->win)
@@ -43,9 +45,6 @@ int	graph_init(t_data *data)
 
 	if (init_mlx_struct(data))
 		return (err_return(EXIT_FAILURE, "MLX init failed", 2));
-	data->win = mlx_new_window(data->mlxinit, data->win_w, data->win_h, title);
-	if (!data->win)
-		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
 	if (init_texture_struct(data, &data->map.tex_no))
 		return (err_return(EXIT_FAILURE, "North texture loading failed", 2));
 	if (init_texture_struct(data, &data->map.tex_so))
@@ -54,6 +53,12 @@ int	graph_init(t_data *data)
 		return (err_return(EXIT_FAILURE, "East texture loading failed", 2));
 	if (init_texture_struct(data, &data->map.tex_we))
 		return (err_return(EXIT_FAILURE, "West texture loading failed", 2));
+	data->game = mlx_new_image(data->mlxinit, data->win_w, data->win_h);
+	if (!data->game)
+		return (err_return(EXIT_FAILURE, "Rendering image failed to init", 2));
+	data->win = mlx_new_window(data->mlxinit, data->win_w, data->win_h, title);
+	if (!data->win)
+		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
 	return (EXIT_SUCCESS);
 }
 

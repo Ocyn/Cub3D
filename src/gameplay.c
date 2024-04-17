@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 18:22:11 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:51:21 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ int	gp_test(t_data *data) //Sandbox function
 {
 	t_tex	*north;
 
+	(void)north;
 	north = &data->map.tex_no;
-	mlx_mouse_get_pos(data->mlxinit, data->win, &north->lorem, &north->ipsum);
-	north->lorem -= (north->wi / 2);
-	north->ipsum -= (north->he / 2);
+	// mlx_mouse_get_pos(data->mlxinit, data->win, &north->lorem, &north->ipsum);
+	// north->lorem -= (north->wi / 2);
+	// north->ipsum -= (north->he / 2);
+	re_pixeltoimg(data->game, north->lorem, north->ipsum, conv_rgb(data->map.floor));
 	return (EXIT_SUCCESS);
 }
 

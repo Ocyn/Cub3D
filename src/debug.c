@@ -6,11 +6,13 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 06:40:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:28:20 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#include <time.h> //Librarie temporaire
 
 void	db_ascii_title(char *tab)
 {
@@ -48,6 +50,21 @@ void	db_beacon(char *title, long size)
 	while (--id > 0)
 		printf("#");
 	printf("%s\n", F_DEFAULT);
+}
+
+size_t	db_framepersecond(size_t last_measure)
+{
+	static size_t previous_time = 0;
+	static size_t previous_measure = 0;
+	size_t current_time = clock();
+	size_t delta_time_sec = (current_time - previous_time) / CLOCKS_PER_SEC;
+
+	if (!previous_time || !previous_measure || delta_time_sec < 1)
+		return (0);
+	size_t fps = last_measure - previous_measure;
+	previous_time = current_time;
+	previous_measure = last_measure;
+	return (fps);
 }
 
 void	db_testft(char *ft_name, int ret_int, char *ret_char)

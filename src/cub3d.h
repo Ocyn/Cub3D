@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 18:26:57 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:50:25 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_data
 	int			arg_nb;
 	char		**arg_tab;
 	void		*mlxinit;
+	void		*game;
 	void		*win;
 	void		*extra;
 	int			win_w;
@@ -127,6 +128,7 @@ void		db_showmap(t_map map, int mode);
 void		db_showtab(char **tab);
 void		db_showplayer(t_player ply);
 void		db_keylog(int key);
+size_t		db_framepersecond(size_t last_measure);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -152,6 +154,7 @@ int			parse_file(char *file);
 
 int			graph_main(t_data *data);
 int			graph_close(t_data *data);
+
 int			re_render(t_data *data);
 int			re_nothing(void *data);
 int			re_pixeltoimg(t_img *img, int x, int y, int color);
@@ -186,6 +189,7 @@ void		*s_malloc(unsigned long size);
 void		*s_freetab(char **tab, long i);
 
 char		**conv_file2tab(char *file);
+int			conv_rgb(int i[3]);
 
 void		sf_safemode(t_data data);
 
