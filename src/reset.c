@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:54 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:51:03 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	res_player_struct(t_player *player, int free)
 	player->compass = 0;
 	player->xpos = 0;
 	player->ypos = 0;
+	player->x = 0;
+	player->y = 0;
 	player->b_move = 0;
 	player->b_touch = 0;
 	player->move_up = 0;

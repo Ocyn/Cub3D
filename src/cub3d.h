@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:19 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:50:28 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_player
 	char		compass;
 	long long	xpos;
 	long long	ypos;
+	double		x;
+	double		y;
 	int			b_touch;
 	int			b_move;
 	int			move_up;

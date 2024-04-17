@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:04 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:51:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ int	init_player_struct(t_player *ply, t_map map)
 	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
 	ply->compass = map.map[ply->ypos][ply->xpos];
+	ply->x = (double)ply->xpos;
+	ply->y = (double)ply->ypos;
 	return (EXIT_SUCCESS);
 }

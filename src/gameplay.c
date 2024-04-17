@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:47:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:54:52 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,13 @@ int	gp_move(t_data *data)
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
 	if (player->move_up && !player->move_down)
-		player->ypos -= speed * (player->ypos <= data->mlx.win_h \
-		&& player->ypos > 0);
+		player->ypos -= speed * (player->ypos > 0);
 	if (player->move_down && !player->move_up)
-		player->ypos += speed * (player->ypos <= data->mlx.win_h \
-		&& player->ypos > 0);
+		player->ypos += speed * (player->ypos <= data->mlx.win_h);
 	if (player->move_right && !player->move_left)
-		player->xpos += speed * (player->xpos <= data->mlx.win_h \
-		&& player->xpos > 0);
+		player->xpos += speed * (player->xpos <= data->mlx.win_w);
 	if (player->move_left && !player->move_right)
-		player->xpos -= speed * (player->xpos <= data->mlx.win_h \
-		&& player->xpos > 0);
+		player->xpos -= speed * (player->xpos > 0);
 	return (EXIT_SUCCESS);
 }
 
