@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:35:41 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:47:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	gp_test(t_data *data) //Sandbox function
 {
 	t_tex	*north;
+	t_player	*player;
 
 	(void)north;
 	north = &data->map.tex_no;
+	player = &data->player;
 	// mlx_mouse_get_pos(data->mlx.init, data->mlx.win, &north->lorem, &north->ipsum);
 	// north->lorem -= (north->wi / 2);
 	// north->ipsum -= (north->he / 2);
-	re_pixeltoimg(data->mlx.game, north->lorem, north->ipsum, conv_rgb(data->map.floor));
+	re_pixeltoimg(data->mlx.game, player->xpos, player->ypos, conv_rgb(data->map.floor));
 	return (EXIT_SUCCESS);
 }
 
@@ -35,13 +37,17 @@ int	gp_move(t_data *data)
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
 	if (player->move_up && !player->move_down)
-		data->map.tex_no.ipsum -= speed;
+		player->ypos -= speed * (player->ypos <= data->mlx.win_h \
+		&& player->ypos > 0);
 	if (player->move_down && !player->move_up)
-		data->map.tex_no.ipsum += speed;
+		player->ypos += speed * (player->ypos <= data->mlx.win_h \
+		&& player->ypos > 0);
 	if (player->move_right && !player->move_left)
-		data->map.tex_no.lorem += speed;
+		player->xpos += speed * (player->xpos <= data->mlx.win_h \
+		&& player->xpos > 0);
 	if (player->move_left && !player->move_right)
-		data->map.tex_no.lorem -= speed;
+		player->xpos -= speed * (player->xpos <= data->mlx.win_h \
+		&& player->xpos > 0);
 	return (EXIT_SUCCESS);
 }
 
