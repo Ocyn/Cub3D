@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:04 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 18:16:24 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int	bind_keyboard_press(int key, t_data *data)
 		graph_close(data);
 	if (key == TAB_KEY)
 	{
-		data->map.tex_no.lorem = data->mlx.win_hmid;
-		data->map.tex_no.ipsum = data->mlx.win_wmid;
+		data->player.x = data->mlx.win_wmid;
+		data->player.y = data->mlx.win_hmid;
+		data->player.xpos = data->mlx.win_wmid;
+		data->player.ypos = data->mlx.win_hmid;
+		misc_clear_screen(data);
 	}
 	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY \
 	|| key == D_KEY || key == RIGHT_ARROW_KEY || key == Z_KEY \

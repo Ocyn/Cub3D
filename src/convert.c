@@ -6,15 +6,26 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:37:32 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 14:50:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 18:43:28 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+
 int	conv_rgb(int i[3])
 {
 	return (i[0] << 16 | i[1] << 8 | i[2]);
+}
+
+int	conv_rgbtab(int red, int green, int blue)
+{
+	int		i[3];
+
+	i[0] = red;
+	i[1] = green;
+	i[2] = blue;
+	return (conv_rgb(i));
 }
 
 char	**conv_file2tab(char *file)

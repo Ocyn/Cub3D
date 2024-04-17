@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:45:28 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 19:12:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ inline void	re_pixeltoimg(t_img *img, int x, int y, int color)
 
 int	re_draw_image(t_data *data)
 {
+	long		pmapx;
+	long		pmapy;
 	t_map		*map;
 	t_player	*player;
 	int			sfps;
@@ -32,7 +34,9 @@ int	re_draw_image(t_data *data)
 	gp_move(data);
 	gp_test(data);
 	data->mlx.ips++;
-	printf("\rFPS [%d] Total [%lld]  |  Player pos (X/Y): %lld/%lld", sfps, data->mlx.ips, player->xpos, player->ypos);
+	pmapx = data->mlx.win_w;
+	pmapy = data->mlx.win_h;
+	printf("\rFPS [%d] Total [%lld] | Player [%f][%f] -> [%ld][%ld]\r", sfps, data->mlx.ips, player->x, player->y, pmapx, pmapy);
 	return (EXIT_SUCCESS);
 }
 

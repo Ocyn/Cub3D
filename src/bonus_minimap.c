@@ -6,42 +6,62 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:35:27 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 19:01:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	mmap_init(t_data *data, int *pos, int *size, int *bkgnd)
-{
-	int	color[3];
-
-	(void)data;
-	*bkgnd = 0;
-	pos[0] = 10;
-	pos[1] = 10;
-	size[0] = 10;
-	size[1] = 10;
-	color[0] = data->map.roof[0];
-	color[1] = data->map.roof[1];
-	color[2] = data->map.roof[2];
-	misc_opposite_color(color);
-	*bkgnd = conv_rgb(color);
-	return (EXIT_SUCCESS);
-}
-
-int	mmap_draw_square(t_data *data, long width, long height, int color)
+int	mmap_draw_player(t_data *data)
 {
 	long	y;
 	long	x;
 
-	y = 20;
-	while (y <= height)
+	y = ((data->mlx.win_h / 6) / 2) - 5;
+	while (y <= ((data->mlx.win_h / 6) / 2) + 5)
 	{
-		x = 40;
-		while (x <= width)
+		x = ((data->mlx.win_w / 6) / 2) - 5;
+		while (x <= ((data->mlx.win_w / 6) / 2) + 5)
 		{
-			re_pixeltoimg(data->mlx.game, x, y, color);
+			re_pixeltoimg(data->mlx.game, x, y, conv_rgbtab(255, 255, 255));
+			x++;
+		}
+		y++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	mmap_draw_map(t_data *data)
+{
+	long	y;
+	long	x;
+
+	y = 0;
+	while (y <= data->mlx.win_h / 6)
+	{
+		x = 0;
+		while (x <= data->mlx.win_w / 6)
+		{
+			re_pixeltoimg(data->mlx.game, x, y, conv_rgbtab(150, 150, 150));
+			x++;
+		}
+		y++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	mmap_draw_border(t_data *data)
+{
+	long	y;
+	long	x;
+
+	y = 0;
+	while (y <= data->mlx.win_h / 6)
+	{
+		x = 0;
+		while (x <= data->mlx.win_w / 6)
+		{
+			re_pixeltoimg(data->mlx.game, x, y, conv_rgbtab(0, 0, 0));
 			x++;
 		}
 		y++;
@@ -51,12 +71,8 @@ int	mmap_draw_square(t_data *data, long width, long height, int color)
 
 int	mmap_minimap(t_data *data)
 {
-	int	pos[2];
-	int	size[2];
-	int	bkgnd;
-
 	(void)data;
-	mmap_init(data, pos, size, &bkgnd);
-	mmap_draw_square(data, data->mlx.win_w / 6, data->mlx.win_h / 6, bkgnd);
+	mmap_draw_map(data);
+	mmap_draw_player(data);
 	return (EXIT_SUCCESS);
 }

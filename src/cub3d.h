@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:50:28 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 18:42:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
 
-# define WIN_HEIGHT			1800
-# define WIN_WIDTH			3200
-
-# define PLAYER_SPEED		1
+# define PLAYER_SPEED		10
 # define PLAYER_FOV			110
 
 
@@ -202,6 +199,7 @@ void		*s_freetab(char **tab, long i);
 
 char		**conv_file2tab(char *file);
 int			conv_rgb(int i[3]);
+int			conv_rgbtab(int red, int green, int blue);
 
 void		sf_safemode(t_data data);
 
