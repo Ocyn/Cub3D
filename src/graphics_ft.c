@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 14:56:26 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:35:12 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int	graph_close(t_data *data)
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	// db_showmap(data->map, 0);
 	if (data->map.tex_no.id)
-		mlx_destroy_image(data->mlxinit, data->map.tex_no.id);
+		mlx_destroy_image(data->mlx.init, data->map.tex_no.id);
 	if (data->map.tex_so.id)
-		mlx_destroy_image(data->mlxinit, data->map.tex_so.id);
+		mlx_destroy_image(data->mlx.init, data->map.tex_so.id);
 	if (data->map.tex_ea.id)
-		mlx_destroy_image(data->mlxinit, data->map.tex_ea.id);
+		mlx_destroy_image(data->mlx.init, data->map.tex_ea.id);
 	if (data->map.tex_we.id)
-		mlx_destroy_image(data->mlxinit, data->map.tex_we.id);
-	if (data->game)
-		mlx_destroy_image(data->mlxinit, data->game);
-	if (data->mlxinit)
+		mlx_destroy_image(data->mlx.init, data->map.tex_we.id);
+	if (data->mlx.game)
+		mlx_destroy_image(data->mlx.init, data->mlx.game);
+	if (data->mlx.init)
 	{
-		if (data->win)
-			mlx_destroy_window(data->mlxinit, data->win);
-		mlx_destroy_display(data->mlxinit);
-		free(data->mlxinit);
+		if (data->mlx.win)
+			mlx_destroy_window(data->mlx.init, data->mlx.win);
+		mlx_destroy_display(data->mlx.init);
+		free(data->mlx.init);
 	}
 	res_data_struct(data, 1);
 	exit(EXIT_SUCCESS);
@@ -53,11 +53,11 @@ int	graph_init(t_data *data)
 		return (err_return(EXIT_FAILURE, "East texture loading failed", 2));
 	if (init_texture_struct(data, &data->map.tex_we))
 		return (err_return(EXIT_FAILURE, "West texture loading failed", 2));
-	data->game = mlx_new_image(data->mlxinit, data->win_w, data->win_h);
-	if (!data->game)
+	data->mlx.game = mlx_new_image(data->mlx.init, data->mlx.win_w, data->mlx.win_h);
+	if (!data->mlx.game)
 		return (err_return(EXIT_FAILURE, "Rendering image failed to init", 2));
-	data->win = mlx_new_window(data->mlxinit, data->win_w, data->win_h, title);
-	if (!data->win)
+	data->mlx.win = mlx_new_window(data->mlx.init, data->mlx.win_w, data->mlx.win_h, title);
+	if (!data->mlx.win)
 		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
 	return (EXIT_SUCCESS);
 }
@@ -71,9 +71,9 @@ int	graph_main(t_data *data)
 		graph_close(data);
 		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
 	}
-	mlx_hook(data->win, 17, 0, graph_close, data);
+	mlx_hook(data->mlx.win, 17, 0, graph_close, data);
 	gp_gameplay(data);
-	mlx_loop_hook(data->mlxinit, re_render, data);
-	mlx_loop(data->mlxinit);
+	mlx_loop_hook(data->mlx.init, re_render, data);
+	mlx_loop(data->mlx.init);
 	return (EXIT_SUCCESS);
 }

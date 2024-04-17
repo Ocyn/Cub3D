@@ -45,6 +45,8 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					keys_bindings.c \
 					graphics_ft.c gameplay.c render.c\
 					\
+					bonus_minimap.c \
+					\
 					safemode.c \
 					debug.c
 

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 14:51:21 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:35:41 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	gp_test(t_data *data) //Sandbox function
 
 	(void)north;
 	north = &data->map.tex_no;
-	// mlx_mouse_get_pos(data->mlxinit, data->win, &north->lorem, &north->ipsum);
+	// mlx_mouse_get_pos(data->mlx.init, data->mlx.win, &north->lorem, &north->ipsum);
 	// north->lorem -= (north->wi / 2);
 	// north->ipsum -= (north->he / 2);
-	re_pixeltoimg(data->game, north->lorem, north->ipsum, conv_rgb(data->map.floor));
+	re_pixeltoimg(data->mlx.game, north->lorem, north->ipsum, conv_rgb(data->map.floor));
 	return (EXIT_SUCCESS);
 }
 
@@ -34,13 +34,13 @@ int	gp_move(t_data *data)
 	speed = PLAYER_SPEED;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
-	if (player->move_up)
+	if (player->move_up && !player->move_down)
 		data->map.tex_no.ipsum -= speed;
-	if (player->move_down)
+	if (player->move_down && !player->move_up)
 		data->map.tex_no.ipsum += speed;
-	if (player->move_right)
+	if (player->move_right && !player->move_left)
 		data->map.tex_no.lorem += speed;
-	if (player->move_left)
+	if (player->move_left && !player->move_right)
 		data->map.tex_no.lorem -= speed;
 	return (EXIT_SUCCESS);
 }
@@ -58,11 +58,11 @@ int	gp_gameplay(t_data *data)
 	if (!data)
 		return (err_return(EXIT_FAILURE, "Memory issue", 2));
 	map = &data->map;
-	mlxp = data->mlxinit;
-	winp = data->win;
+	mlxp = data->mlx.init;
+	winp = data->mlx.win;
 	mlx_key_hook(winp, bind_bindings, data);
-	mlx_hook(data->win, 02, 1L<<0, bind_keyboard_press, data);
-	mlx_hook(data->win, 03, 1L<<1, bind_keyboard_release, data);
-	//mlx_mouse_move(mlxp, winp, data->win_wmid, data->win_hmid);
+	mlx_hook(data->mlx.win, 02, 1L<<0, bind_keyboard_press, data);
+	mlx_hook(data->mlx.win, 03, 1L<<1, bind_keyboard_release, data);
+	//mlx_mouse_move(mlxp, winp, data->mlx.win_wmid, data->mlx.win_hmid);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 15:02:30 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:34:04 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	bind_keyboard_press(int key, t_data *data)
 		graph_close(data);
 	if (key == TAB_KEY)
 	{
-		data->map.tex_no.lorem = data->win_hmid;
-		data->map.tex_no.ipsum = data->win_wmid;
+		data->map.tex_no.lorem = data->mlx.win_hmid;
+		data->map.tex_no.ipsum = data->mlx.win_wmid;
 	}
 	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY \
 	|| key == D_KEY || key == RIGHT_ARROW_KEY || key == Z_KEY \
@@ -42,11 +42,6 @@ int	bind_keyboard_release(int key, t_data *data)
 {
 	//db_keylog(key);
 	(void)key;
-	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY \
-	|| key == D_KEY || key == RIGHT_ARROW_KEY || key == Z_KEY \
-	|| key == W_KEY || key == UP_ARROW_KEY || key == S_KEY \
-	|| key == DOWN_ARROW_KEY)
-		data->player.b_move = 0;
 	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY)
 		data->player.move_left = 0;
 	if (key == D_KEY || key == RIGHT_ARROW_KEY)
@@ -64,8 +59,8 @@ int	bind_bindings(int key, t_data *data)
 		graph_close(data);
 	if (key == TAB_KEY)
 	{
-		data->map.tex_no.lorem = data->win_hmid;
-		data->map.tex_no.ipsum = data->win_wmid;
+		data->map.tex_no.lorem = data->mlx.win_hmid;
+		data->map.tex_no.ipsum = data->mlx.win_wmid;
 	}
 	//bind_keyboard(key, data);
 	return (EXIT_SUCCESS);

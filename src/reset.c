@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 18:04:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:34:54 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ void	res_data_struct(t_data *data, int free)
 		return ;
 	data->arg_nb = 0;
 	data->arg_tab = NULL;
-	data->mlxinit = NULL;
-	data->win = NULL;
+	data->mlx.init = NULL;
+	data->mlx.win = NULL;
 	data->extra = NULL;
-	data->win_w = 0;
-	data->win_h = 0;
-	data->win_wmid = 0;
-	data->win_hmid = 0;
-	data->ips = 0;
+	data->mlx.win_w = 0;
+	data->mlx.win_h = 0;
+	data->mlx.win_wmid = 0;
+	data->mlx.win_hmid = 0;
+	data->mlx.ips = 0;
 	res_map_struct(&data->map, free);
 	res_player_struct(&data->player, free);
 }

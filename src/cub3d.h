@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 14:50:25 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:34:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,26 @@ typedef struct s_map
 	long long	ylen;
 }				t_map;
 
-typedef struct s_data
+typedef struct s_mlx
 {
-	int			arg_nb;
-	char		**arg_tab;
-	void		*mlxinit;
+	void		*init;
 	void		*game;
 	void		*win;
-	void		*extra;
 	int			win_w;
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
 	long long	ips;
+}				t_mlx;
+
+typedef struct s_data
+{
+	int			arg_nb;
+	char		**arg_tab;
+	void		*extra;
 	t_map		map;
 	t_player	player;
+	t_mlx		mlx;
 }				t_data;
 
 void		db_ascii_title(char *tab);
@@ -128,7 +133,7 @@ void		db_showmap(t_map map, int mode);
 void		db_showtab(char **tab);
 void		db_showplayer(t_player ply);
 void		db_keylog(int key);
-size_t		db_framepersecond(size_t last_measure);
+int			db_framepersecond(void);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -157,7 +162,8 @@ int			graph_close(t_data *data);
 
 int			re_render(t_data *data);
 int			re_nothing(void *data);
-int			re_pixeltoimg(t_img *img, int x, int y, int color);
+int			re_draw_image(t_data *data);
+void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
 int			gp_gameplay(t_data *data);
 int			gp_move(t_data *data);
@@ -168,6 +174,8 @@ int			bind_keyboard_press(int key, t_data *data);
 int			bind_keyboard_release(int key, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
+void		misc_opposite_color(int *color);
+void		misc_clear_screen(t_data *data);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
@@ -184,6 +192,8 @@ int			me_str2strcmp(char *src, char *reg);
 int			me_find_str_in_tab(int strict_mode, char *find, char **tab);
 int			me_find_str_in_str(const char *src, const char *seek);
 
+int			mmap_minimap(t_data *data);
+
 void		*s_free(char **ptr_memory);
 void		*s_malloc(unsigned long size);
 void		*s_freetab(char **tab, long i);
@@ -192,5 +202,7 @@ char		**conv_file2tab(char *file);
 int			conv_rgb(int i[3]);
 
 void		sf_safemode(t_data data);
+
+
 
 #endif

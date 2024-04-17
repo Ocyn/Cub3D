@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 14:56:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/17 17:34:04 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_data_struct(t_data *data, int argc, char **argv)
 
 int	init_texture_struct(t_data *data, t_tex	*texture)
 {
-	texture->id = mlx_xpm_file_to_image(data->mlxinit, texture->file, &texture->wi, &texture->he);
+	texture->id = mlx_xpm_file_to_image(data->mlx.init, texture->file, &texture->wi, &texture->he);
 	if (!texture->id)
 		return (err_return(EXIT_FAILURE, "XPM file failed to load", 3));
 	texture->life = (texture->id != NULL);
@@ -37,14 +37,14 @@ int	init_mlx_struct(t_data *data)
 {
 	if (!data)
 		return (err_return(EXIT_FAILURE, "Memory issue", 3));
-	data->mlxinit = mlx_init();
-	if (!data->mlxinit)
+	data->mlx.init = mlx_init();
+	if (!data->mlx.init)
 		return (err_return(EXIT_FAILURE, "MLX init failed", 3));
-	mlx_get_screen_size(data->mlxinit, &data->win_w, &data->win_h);
-	data->win_h /= 2;
-	data->win_w /= 2;
-	data->win_hmid = (data->win_h / 2);
-	data->win_wmid = (data->win_w / 2);
+	mlx_get_screen_size(data->mlx.init, &data->mlx.win_w, &data->mlx.win_h);
+	data->mlx.win_h /= 2;
+	data->mlx.win_w /= 2;
+	data->mlx.win_hmid = (data->mlx.win_h / 2);
+	data->mlx.win_wmid = (data->mlx.win_w / 2);
 	return (EXIT_SUCCESS);
 }
 
