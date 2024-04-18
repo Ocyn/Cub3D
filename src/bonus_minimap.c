@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 19:28:18 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 19:39:09 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	mmap_move(t_data *data)
 	if (player->move_up && !player->move_down)
 		mlx->minimap_y += speed * (mlx->minimap_y < mlx->minimap_size[1]);
 	if (player->move_down && !player->move_up)
-		mlx->minimap_y -= speed;
+		mlx->minimap_y -= speed * (mlx->minimap_y < 10 * data->map.ylen);
 	if (player->move_right && !player->move_left)
-		mlx->minimap_x -= speed;
+		mlx->minimap_x -= speed * (mlx->minimap_x < 10 * data->map.xlen);
 	if (player->move_left && !player->move_right)
 		mlx->minimap_x += speed * (mlx->minimap_x < mlx->minimap_size[0]);
 	return (EXIT_SUCCESS);
@@ -42,7 +42,7 @@ int	mmap_area(size_t area[2], size_t cord[2], char c)
 		if (cord[0] < area[0] && cord[1] < area[1])
 			return (conv_rgbtab(255, 255, 255));
 		// else
-		// 	return (conv_rgbtab(50, 50, 50));
+		// 	return (conv_rgbtab(30, 30, 30));
 	}
 	return (0);
 }
