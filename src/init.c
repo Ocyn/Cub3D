@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 20:51:49 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 00:52:38 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ int	init_mlx_struct(t_data *data)
 	data->mlx.minimap_size[1] = data->mlx.win_h / 6;
 	data->mlx.minimap_pos[0] = MINIMAP_POS_X;
 	data->mlx.minimap_pos[1] = MINIMAP_POS_Y;
+	data->mlx.map_limit[0] = data->map.xlen * GAME_SCALING;
+	data->mlx.map_limit[1] = data->map.ylen * GAME_SCALING;
+	data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * GAME_SCALING;
+	data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * GAME_SCALING;
+	data->mlx.speed = PLAYER_SPEED;
+	data->mlx.speed /= GAME_SCALING;
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 21:34:51 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 00:10:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
 
-# define PLAYER_SPEED		5
+# define GAME_SCALING		10
+
+# define PLAYER_SPEED		2
 # define PLAYER_FOV			110
 
-# define MINIMAP_SCALE		6
+# define MINIMAP_SCALE		10
 # define MINIMAP_POS_X		0
 # define MINIMAP_POS_Y		0
 
@@ -115,12 +117,13 @@ typedef struct s_mlx
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
-	size_t		screensize[2];
+	double		map_limit[2];
 	double		minimap_x;
 	double		minimap_y;
 	double		minimap_angle;
 	long		minimap_size[2];
 	long		minimap_pos[2];
+	double		speed;
 	long long	ips;
 }				t_mlx;
 
@@ -146,6 +149,7 @@ void		db_game_monitoring(t_data *data);
 int			db_framepersecond(void);
 int			db_readfile(char *file);
 int			db_return(int value, char *log);
+void		db_game_info(t_data *data);
 
 int			sb_telecran(t_data *data);
 int			sb_movingmap(t_data *data);

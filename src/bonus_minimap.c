@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 21:41:47 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 00:57:37 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@ int	mmap_move(t_data *data)
 {
 	t_player	*player;
 	t_mlx		*mlx;
-	double		speed;
 
 	player = &data->player;
 	mlx = &data->mlx;
-	speed = PLAYER_SPEED * 0.1;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
-	if (player->move_up && !player->move_down)
-		mlx->minimap_y += speed * (mlx->minimap_y < mlx->minimap_size[1]);
-	if (player->move_down && !player->move_up)
-		mlx->minimap_y -= speed * (mlx->minimap_y < 10 * data->map.ylen);
-	if (player->move_right && !player->move_left)
-		mlx->minimap_x -= speed * (mlx->minimap_x < 10 * data->map.xlen);
-	if (player->move_left && !player->move_right)
-		mlx->minimap_x += speed * (mlx->minimap_x < mlx->minimap_size[0]);
+	mlx->minimap_y = mlx->minimap_size[1] / 2;
+	mlx->minimap_x = mlx->minimap_size[0] / 2;
+	mlx->minimap_y -= player->y * GAME_SCALING;
+	mlx->minimap_x -= player->x * GAME_SCALING;
+	mlx->minimap_y -= GAME_SCALING / 2;
+	mlx->minimap_x -= GAME_SCALING / 2;
 	mlx->minimap_angle = player->look;
 	return (EXIT_SUCCESS);
 }
@@ -39,15 +35,16 @@ int	mmap_area(size_t area[2], size_t cord[2], char c)
 {
 	int	border;
 
-	border = 2;
 	(void)area;
+	border = 2;
 	if (cord[0] + border < area[0] && cord[1] + border < area[1])
 	{
+		if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
+			return (conv_rgbtab(255, 0, 0));
 		if (c != '0')
 			return (conv_rgbtab(255, 255, 255));
-		// else
-		// 	return (conv_rgbtab(30, 30, 30));
 	}
+	//return (conv_rgbtab(30, 30, 30));
 	return (0);
 }
 
@@ -88,7 +85,7 @@ void	mmap_draw_hud(t_mlx *mlx, int mode)
 	}
 	if (mode == 1)
 	{
-		draw_square(mlx, (size_t[2]){10, 10} \
+		draw_square(mlx, (size_t[2]){GAME_SCALING, GAME_SCALING} \
 		, (size_t[2]){mlx->minimap_size[0] / 2 - 5, mlx->minimap_size[1] / 2 - 5} \
 		, conv_rgbtab(81, 254, 0));
 	}
@@ -96,13 +93,15 @@ void	mmap_draw_hud(t_mlx *mlx, int mode)
 
 int	mmap_minimap(t_data *data)
 {
-	size_t	cord[2] = {0, 0};
+	t_mlx	*mlx;
 
 	(void)data;
-	mmap_draw_hud(&data->mlx, 0);
-	draw_square(&data->mlx, (size_t *)data->mlx.minimap_size, cord, 0);
-	mmap_draw_map(data, (size_t *)data->mlx.minimap_size, 10 \
-	, (size_t[2]){data->mlx.minimap_x, data->mlx.minimap_y});
-	mmap_draw_hud(&data->mlx, 1);
+	mlx = &data->mlx;
+	mmap_move(data);
+	mmap_draw_hud(mlx, 0);
+	draw_square(mlx, (size_t *)mlx->minimap_size, (size_t *)mlx->minimap_pos, 0);
+	mmap_draw_map(data, (size_t *)mlx->minimap_size, GAME_SCALING \
+	, (size_t[2]){(mlx->minimap_x), (mlx->minimap_y) * 1});
+	mmap_draw_hud(mlx, 1);
 	return (EXIT_SUCCESS);
 }

@@ -6,38 +6,50 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 20:39:59 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 00:58:59 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	gp_move_event(t_data *data)
+{
+	t_player	*player;
+	t_mlx		*mlx;
+
+	(void)player;
+	player = &data->player;
+	mlx = &data->mlx;
+	player->b_move = 1;
+	if (player->y < 0)
+		player->y = 0;
+	if (player->x < 0)
+		player->x = 0;
+	return (EXIT_SUCCESS);
+}
+
 int	gp_move(t_data *data)
 {
 	t_player	*player;
-	double		speed;
 
+	gp_move_event(data);
 	player = &data->player;
-	speed = PLAYER_SPEED * 0.1;
 	if (player->turn_right && !player->turn_left)
-		player->angle_rot -= speed * (player->angle_rot > -360);
+		player->angle_rot -= data->mlx.speed * (player->angle_rot > -360);
 	if (player->turn_left && !player->turn_right)
-		player->angle_rot += speed;
+		player->angle_rot += data->mlx.speed;
 	player->angle_rot = (int)player->angle_rot % 360;
 	player->look = player->angle_rot;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
-	if (player->move_up && !player->move_down)
-		player->y -= speed * (player->y > 0);
-	if (player->move_down && !player->move_up)
-		player->y += speed * (player->y + 1 < data->mlx.win_h);
-	if (player->move_right && !player->move_left)
-		player->x += speed * (player->x + 1 < data->mlx.win_w);
-	if (player->move_left && !player->move_right)
-		player->x -= speed * (player->x > 0);
-	mmap_move(data);
-	player->ypos = player->y;
-	player->xpos = player->x;
+	if (player->move_up && !player->move_down && player->y > 0)
+		player->y -= data->mlx.speed;
+	if (player->move_down && !player->move_up && player->y < data->map.ylen)
+		player->y += data->mlx.speed;
+	if (player->move_right && !player->move_left && player->x < data->map.xlen)
+		player->x += data->mlx.speed;
+	if (player->move_left && !player->move_right && player->x > 0)
+		player->x -= data->mlx.speed;
 	return (EXIT_SUCCESS);
 }
 

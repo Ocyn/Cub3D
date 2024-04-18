@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 20:26:49 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 00:21:47 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ void	db_beacon(char *title, long size)
 	printf("%s\n", F_DEFAULT);
 }
 
+void	db_game_info(t_data *data)
+{
+	printf("\nScreen\t\tW[%d] H[%d]\n", data->mlx.win_w, data->mlx.win_h);
+	printf("InGame Data:\n");
+	printf(" Map Scale:\t\t[%d]:[X:%.1f][Y:%.1f]\n", GAME_SCALING, data->mlx.map_limit[0], data->mlx.map_limit[1]);
+	printf(" Speed:\t\t3D[%.2f] | Minimap[%.2f]\n", data->mlx.speed, data->mlx.speed);
+	printf("\n\n");
+}
+
 void	db_game_monitoring(t_data *data)
 {
 	long		pmapx;
@@ -64,9 +73,10 @@ void	db_game_monitoring(t_data *data)
 	mlx = &data->mlx;
 	pmapx = data->mlx.win_w;
 	pmapy = data->mlx.win_h;
-	printf("\rFPS [%d] Total [%lld]", db_framepersecond(), data->mlx.ips);
+	printf("\rFPS [%d]", db_framepersecond());
 	printf(" | Player [%.2f][%.2f] [%.2f][%.2f]", player->x, player->y, player->angle_rot, player->look);
-	printf(" | Minimap [%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
+	printf(" | Map [%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
+	// printf(" | Key U[%d]D[%d]L[%d]R[%d]", player->move_up, player->move_down, player->move_left, player->move_right);
 	printf("      \r");
 }
 
