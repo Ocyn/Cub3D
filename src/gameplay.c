@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 15:58:30 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 19:18:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	gp_move(t_data *data)
 		player->x += speed * (player->x + 1 < data->mlx.win_w);
 	if (player->move_left && !player->move_right)
 		player->x -= speed * (player->x > 0);
+	mmap_move(data);
 	player->ypos = player->y;
 	player->xpos = player->x;
 	return (EXIT_SUCCESS);

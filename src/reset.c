@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:51:03 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 19:20:37 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,11 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.win_wmid = 0;
 	data->mlx.win_hmid = 0;
 	data->mlx.ips = 0;
+	data->mlx.minimap_x = 0;
+	data->mlx.minimap_y = 0;
+	data->mlx.minimap_angle = 0;
+	data->mlx.minimap_size[0] = 0;
+	data->mlx.minimap_size[1] = 0;
 	res_map_struct(&data->map, free);
 	res_player_struct(&data->player, free);
 }

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 18:45:10 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 19:20:17 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ typedef struct s_mlx
 	int			win_wmid;
 	int			win_hmid;
 	size_t		screensize[2];
+	double		minimap_x;
+	double		minimap_y;
+	double		minimap_angle;
+	long		minimap_size[2];
 	long long	ips;
 }				t_mlx;
 
@@ -199,6 +203,7 @@ int			me_find_str_in_tab(int strict_mode, char *find, char **tab);
 int			me_find_str_in_str(const char *src, const char *seek);
 
 void		mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2]);
+int			mmap_move(t_data *data);
 int			mmap_minimap(t_data *data);
 
 void		*s_free(char **ptr_memory);

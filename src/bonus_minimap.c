@@ -6,15 +6,31 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 19:05:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 19:28:18 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	mmap_draw_player(t_data *data)
+int	mmap_move(t_data *data)
 {
-	(void)data;
+	t_player	*player;
+	t_mlx		*mlx;
+	double		speed;
+
+	player = &data->player;
+	mlx = &data->mlx;
+	speed = PLAYER_SPEED * 0.1;
+	if (!player->b_move)
+		return (EXIT_SUCCESS);
+	if (player->move_up && !player->move_down)
+		mlx->minimap_y += speed * (mlx->minimap_y < mlx->minimap_size[1]);
+	if (player->move_down && !player->move_up)
+		mlx->minimap_y -= speed;
+	if (player->move_right && !player->move_left)
+		mlx->minimap_x -= speed;
+	if (player->move_left && !player->move_right)
+		mlx->minimap_x += speed * (mlx->minimap_x < mlx->minimap_size[0]);
 	return (EXIT_SUCCESS);
 }
 
@@ -42,8 +58,6 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	while (i[1] < (size_t)data->map.ylen)
 	{
 		i[0] = 0;
-		// draw_square(&data->mlx, (size_t[2]){scale * line, scale} \
-		// , (size_t[2]){xy[0], xy[1] + (i[1] * scale)}, 0);
 		while (i[0] < (size_t)data->map.xlen)
 		{
 			color = mmap_area(area, (size_t[2]){xy[0] + (i[0] * scale) \
@@ -84,12 +98,14 @@ int	mmap_draw_hud(t_data *data)
 
 int	mmap_minimap(t_data *data)
 {
-	size_t	area[2] = {data->mlx.win_w / 6, data->mlx.win_h / 6};
 	size_t	cord[2] = {0, 0};
 
 	(void)data;
-	draw_square(&data->mlx, area, cord, 0);
-	mmap_draw_map(data, area, 10, (size_t[2]){data->player.x, data->player.y});
+	data->mlx.minimap_size[0] = data->mlx.win_w / 6;
+	data->mlx.minimap_size[1] = data->mlx.win_h / 6;
+	draw_square(&data->mlx, (size_t *)data->mlx.minimap_size, cord, 0);
+	mmap_draw_map(data, (size_t *)data->mlx.minimap_size, 10 \
+	, (size_t[2]){data->mlx.minimap_x, data->mlx.minimap_y});
 	mmap_draw_hud(data);
 	return (EXIT_SUCCESS);
 }
