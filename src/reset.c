@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 19:20:37 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 20:24:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	res_player_struct(t_player *player, int free)
 	player->move_down = 0;
 	player->move_right = 0;
 	player->move_left = 0;
+	player->turn_right = 0;
+	player->turn_left = 0;
+	player->look = 0;
+	player->angle_rot = 0;
 }
 
 void	res_data_struct(t_data *data, int free)

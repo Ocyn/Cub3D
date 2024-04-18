@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 19:20:17 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 20:16:15 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_player
 {
 	char		compass;
 	double		angle_rot;
+	double		look;
 	long long	xpos;
 	long long	ypos;
 	double		x;
@@ -72,6 +73,8 @@ typedef struct s_player
 	int			move_down;
 	int			move_right;
 	int			move_left;
+	int			turn_right;
+	int			turn_left;
 }				t_player;
 
 typedef struct s_tex
