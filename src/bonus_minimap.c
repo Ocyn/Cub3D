@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 00:57:37 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 01:09:12 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	mmap_move(t_data *data)
 		return (EXIT_SUCCESS);
 	mlx->minimap_y = mlx->minimap_size[1] / 2;
 	mlx->minimap_x = mlx->minimap_size[0] / 2;
-	mlx->minimap_y -= player->y * GAME_SCALING;
-	mlx->minimap_x -= player->x * GAME_SCALING;
-	mlx->minimap_y -= GAME_SCALING / 2;
-	mlx->minimap_x -= GAME_SCALING / 2;
+	mlx->minimap_y -= player->y * mlx->minimap_scale;
+	mlx->minimap_x -= player->x * mlx->minimap_scale;
+	mlx->minimap_y -= mlx->minimap_scale / 2;
+	mlx->minimap_x -= mlx->minimap_scale / 2;
 	mlx->minimap_angle = player->look;
 	return (EXIT_SUCCESS);
 }
@@ -85,7 +85,7 @@ void	mmap_draw_hud(t_mlx *mlx, int mode)
 	}
 	if (mode == 1)
 	{
-		draw_square(mlx, (size_t[2]){GAME_SCALING, GAME_SCALING} \
+		draw_square(mlx, (size_t[2]){mlx->minimap_scale, mlx->minimap_scale} \
 		, (size_t[2]){mlx->minimap_size[0] / 2 - 5, mlx->minimap_size[1] / 2 - 5} \
 		, conv_rgbtab(81, 254, 0));
 	}
@@ -100,8 +100,8 @@ int	mmap_minimap(t_data *data)
 	mmap_move(data);
 	mmap_draw_hud(mlx, 0);
 	draw_square(mlx, (size_t *)mlx->minimap_size, (size_t *)mlx->minimap_pos, 0);
-	mmap_draw_map(data, (size_t *)mlx->minimap_size, GAME_SCALING \
-	, (size_t[2]){(mlx->minimap_x), (mlx->minimap_y) * 1});
+	mmap_draw_map(data, (size_t *)mlx->minimap_size, mlx->minimap_scale \
+	, (size_t[2]){(mlx->minimap_x), (mlx->minimap_y)});
 	mmap_draw_hud(mlx, 1);
 	return (EXIT_SUCCESS);
 }

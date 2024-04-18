@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 22:08:31 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 01:05:52 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.minimap_x = 0;
 	data->mlx.minimap_y = 0;
 	data->mlx.minimap_angle = 0;
+	data->mlx.minimap_scale = 0;
 	data->mlx.minimap_size[0] = 0;
 	data->mlx.minimap_size[1] = 0;
 	data->mlx.minimap_pos[0] = 0;

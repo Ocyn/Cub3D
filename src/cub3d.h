@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 00:10:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 01:22:53 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define D_KEY				100
 # define Z_KEY				122
 # define Q_KEY				113
+# define PLUS_KEY			78
+# define MINUS_KEY			74
 # define UP_ARROW_KEY		65362
 # define RIGHT_ARROW_KEY	65363
 # define LEFT_ARROW_KEY		65361
@@ -55,9 +57,9 @@
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
 
-# define GAME_SCALING		10
+# define GAME_SCALING		20
 
-# define PLAYER_SPEED		2
+# define PLAYER_SPEED		1
 # define PLAYER_FOV			110
 
 # define MINIMAP_SCALE		10
@@ -120,6 +122,7 @@ typedef struct s_mlx
 	double		map_limit[2];
 	double		minimap_x;
 	double		minimap_y;
+	double		minimap_scale;
 	double		minimap_angle;
 	long		minimap_size[2];
 	long		minimap_pos[2];

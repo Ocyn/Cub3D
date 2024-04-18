@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 00:52:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 01:21:01 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,24 @@ int	bind_bindings(int key, t_data *data)
 {
 	if (key == ESC_KEY)
 		graph_close(data);
+	if (key == PLUS_KEY && data->mlx.minimap_scale < 1000)
+	{
+		misc_clear_screen(data->mlx.game);
+		data->mlx.minimap_scale += 2;
+	}
+	if (key == MINUS_KEY && data->mlx.minimap_scale > 4)
+	{
+		misc_clear_screen(data->mlx.game);
+		data->mlx.minimap_scale -= 2;
+	}
 	if (key == TAB_KEY)
 	{
+		data->mlx.minimap_scale = GAME_SCALING;
 		misc_clear_screen(data->mlx.game);
 		data->player.x = data->player.xpos;
 		data->player.y = data->player.ypos;
-		data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * GAME_SCALING;
-		data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * GAME_SCALING;
+		data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * data->mlx.minimap_scale;
+		data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * data->mlx.minimap_scale;
 	}
 	return (EXIT_SUCCESS);
 }
