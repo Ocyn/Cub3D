@@ -6,28 +6,11 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 19:02:39 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 15:58:30 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	gp_test(t_data *data) //Sandbox function
-{
-	t_tex	*north;
-	t_player	*player;
-
-	(void)north;
-	north = &data->map.tex_no;
-	player = &data->player;
-	// mlx_mouse_get_pos(data->mlx.init, data->mlx.win, &north->lorem, &north->ipsum);
-	// north->lorem -= (north->wi / 2);
-	// north->ipsum -= (north->he / 2);
-	player->ypos = player->y;
-	player->xpos = player->x;
-	re_pixeltoimg(data->mlx.game, player->xpos, player->ypos, conv_rgb(data->map.floor));
-	return (EXIT_SUCCESS);
-}
 
 int	gp_move(t_data *data)
 {
@@ -46,6 +29,8 @@ int	gp_move(t_data *data)
 		player->x += speed * (player->x + 1 < data->mlx.win_w);
 	if (player->move_left && !player->move_right)
 		player->x -= speed * (player->x > 0);
+	player->ypos = player->y;
+	player->xpos = player->x;
 	return (EXIT_SUCCESS);
 }
 
@@ -64,7 +49,6 @@ int	gp_gameplay(t_data *data)
 	map = &data->map;
 	mlxp = data->mlx.init;
 	winp = data->mlx.win;
-	mlx_key_hook(winp, bind_bindings, data);
 	mlx_hook(data->mlx.win, 02, 1L<<0, bind_keyboard_press, data);
 	mlx_hook(data->mlx.win, 03, 1L<<1, bind_keyboard_release, data);
 	//mlx_mouse_move(mlxp, winp, data->mlx.win_wmid, data->mlx.win_hmid);

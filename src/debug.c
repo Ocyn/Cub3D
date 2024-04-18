@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:28:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 15:22:05 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ void	db_beacon(char *title, long size)
 	while (--id > 0)
 		printf("#");
 	printf("%s\n", F_DEFAULT);
+}
+
+void	db_game_monitoring(t_data *data)
+{
+	long		pmapx;
+	long		pmapy;
+	t_player	*player;
+
+	data->mlx.ips++;
+	player = &data->player;
+	pmapx = data->mlx.win_w;
+	pmapy = data->mlx.win_h;
+	printf("\rFPS [%d] Total [%lld]", db_framepersecond(), data->mlx.ips);
+	printf(" | Player [%f][%f] -> [%ld][%ld]", player->x, player->y, pmapx, pmapy);
+	printf("      \r");
 }
 
 int	db_framepersecond(void)

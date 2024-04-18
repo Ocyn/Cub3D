@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 18:42:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 18:45:10 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@
 # define PLAYER_SPEED		10
 # define PLAYER_FOV			110
 
-
-
 typedef struct s_player
 {
 	char		compass;
+	double		angle_rot;
 	long long	xpos;
 	long long	ypos;
 	double		x;
@@ -109,6 +108,7 @@ typedef struct s_mlx
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
+	size_t		screensize[2];
 	long long	ips;
 }				t_mlx;
 
@@ -126,13 +126,17 @@ void		db_ascii_title(char *tab);
 void		db_ascii_safemode(char *tab);
 void		db_beacon(char *title, long size);
 void		db_testft(char *ft_name, int ret_int, char *ret_char);
-int			db_readfile(char *file);
-int			db_return(int value, char *log);
 void		db_showmap(t_map map, int mode);
 void		db_showtab(char **tab);
 void		db_showplayer(t_player ply);
 void		db_keylog(int key);
+void		db_game_monitoring(t_data *data);
 int			db_framepersecond(void);
+int			db_readfile(char *file);
+int			db_return(int value, char *log);
+
+int			sb_telecran(t_data *data);
+int			sb_movingmap(t_data *data);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -164,9 +168,12 @@ int			re_nothing(void *data);
 int			re_draw_image(t_data *data);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
+void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
+void		draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
+void		draw_grid_tab(t_mlx *mlx, char **tab, int scale, size_t xy[2]);
+
 int			gp_gameplay(t_data *data);
 int			gp_move(t_data *data);
-int			gp_test(t_data *data);
 
 int			bind_bindings(int key, t_data *data);
 int			bind_keyboard_press(int key, t_data *data);
@@ -174,7 +181,7 @@ int			bind_keyboard_release(int key, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);
-void		misc_clear_screen(t_data *data);
+void		misc_clear_screen(t_img *img);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
@@ -191,6 +198,7 @@ int			me_str2strcmp(char *src, char *reg);
 int			me_find_str_in_tab(int strict_mode, char *find, char **tab);
 int			me_find_str_in_str(const char *src, const char *seek);
 
+void		mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2]);
 int			mmap_minimap(t_data *data);
 
 void		*s_free(char **ptr_memory);
@@ -202,7 +210,6 @@ int			conv_rgb(int i[3]);
 int			conv_rgbtab(int red, int green, int blue);
 
 void		sf_safemode(t_data data);
-
 
 
 #endif

@@ -6,30 +6,15 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:35:53 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 16:05:56 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	misc_clear_screen(t_data *data)
+inline void	misc_clear_screen(t_img *img)
 {
-	long long	x;
-	long long	y;
-
-	y = 0;
-	if (!data)
-		return ;
-	while (y <= data->mlx.win_h)
-	{
-		x = 0;
-		while (x <= data->mlx.win_w)
-		{
-			re_pixeltoimg(data->mlx.game, x, y, 0);
-			x++;
-		}
-		y++;
-	}
+	ft_memset(img->data, 0, (img->width * img->height) * 4);
 }
 
 void	misc_opposite_color(int *color)

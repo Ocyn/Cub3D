@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics_ft.c                                      :+:      :+:    :+:   */
+/*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 18:26:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 15:58:52 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	graph_init(t_data *data)
 	data->mlx.win = mlx_new_window(data->mlx.init, data->mlx.win_w, data->mlx.win_h, title);
 	if (!data->mlx.win)
 		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
-	printf("\nScreen \tW[%d] H[%d]\n", data->mlx.win_w, data->mlx.win_h);
+	printf("\nScreen \tW[%d] H[%d]\n\n", data->mlx.win_w, data->mlx.win_h);
 	return (EXIT_SUCCESS);
 }
 
@@ -73,6 +73,7 @@ int	graph_main(t_data *data)
 		return (err_return(EXIT_FAILURE, "MLX init failed", 1));
 	}
 	mlx_hook(data->mlx.win, 17, 0, graph_close, data);
+	mlx_key_hook(data->mlx.win, bind_bindings, data);
 	gp_gameplay(data);
 	mlx_loop_hook(data->mlx.init, re_render, data);
 	mlx_loop(data->mlx.init);

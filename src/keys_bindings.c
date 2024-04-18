@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 18:16:24 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 16:02:30 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 
 int	bind_keyboard_press(int key, t_data *data)
 {
-	//db_keylog(key);
-	if (key == ESC_KEY)
-		graph_close(data);
-	if (key == TAB_KEY)
-	{
-		data->player.x = data->mlx.win_wmid;
-		data->player.y = data->mlx.win_hmid;
-		data->player.xpos = data->mlx.win_wmid;
-		data->player.ypos = data->mlx.win_hmid;
-		misc_clear_screen(data);
-	}
+	bind_bindings(key, data);
 	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY \
 	|| key == D_KEY || key == RIGHT_ARROW_KEY || key == Z_KEY \
 	|| key == W_KEY || key == UP_ARROW_KEY || key == S_KEY \
@@ -43,7 +33,6 @@ int	bind_keyboard_press(int key, t_data *data)
 
 int	bind_keyboard_release(int key, t_data *data)
 {
-	//db_keylog(key);
 	(void)key;
 	if (key == A_KEY || key == Q_KEY || key == LEFT_ARROW_KEY)
 		data->player.move_left = 0;
@@ -62,9 +51,11 @@ int	bind_bindings(int key, t_data *data)
 		graph_close(data);
 	if (key == TAB_KEY)
 	{
-		data->map.tex_no.lorem = data->mlx.win_hmid;
-		data->map.tex_no.ipsum = data->mlx.win_wmid;
+		misc_clear_screen(data->mlx.game);
+		data->player.x = data->mlx.win_wmid;
+		data->player.y = data->mlx.win_hmid;
+		data->player.xpos = data->mlx.win_wmid;
+		data->player.ypos = data->mlx.win_hmid;
 	}
-	//bind_keyboard(key, data);
 	return (EXIT_SUCCESS);
 }
