@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 21:19:33 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 21:41:47 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,20 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	}
 }
 
-void	mmap_draw_hud(t_mlx *mlx)
+void	mmap_draw_hud(t_mlx *mlx, int mode)
 {
-	draw_square_snap(mlx, (size_t[2]){500, 500}, (size_t[2]){1500, 1500}, conv_rgbtab(255, 255, 255));
-	draw_square(mlx, (size_t[2]){10, 10} \
-	, (size_t[2]){mlx->win_w / 12 - 5, mlx->win_h / 12 - 5} \
-	, conv_rgbtab(81, 254, 0));
+	if (!mode)
+	{
+		draw_square(mlx, (size_t[2]){mlx->minimap_size[0] + 10 \
+		, mlx->minimap_size[1] + 10}, (size_t[2]){mlx->minimap_pos[0] \
+		, mlx->minimap_pos[1]}, conv_rgbtab(20, 20, 20));
+	}
+	if (mode == 1)
+	{
+		draw_square(mlx, (size_t[2]){10, 10} \
+		, (size_t[2]){mlx->minimap_size[0] / 2 - 5, mlx->minimap_size[1] / 2 - 5} \
+		, conv_rgbtab(81, 254, 0));
+	}
 }
 
 int	mmap_minimap(t_data *data)
@@ -91,9 +99,10 @@ int	mmap_minimap(t_data *data)
 	size_t	cord[2] = {0, 0};
 
 	(void)data;
+	mmap_draw_hud(&data->mlx, 0);
 	draw_square(&data->mlx, (size_t *)data->mlx.minimap_size, cord, 0);
 	mmap_draw_map(data, (size_t *)data->mlx.minimap_size, 10 \
 	, (size_t[2]){data->mlx.minimap_x, data->mlx.minimap_y});
-	mmap_draw_hud(&data->mlx);
+	mmap_draw_hud(&data->mlx, 1);
 	return (EXIT_SUCCESS);
 }
