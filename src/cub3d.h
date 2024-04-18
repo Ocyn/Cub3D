@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 20:16:15 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 21:05:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
 
-# define PLAYER_SPEED		10
+# define PLAYER_SPEED		5
 # define PLAYER_FOV			110
+
+# define MINIMAP_SCALE		6
+# define MINIMAP_POS_X		0
+# define MINIMAP_POS_Y		0
 
 typedef struct s_player
 {
@@ -116,6 +120,7 @@ typedef struct s_mlx
 	double		minimap_y;
 	double		minimap_angle;
 	long		minimap_size[2];
+	long		minimap_pos[2];
 	long long	ips;
 }				t_mlx;
 
@@ -176,6 +181,7 @@ int			re_draw_image(t_data *data);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
 void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
+void		draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 void		draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
 void		draw_grid_tab(t_mlx *mlx, char **tab, int scale, size_t xy[2]);
 

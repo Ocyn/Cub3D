@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 18:02:37 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 21:21:41 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,25 @@ inline void	draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color)
 		}
 		i[1]++;
 	}
-	return ;
+}
+
+inline void	draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
+{
+	size_t	x;
+
+	if (one[0] >= two[0] || one[1] >= two[1])
+		return ;
+	x = one[0];
+	while (one[1] <= two[1])
+	{
+		one[0] = x;
+		while (one[0] <= two[0])
+		{
+			re_pixeltoimg(mlx->game, one[0], one[1], color);
+			one[0]++;
+		}
+		one[1]++;
+	}
 }
 
 inline void	draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color)
@@ -48,7 +66,6 @@ inline void	draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color)
 		}
 		i[1]++;
 	}
-	return ;
 }
 
 inline void	draw_grid_tab(t_mlx *mlx, char **tab, int scale, size_t xy[2])
@@ -76,5 +93,4 @@ inline void	draw_grid_tab(t_mlx *mlx, char **tab, int scale, size_t xy[2])
 		}
 		i[1]++;
 	}
-	return ;
 }

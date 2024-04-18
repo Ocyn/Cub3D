@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 20:18:17 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 21:19:33 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ int	mmap_move(t_data *data)
 
 int	mmap_area(size_t area[2], size_t cord[2], char c)
 {
+	int	border;
+
+	border = 2;
 	(void)area;
-	if (c != '0')
+	if (cord[0] + border < area[0] && cord[1] + border < area[1])
 	{
-		if (cord[0] < area[0] && cord[1] < area[1])
+		if (c != '0')
 			return (conv_rgbtab(255, 255, 255));
 		// else
 		// 	return (conv_rgbtab(30, 30, 30));
@@ -75,26 +78,12 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	}
 }
 
-int	mmap_draw_hud(t_data *data)
+void	mmap_draw_hud(t_mlx *mlx)
 {
-	long	y;
-	long	x;
-
-	y = -1;
-	while (++y <= data->mlx.win_h / 6)
-	{
-		x = -1;
-		while (++x <= data->mlx.win_w / 6)
-		{
-			if (y == 0 || x == 0 \
-			|| x == data->mlx.win_w / 6 || y == data->mlx.win_h / 6)
-				re_pixeltoimg(data->mlx.game, x, y, conv_rgbtab(20, 0, 255));
-		}
-	}
-	draw_square(&data->mlx, (size_t[2]){10, 10} \
-	, (size_t[2]){data->mlx.win_w / 12 - 5, data->mlx.win_h / 12 - 5} \
-	, conv_rgbtab(255, 0, 178));
-	return (EXIT_SUCCESS);
+	draw_square_snap(mlx, (size_t[2]){500, 500}, (size_t[2]){1500, 1500}, conv_rgbtab(255, 255, 255));
+	draw_square(mlx, (size_t[2]){10, 10} \
+	, (size_t[2]){mlx->win_w / 12 - 5, mlx->win_h / 12 - 5} \
+	, conv_rgbtab(81, 254, 0));
 }
 
 int	mmap_minimap(t_data *data)
@@ -102,11 +91,9 @@ int	mmap_minimap(t_data *data)
 	size_t	cord[2] = {0, 0};
 
 	(void)data;
-	data->mlx.minimap_size[0] = data->mlx.win_w / 6;
-	data->mlx.minimap_size[1] = data->mlx.win_h / 6;
 	draw_square(&data->mlx, (size_t *)data->mlx.minimap_size, cord, 0);
 	mmap_draw_map(data, (size_t *)data->mlx.minimap_size, 10 \
 	, (size_t[2]){data->mlx.minimap_x, data->mlx.minimap_y});
-	mmap_draw_hud(data);
+	mmap_draw_hud(&data->mlx);
 	return (EXIT_SUCCESS);
 }

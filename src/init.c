@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/17 17:51:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/18 20:51:49 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int	init_mlx_struct(t_data *data)
 	data->mlx.win_w /= 2;
 	data->mlx.win_hmid = (data->mlx.win_h / 2);
 	data->mlx.win_wmid = (data->mlx.win_w / 2);
+	data->mlx.minimap_size[0] = data->mlx.win_w / 6;
+	data->mlx.minimap_size[1] = data->mlx.win_h / 6;
+	data->mlx.minimap_pos[0] = MINIMAP_POS_X;
+	data->mlx.minimap_pos[1] = MINIMAP_POS_Y;
 	return (EXIT_SUCCESS);
 }
 
