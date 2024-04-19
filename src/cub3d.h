@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:28:53 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:30:03 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@
 # define DOWN_ARROW_KEY		65364
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
+# define MULT_KEY 			65450
+# define DIV_KEY 			65455
+
+# define MOUSE_RCLICK 		3
+# define MOUSE_LCLICK 		1
+# define MOUSE_MCLICK 		65421
+# define MOUSE_USCROLL 		65421
+# define MOUSE_DSCROLL 		65421
+
+# define ENTERNUM_KEY 		65421
 
 # define GAME_SCALING		10
 
@@ -118,6 +128,7 @@ typedef struct s_mlx
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
+	int			mouse_pos[2];
 	double		map_limit[2];
 	double		minimap_x;
 	double		minimap_y;
@@ -156,6 +167,7 @@ void		db_game_info(t_data *data);
 
 int			sb_telecran(t_data *data);
 int			sb_movingmap(t_data *data);
+int			sb_line(t_data *data) ;
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -192,6 +204,7 @@ void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
 void		draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 void		draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
 void		draw_grid_tab(t_mlx *mlx, char **tab, int scale, size_t xy[2]);
+void		draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 int			gp_gameplay(t_data *data);
 int			gp_move(t_data *data);
@@ -199,6 +212,7 @@ int			gp_move(t_data *data);
 int			bind_bindings(int key, t_data *data);
 int			bind_keyboard_press(int key, t_data *data);
 int			bind_keyboard_release(int key, t_data *data);
+int			bind_mouse(int key, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);

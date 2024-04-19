@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:09:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:38:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	re_events_loop(t_data *data)
 {
 	if (!data)
 		return (EXIT_FAILURE);
+	mlx_mouse_get_pos(data->mlx.init, data->mlx.win \
+	, &data->mlx.mouse_pos[0], &data->mlx.mouse_pos[1]);
 	gp_move(data);
 	//sb_telecran(data);
 	//sb_movingmap(data);

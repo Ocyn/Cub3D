@@ -6,11 +6,26 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:20:04 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:44:49 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	bind_mouse(int key, t_data *data)
+{
+	if (key == MOUSE_LCLICK)
+		sb_line(data);
+	if (key == MOUSE_RCLICK)
+		(void)data;
+	if (key == MOUSE_MCLICK)
+		(void)data;
+	if (key == MOUSE_USCROLL)
+		(void)data;
+	if (key == MOUSE_DSCROLL)
+		(void)data;
+	return (EXIT_SUCCESS);
+}
 
 int	bind_keyboard_press(int key, t_data *data)
 {
@@ -72,5 +87,7 @@ int	bind_bindings(int key, t_data *data)
 		misc_default_game(data, 1);
 		misc_default_game(data, 0);
 	}
+	if (key == MULT_KEY)
+		sb_line(data);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:09:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:43:59 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	graph_main(t_data *data)
 	mlx_hook(data->mlx.win, 17, 0, graph_close, data);
 	mlx_key_hook(data->mlx.win, bind_bindings, data);
 	gp_gameplay(data);
+	mlx_mouse_hook(data->mlx.win, bind_mouse, data);
 	mlx_loop_hook(data->mlx.init, re_render, data);
 	mlx_loop(data->mlx.init);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 21:21:41 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:19:38 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,40 @@ inline void	draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color)
 			i[0]++;
 		}
 		i[1]++;
+	}
+}
+
+inline void	draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
+{
+	int	x[2];
+	int	y[2];
+	int	angle[2];
+
+	x[0] = abs((int)two[0] - (int)one[0]);
+	y[0] = abs((int)two[1] - (int)one[1]);
+	x[1] = (one[0] < two[0]);
+	y[1] = (one[1] < two[1]);
+	if (!x[1])
+		x[1] = -1;
+	if (!y[1])
+		y[1] = -1;
+	angle[0] = x[0] - y[0];
+	while (one[0] != two[0] || one[1] != two[1])
+	{
+		re_pixeltoimg(mlx->game, one[0], one[1], color);
+		if (one[0] == two[0] || one[1] == two[1])
+			break;
+		angle[1] = angle[0] * 2;
+		if (angle[1] > -y[0])
+		{
+			angle[0] -= y[0];
+			one[0] += x[1];
+		}
+		if (angle[1] < x[0])
+		{
+			angle[0] += x[0];
+			one[1] += y[1];
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:04:50 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 17:36:05 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 18:38:03 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,23 @@ int	sb_movingmap(t_data *data)
 	draw_grid_tab(mlx, map->map, 10, (size_t[2]){data->player.x, data->player.y});
 	//draw_grid_sq(mlx, (size_t[2]){200, 200}, (size_t[2]){data->player.x, data->player.y}, conv_rgbtab(255, 255, 255));
 	//draw_square(mlx, (size_t[2]){200, 200}, (size_t[2]){data->player.x, data->player.y}, conv_rgbtab(255, 255, 255));
+	return (EXIT_SUCCESS);
+}
+
+int	sb_line(t_data *data) 
+{
+	t_map		*map;
+	t_mlx		*mlx;
+	t_player	*player;
+
+	(void)data;
+	(void)map;
+	(void)mlx;
+	(void)player;
+	player = &data->player;
+	map = &data->map;
+	mlx = &data->mlx;
+	draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
+	, (size_t[2]){mlx->mouse_pos[0], mlx->mouse_pos[1]}, 0);
 	return (EXIT_SUCCESS);
 }

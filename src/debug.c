@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 15:08:44 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 17:45:05 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	db_game_monitoring(t_data *data)
 	printf("\rFPS [%d]", db_framepersecond());
 	printf(" | Scale[%.1f]", mlx->game_scale);
 	printf(" | Player[%.2f][%.2f].[%.2f]", player->x, player->y, player->angle_rot);
-	printf(" | Map[%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
+	printf(" | Mouse[X:%d][Y:%d]", data->mlx.mouse_pos[0], data->mlx.mouse_pos[1]);
+	//printf(" | Map[%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
 	printf("      \r");
 }
 
