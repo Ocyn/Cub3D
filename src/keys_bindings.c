@@ -6,26 +6,11 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 18:44:49 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 22:01:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	bind_mouse(int key, t_data *data)
-{
-	if (key == MOUSE_LCLICK)
-		sb_line(data);
-	if (key == MOUSE_RCLICK)
-		(void)data;
-	if (key == MOUSE_MCLICK)
-		(void)data;
-	if (key == MOUSE_USCROLL)
-		(void)data;
-	if (key == MOUSE_DSCROLL)
-		(void)data;
-	return (EXIT_SUCCESS);
-}
 
 int	bind_keyboard_press(int key, t_data *data)
 {
@@ -63,30 +48,34 @@ int	bind_keyboard_release(int key, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+int	bind_mouse(int key, t_data *data)
+{
+	if (key == MOUSE_LCLICK)
+		sb_line(data);
+	if (key == MOUSE_RCLICK)
+		(void)data;
+	if (key == MOUSE_MCLICK)
+		(void)data;
+	if (key == MOUSE_USCROLL)
+		(void)data;
+	if (key == MOUSE_DSCROLL)
+		(void)data;
+	return (EXIT_SUCCESS);
+}
+
 int	bind_bindings(int key, t_data *data)
 {
 	//db_key_event(key);
 	if (key == ESC_KEY)
 		graph_close(data);
-	if (key == PLUS_KEY)
-	{
+	if (key == PLUS_KEY && data->mlx.game_scale < 50)
+		data->mlx.game_scale += 1;
+	if (key == MINUS_KEY && data->mlx.game_scale > 2)
+		data->mlx.game_scale -= 1;
+	if (key == PLUS_KEY || key == MINUS_KEY || key == TAB_KEY)
 		misc_default_game(data, 0);
-		data->mlx.game_scale += (data->mlx.game_scale / 8);
-	}
-	if (key == MINUS_KEY)
-	{
-		misc_default_game(data, 0);
-		data->mlx.game_scale -= (data->mlx.game_scale / 8) * (data->mlx.game_scale > 2);
-	}
-	while (data->mlx.game_scale > 100)
-		data->mlx.game_scale -= (data->mlx.game_scale / 8);
-	while (data->mlx.game_scale < 2)
-		data->mlx.game_scale += (data->mlx.game_scale / 8);
 	if (key == TAB_KEY)
-	{
 		misc_default_game(data, 1);
-		misc_default_game(data, 0);
-	}
 	if (key == MULT_KEY)
 		sb_line(data);
 	return (EXIT_SUCCESS);

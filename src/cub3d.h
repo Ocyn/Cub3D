@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 18:30:03 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 21:50:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,8 @@ int			me_find_str_in_str(const char *src, const char *seek);
 void		mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2]);
 int			mmap_move(t_data *data);
 int			mmap_minimap(t_data *data);
+
+int			ov_overlay(t_data *data);
 
 void		*s_free(char **ptr_memory);
 void		*s_malloc(unsigned long size);
