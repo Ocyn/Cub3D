@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 00:58:59 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:26:51 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	gp_move(t_data *data)
 	player = &data->player;
 	if (player->turn_right && !player->turn_left)
 		player->angle_rot -= data->mlx.speed * (player->angle_rot > -360);
-	if (player->turn_left && !player->turn_right)
+	if (player->turn_left && !player->turn_right * (player->angle_rot < 360))
 		player->angle_rot += data->mlx.speed;
-	player->angle_rot = (int)player->angle_rot % 360;
 	player->look = player->angle_rot;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);

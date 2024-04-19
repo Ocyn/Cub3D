@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 01:21:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:20:04 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,27 @@ int	bind_keyboard_release(int key, t_data *data)
 
 int	bind_bindings(int key, t_data *data)
 {
+	//db_key_event(key);
 	if (key == ESC_KEY)
 		graph_close(data);
-	if (key == PLUS_KEY && data->mlx.minimap_scale < 1000)
+	if (key == PLUS_KEY)
 	{
-		misc_clear_screen(data->mlx.game);
-		data->mlx.minimap_scale += 2;
+		misc_default_game(data, 0);
+		data->mlx.game_scale += (data->mlx.game_scale / 8);
 	}
-	if (key == MINUS_KEY && data->mlx.minimap_scale > 4)
+	if (key == MINUS_KEY)
 	{
-		misc_clear_screen(data->mlx.game);
-		data->mlx.minimap_scale -= 2;
+		misc_default_game(data, 0);
+		data->mlx.game_scale -= (data->mlx.game_scale / 8) * (data->mlx.game_scale > 2);
 	}
+	while (data->mlx.game_scale > 100)
+		data->mlx.game_scale -= (data->mlx.game_scale / 8);
+	while (data->mlx.game_scale < 2)
+		data->mlx.game_scale += (data->mlx.game_scale / 8);
 	if (key == TAB_KEY)
 	{
-		data->mlx.minimap_scale = GAME_SCALING;
-		misc_clear_screen(data->mlx.game);
-		data->player.x = data->player.xpos;
-		data->player.y = data->player.ypos;
-		data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * data->mlx.minimap_scale;
-		data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * data->mlx.minimap_scale;
+		misc_default_game(data, 1);
+		misc_default_game(data, 0);
 	}
 	return (EXIT_SUCCESS);
 }

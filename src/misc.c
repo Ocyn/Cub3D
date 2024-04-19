@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 16:05:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:16:42 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 inline void	misc_clear_screen(t_img *img)
 {
 	ft_memset(img->data, 0, (img->width * img->height) * 4);
+}
+
+inline void	misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color)
+{
+	ft_memset((int *)(img->data) + ((img->width * one[1]) + one[0]) \
+	, (int)color, 4 * (img->width * two[1]) + two[0]);
+}
+
+inline void	misc_default_game(t_data *data, int mode)
+{
+	if (mode == 0)
+	{
+		misc_clear_screen(data->mlx.game);
+		re_draw_environnment(data, 1);
+	}
+	if (mode == 1)
+	{
+		data->mlx.game_scale = GAME_SCALING;
+		data->player.x = data->player.xpos;
+		data->player.y = data->player.ypos;
+		data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * data->mlx.game_scale;
+		data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * data->mlx.game_scale;
+	}
 }
 
 void	misc_opposite_color(int *color)

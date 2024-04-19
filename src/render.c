@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 18:09:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:09:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,30 @@ inline void	re_pixeltoimg(t_img *img, int x, int y, int color)
 	if ((size_t)x >= (size_t)img->width || (size_t)y >= (size_t)img->height)
 		return ;
 	((int *)img->data)[((y * img->width) + x)] = color;
+}
+
+inline void	re_draw_environnment(t_data *data, int mode)
+{
+	if (!mode)
+	{
+		misc_fill_screen(data->mlx.game, (size_t[2]){0, 0}, \
+		(size_t[2]){data->mlx.win_w - 1, data->mlx.win_hmid - 1} \
+		, conv_rgb(data->map.roof));
+		misc_fill_screen(data->mlx.game \
+		, (size_t[2]){0, data->mlx.win_hmid} \
+		, (size_t[2]){data->mlx.win_w, data->mlx.win_h} \
+		, conv_rgb(data->map.floor));
+	}
+	if (mode == 1)
+	{
+		draw_square_snap(&data->mlx, (size_t[2]){0, 0} \
+		, (size_t[2]){data->mlx.win_w - 1, data->mlx.win_hmid - 1} \
+		, conv_rgb(data->map.roof));
+		draw_square_snap(&data->mlx \
+		, (size_t[2]){0, data->mlx.win_hmid} \
+		, (size_t[2]){data->mlx.win_w, data->mlx.win_h} \
+		, conv_rgb(data->map.floor));
+	}
 }
 
 int	re_events_loop(t_data *data)

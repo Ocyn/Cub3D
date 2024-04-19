@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 22:47:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:09:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	graph_init(t_data *data)
 	if (init_texture_struct(data, &data->map.tex_we))
 		return (err_return(EXIT_FAILURE, "West texture loading failed", 2));
 	data->mlx.game = mlx_new_image(data->mlx.init, data->mlx.win_w, data->mlx.win_h);
+	re_draw_environnment(data, 1);
 	if (!data->mlx.game)
 		return (err_return(EXIT_FAILURE, "Rendering image failed to init", 2));
 	data->mlx.win = mlx_new_window(data->mlx.init, data->mlx.win_w, data->mlx.win_h, title);

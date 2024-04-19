@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 01:22:53 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:16:20 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define D_KEY				100
 # define Z_KEY				122
 # define Q_KEY				113
-# define PLUS_KEY			78
-# define MINUS_KEY			74
+# define PLUS_KEY			65451
+# define MINUS_KEY			65453
 # define UP_ARROW_KEY		65362
 # define RIGHT_ARROW_KEY	65363
 # define LEFT_ARROW_KEY		65361
@@ -57,12 +57,11 @@
 # define TAB_KEY 			65289
 # define ESC_KEY 			65307
 
-# define GAME_SCALING		20
+# define GAME_SCALING		10
 
 # define PLAYER_SPEED		1
 # define PLAYER_FOV			110
 
-# define MINIMAP_SCALE		10
 # define MINIMAP_POS_X		0
 # define MINIMAP_POS_Y		0
 
@@ -122,7 +121,7 @@ typedef struct s_mlx
 	double		map_limit[2];
 	double		minimap_x;
 	double		minimap_y;
-	double		minimap_scale;
+	double		game_scale;
 	double		minimap_angle;
 	long		minimap_size[2];
 	long		minimap_pos[2];
@@ -149,6 +148,7 @@ void		db_showtab(char **tab);
 void		db_showplayer(t_player ply);
 void		db_keylog(int key);
 void		db_game_monitoring(t_data *data);
+void		db_key_event(int key);
 int			db_framepersecond(void);
 int			db_readfile(char *file);
 int			db_return(int value, char *log);
@@ -185,6 +185,7 @@ int			graph_close(t_data *data);
 int			re_render(t_data *data);
 int			re_nothing(void *data);
 int			re_draw_image(t_data *data);
+void		re_draw_environnment(t_data *data, int mode);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
 void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
@@ -202,6 +203,8 @@ int			bind_keyboard_release(int key, t_data *data);
 int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);
 void		misc_clear_screen(t_img *img);
+void		misc_default_game(t_data *data, int mode);
+void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
