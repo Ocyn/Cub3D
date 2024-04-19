@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:24:26 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:33:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	mmap_move(t_data *data)
 	mlx->minimap_x -= player->x * mlx->game_scale;
 	mlx->minimap_y -= mlx->game_scale / 2;
 	mlx->minimap_x -= mlx->game_scale / 2;
-	mlx->minimap_angle = player->look;
+	mlx->minimap_angle = player->angle_rot;
 	return (EXIT_SUCCESS);
 }
 

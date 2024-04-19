@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:16:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:28:53 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_player
 {
 	char		compass;
 	double		angle_rot;
-	double		look;
+	int			invert;
 	long long	xpos;
 	long long	ypos;
 	double		x;

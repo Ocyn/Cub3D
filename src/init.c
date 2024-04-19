@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 14:55:49 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:31:31 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	init_player_struct(t_player *ply, t_map map)
 	ply->compass = map.map[ply->ypos][ply->xpos];
 	ply->x = (double)ply->xpos;
 	ply->y = (double)ply->ypos;
+	ply->invert = 1;
 	return (EXIT_SUCCESS);
 }

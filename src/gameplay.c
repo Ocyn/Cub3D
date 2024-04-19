@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:26:51 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/19 16:43:25 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,28 @@ int	gp_move_event(t_data *data)
 
 int	gp_move(t_data *data)
 {
-	t_player	*player;
+	t_player	*ply;
 
 	gp_move_event(data);
-	player = &data->player;
-	if (player->turn_right && !player->turn_left)
-		player->angle_rot -= data->mlx.speed * (player->angle_rot > -360);
-	if (player->turn_left && !player->turn_right * (player->angle_rot < 360))
-		player->angle_rot += data->mlx.speed;
-	player->look = player->angle_rot;
-	if (!player->b_move)
+	ply = &data->player;
+	if (ply->turn_right && !ply->turn_left && ply->angle_rot > -180)
+		ply->angle_rot -= (data->mlx.speed * ply->invert);
+	if (ply->turn_left && !ply->turn_right && ply->angle_rot < 180)
+		ply->angle_rot += (data->mlx.speed * ply->invert);
+	if (ply->angle_rot > 180 || ply->angle_rot < -180)
+		ply->angle_rot *= -1;
+	// if (ply->angle_rot > 180 || ply->angle_rot < -180)
+	// 	ply->invert *= -1;
+	if (!ply->b_move)
 		return (EXIT_SUCCESS);
-	if (player->move_up && !player->move_down && player->y > 0)
-		player->y -= data->mlx.speed;
-	if (player->move_down && !player->move_up && player->y < data->map.ylen)
-		player->y += data->mlx.speed;
-	if (player->move_right && !player->move_left && player->x < data->map.xlen)
-		player->x += data->mlx.speed;
-	if (player->move_left && !player->move_right && player->x > 0)
-		player->x -= data->mlx.speed;
+	if (ply->move_up && !ply->move_down && ply->y > 0)
+		ply->y -= data->mlx.speed;
+	if (ply->move_down && !ply->move_up && ply->y < data->map.ylen)
+		ply->y += data->mlx.speed;
+	if (ply->move_right && !ply->move_left && ply->x < data->map.xlen)
+		ply->x += data->mlx.speed;
+	if (ply->move_left && !ply->move_right && ply->x > 0)
+		ply->x -= data->mlx.speed;
 	return (EXIT_SUCCESS);
 }
 
