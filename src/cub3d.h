@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 21:50:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/23 19:41:41 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../lib/mlx_linux/mlx_int.h"
 # include "../lib/libft/src/libft.h"
 # include "../lib/gnl/src/gnl.h"
+# include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -64,6 +65,8 @@
 # define MOUSE_MCLICK 		65421
 # define MOUSE_USCROLL 		65421
 # define MOUSE_DSCROLL 		65421
+
+# define MATH_PI			3.14159265358979323846
 
 # define ENTERNUM_KEY 		65421
 
@@ -163,11 +166,14 @@ void		db_key_event(int key);
 int			db_framepersecond(void);
 int			db_readfile(char *file);
 int			db_return(int value, char *log);
+void		db_mouse(int key, t_data data);
+
 void		db_game_info(t_data *data);
 
 int			sb_telecran(t_data *data);
 int			sb_movingmap(t_data *data);
-int			sb_line(t_data *data) ;
+int			sb_line(t_data *data);
+int			sb_circle(t_data *data);
 
 size_t		err_putstr_fd(char *str, int fd);
 int			err_custom(int launch, char *log, int tab);
@@ -212,13 +218,15 @@ int			gp_move(t_data *data);
 int			bind_bindings(int key, t_data *data);
 int			bind_keyboard_press(int key, t_data *data);
 int			bind_keyboard_release(int key, t_data *data);
-int			bind_mouse(int key, t_data *data);
+int			bind_mouse(int key, int m_x, int m_y, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);
 void		misc_clear_screen(t_img *img);
 void		misc_default_game(t_data *data, int mode);
 void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
+
+int			math_coeff_circle(int radius, int angle, int *out);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);

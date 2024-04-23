@@ -46,7 +46,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					graphic.c gameplay.c render.c draw.c \
 					\
 					bonus_minimap.c \
-					bonus_overlay.c \dw
+					bonus_overlay.c \
 					\
 					safemode.c \
 					debug.c \
@@ -73,7 +73,7 @@ DIRS				= $(sort $(dir $(OBJ)))
 #			UTILITIES
 
 CC					= cc
-CFLAGS				= -Wextra -Wall -Werror -MMD
+CFLAGS				= -Wextra -Wall -Werror -g3 -MMD
 
 FLAGS				= $(CFLAGS)
 ALL_INCLUDE			= -I $(SRC_DIR) \

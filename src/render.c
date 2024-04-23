@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 18:38:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/23 19:47:31 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	re_events_loop(t_data *data)
 	gp_move(data);
 	//sb_telecran(data);
 	//sb_movingmap(data);
+	sb_circle(data);
 	mmap_minimap(data);
 	db_game_monitoring(data);
 	return (EXIT_SUCCESS);

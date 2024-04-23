@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 17:45:05 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/23 18:57:03 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ void	db_game_monitoring(t_data *data)
 	printf(" | Mouse[X:%d][Y:%d]", data->mlx.mouse_pos[0], data->mlx.mouse_pos[1]);
 	//printf(" | Map[%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
 	printf("      \r");
+}
+
+void	db_mouse(int key, t_data data)
+{
+	t_mlx	mlx;
+
+	mlx = data.mlx;
+	printf("\nDB_MOUSE \n");
+	printf("\tKey [%d]\n", key);
+	printf("\tPosition [%d][%d]\n", mlx.mouse_pos[0], mlx.mouse_pos[1]);
 }
 
 int	db_framepersecond(void)
