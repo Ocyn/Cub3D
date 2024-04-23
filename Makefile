@@ -46,7 +46,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					graphic.c gameplay.c render.c draw.c \
 					\
 					bonus_minimap.c \
-					bonus_overlay.c \
+					bonus_overlay.c \dw
 					\
 					safemode.c \
 					debug.c \

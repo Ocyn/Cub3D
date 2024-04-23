@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 22:01:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/23 15:52:56 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	bind_keyboard_release(int key, t_data *data)
 int	bind_mouse(int key, t_data *data)
 {
 	if (key == MOUSE_LCLICK)
-		sb_line(data);
+		(void)data;
 	if (key == MOUSE_RCLICK)
 		(void)data;
 	if (key == MOUSE_MCLICK)
