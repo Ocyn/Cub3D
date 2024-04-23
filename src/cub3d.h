@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/23 19:41:41 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/23 21:23:14 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,7 @@ void		misc_clear_screen(t_img *img);
 void		misc_default_game(t_data *data, int mode);
 void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
 
-int			math_coeff_circle(int radius, int angle, int *out);
+int			math_coeff_circle(int radius, double angle, int *out);
 
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
