@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 17:42:41 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:47:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	res_player_struct(t_player *player, int free)
 	player->compass = 0;
 	player->xpos = 0;
 	player->ypos = 0;
-	player->x = 0;
-	player->y = 0;
+	ft_memset(player->x_y, 0, sizeof(double) * 2);
+	player->x = &player->x_y[0];
+	player->y = &player->x_y[1];
+	player->angle = 0;
+	ft_memset(player->a_move, 0, sizeof(int) * 2);
 	player->b_move = 0;
 	player->b_touch = 0;
 	player->move_up = 0;
@@ -66,8 +69,16 @@ void	res_player_struct(t_player *player, int free)
 	player->move_left = 0;
 	player->turn_right = 0;
 	player->turn_left = 0;
-	player->invert = 0;
-	player->angle_rot = 0;
+}
+
+void	res_minimap_struct(t_minimap *minimap)
+{
+	ft_memset(minimap->win_size, 0, sizeof(int) * 2);
+	ft_memset(minimap->win_pos, 0, sizeof(int) * 2);
+	ft_memset(minimap->x_y, 0, sizeof(double) * 2);
+	minimap->x = &minimap->x_y[0];
+	minimap->y = &minimap->x_y[1];
+	minimap->angle = 0;
 }
 
 void	res_data_struct(t_data *data, int free)
@@ -83,20 +94,11 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.win_h = 0;
 	data->mlx.win_wmid = 0;
 	data->mlx.win_hmid = 0;
-	data->mlx.ips = 0;
-	data->mlx.minimap_x = 0;
-	data->mlx.minimap_y = 0;
-	data->mlx.minimap_angle = 0;
+	data->mlx.fps = 0;
 	data->mlx.game_scale = 0;
-	data->mlx.minimap_size[0] = 0;
-	data->mlx.minimap_size[1] = 0;
-	data->mlx.minimap_pos[0] = 0;
-	data->mlx.minimap_pos[1] = 0;
-	data->mlx.map_limit[0] = 0;
-	data->mlx.map_limit[1] = 0;
-	data->mlx.speed = 0;
-	data->mlx.mouse_pos[0] = 0;
-	data->mlx.mouse_pos[1] = 0;
+	res_minimap_struct(&data->minimap);
+	ft_memset(data->mlx.map_limit, 0, sizeof(double) * 2);
+	ft_memset(data->mlx.mouse_pos, 0, sizeof(int) * 2);
 	res_map_struct(&data->map, free);
 	res_player_struct(&data->player, free);
 }

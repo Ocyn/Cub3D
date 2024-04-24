@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/23 22:31:51 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 19:39:42 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	gp_move_event(t_data *data)
 		player->y = 0;
 	if (player->x < 0)
 		player->x = 0;
+	math_coeff_circle(data->mlx.speed, player->angle, player->a_move);
 	return (EXIT_SUCCESS);
 }
 
@@ -35,21 +36,23 @@ int	gp_move(t_data *data)
 	gp_move_event(data);
 	ply = &data->player;
 	if (ply->turn_right && !ply->turn_left)
-		ply->angle_rot += (data->mlx.speed);
+		ply->angle += (data->mlx.speed);
 	if (ply->turn_left && !ply->turn_right)
-		ply->angle_rot -= (data->mlx.speed);
-	if (ply->angle_rot >= 180 || ply->angle_rot <= -180)
-		ply->angle_rot *= -1;
+		ply->angle -= (data->mlx.speed);
+	if (ply->angle < 0)
+		ply->angle = 360;
+	if (ply->angle > 360)
+		ply->angle = 0;
 	if (!ply->b_move)
 		return (EXIT_SUCCESS);
-	if (ply->move_up && !ply->move_down && ply->y > 0)
-		ply->y -= data->mlx.speed;
-	if (ply->move_down && !ply->move_up && ply->y < data->map.ylen)
-		ply->y += data->mlx.speed;
-	if (ply->move_right && !ply->move_left && ply->x < data->map.xlen)
-		ply->x += data->mlx.speed;
-	if (ply->move_left && !ply->move_right && ply->x > 0)
-		ply->x -= data->mlx.speed;
+	if (ply->move_up && !ply->move_down && *ply->y > 0)
+		*ply->y -= data->mlx.speed;
+	if (ply->move_down && !ply->move_up && *ply->y < data->map.ylen)
+		*ply->y += data->mlx.speed;
+	if (ply->move_right && !ply->move_left && *ply->x < data->map.xlen)
+		*ply->x += data->mlx.speed;
+	if (ply->move_left && !ply->move_right && *ply->x > 0)
+		*ply->x -= data->mlx.speed;
 	return (EXIT_SUCCESS);
 }
 

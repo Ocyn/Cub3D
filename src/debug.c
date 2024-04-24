@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/23 18:57:03 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 19:50:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void	db_game_info(t_data *data)
 {
 	printf("\nScreen\t\tW[%d] H[%d]\n", data->mlx.win_w, data->mlx.win_h);
 	printf("InGame Data:\n");
-	printf(" Map Scale:\t\t[%d]:[X:%.1f][Y:%.1f]\n", GAME_SCALING, data->mlx.map_limit[0], data->mlx.map_limit[1]);
-	printf(" Speed:\t\t3D[%.2f] | Minimap[%.2f]\n", data->mlx.speed, data->mlx.speed);
+	printf(" Map Scale:\t\t[%d]:[X:%.1f][Y:%.1f]\n" \
+	, GAME_SCALING, data->mlx.map_limit[0], data->mlx.map_limit[1]);
+	printf(" Speed:\t\t3D[%.2f] | Minimap[%.2f]\n" \
+	, data->mlx.speed, data->mlx.speed);
+	printf(" Minimap Coord:\t\t[X:%.1f][Y:%.1f]\n", data->minimap.x_y[0], data->minimap.x_y[1]);
 	printf("\n\n");
 }
 
@@ -73,15 +76,17 @@ void	db_game_monitoring(t_data *data)
 	t_player	*player;
 	t_mlx		*mlx;
 
-	data->mlx.ips++;
+	data->mlx.fps++;
 	player = &data->player;
 	mlx = &data->mlx;
 	pmapx = data->mlx.win_w;
 	pmapy = data->mlx.win_h;
 	printf("\rFPS [%d]", db_framepersecond());
-	printf(" | Scale[%.1f]", mlx->game_scale);
-	printf(" | Player[%.2f][%.2f].[%.2f]", player->x, player->y, player->angle_rot);
-	printf(" | Mouse[X:%d][Y:%d]", data->mlx.mouse_pos[0], data->mlx.mouse_pos[1]);
+	printf(" | Scale[%d]", mlx->game_scale);
+	printf(" | Player[%.1f][%.1f].[%.1f]->[%d|%d]", *player->x \
+	, *player->y, player->angle, player->a_move[0], player->a_move[1]);
+	printf(" | Mouse[X:%d][Y:%d]", data->mlx.mouse_pos[0] \
+	, data->mlx.mouse_pos[1]);
 	//printf(" | Map[%.2f][%.2f]", mlx->minimap_x, mlx->minimap_y);
 	printf("      \r");
 }

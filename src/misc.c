@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:16:42 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:44:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,25 @@ inline void	misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color
 
 inline void	misc_default_game(t_data *data, int mode)
 {
+	t_minimap	*minimap;
+	t_player	*player;
+	t_mlx		*mlx;
+
+	player = &data->player;
+	minimap = &data->minimap;
+	mlx = &data->mlx;
 	if (mode == 0)
 	{
-		misc_clear_screen(data->mlx.game);
+		misc_clear_screen(mlx->game);
 		re_draw_environnment(data, 1);
 	}
 	if (mode == 1)
 	{
-		data->mlx.game_scale = GAME_SCALING;
-		data->player.x = data->player.xpos;
-		data->player.y = data->player.ypos;
-		data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * data->mlx.game_scale;
-		data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * data->mlx.game_scale;
+		mlx->game_scale = GAME_SCALING;
+		*player->x = player->xpos;
+		*player->y = player->ypos;
+		*minimap->y = (minimap->win_size[1] / 2) - player->ypos * mlx->game_scale;
+		*minimap->x = (minimap->win_size[0] / 2) - player->xpos * mlx->game_scale;
 	}
 }
 

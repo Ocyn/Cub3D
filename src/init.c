@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:31:31 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:32:39 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,80 +33,72 @@ int	init_texture_struct(t_data *data, t_tex	*texture)
 	return (EXIT_SUCCESS);
 }
 
-int	init_mlx_struct(t_data *data)
+int	init_minimap_struct(t_data *data, t_minimap *minimap)
 {
 	if (!data)
-		return (err_return(EXIT_FAILURE, "Memory issue", 3));
-	data->mlx.init = mlx_init();
-	if (!data->mlx.init)
-		return (err_return(EXIT_FAILURE, "MLX init failed", 3));
-	mlx_get_screen_size(data->mlx.init, &data->mlx.win_w, &data->mlx.win_h);
-	data->mlx.game_scale = GAME_SCALING;
-	data->mlx.win_h /= 2;
-	data->mlx.win_w /= 2;
-	data->mlx.win_hmid = (data->mlx.win_h / 2);
-	data->mlx.win_wmid = (data->mlx.win_w / 2);
-	data->mlx.minimap_size[0] = data->mlx.win_w / 6;
-	data->mlx.minimap_size[1] = data->mlx.win_h / 6;
-	data->mlx.minimap_pos[0] = MINIMAP_POS_X;
-	data->mlx.minimap_pos[1] = MINIMAP_POS_Y;
-	data->mlx.map_limit[0] = data->map.xlen * data->mlx.game_scale;
-	data->mlx.map_limit[1] = data->map.ylen * data->mlx.game_scale;
-	data->mlx.minimap_y = (data->mlx.minimap_size[1] / 2) - data->player.ypos * data->mlx.game_scale;
-	data->mlx.minimap_x = (data->mlx.minimap_size[0] / 2) - data->player.xpos * data->mlx.game_scale;
-	data->mlx.speed = PLAYER_SPEED;
-	data->mlx.speed /= data->mlx.game_scale;
+		return (err_return(EXIT_FAILURE, "Memory issue", 4));
+	res_minimap_struct(minimap);
+	minimap->win_size[0] = data->mlx.win_w / MINIMAP_SCALE;
+	minimap->win_size[1] = data->mlx.win_h / MINIMAP_SCALE;
+	minimap->win_pos[0] = MINIMAP_POS_X;
+	minimap->win_pos[1] = MINIMAP_POS_Y;
+	*minimap->y = (minimap->win_size[1] / 2) - data->player.ypos * data->mlx.game_scale;
+	*minimap->x = (minimap->win_size[0] / 2) - data->player.xpos * data->mlx.game_scale;
+	printf("\nDB:\t\t[X:%d][Y:%d] / 2\n", minimap->win_size[0], minimap->win_size[1]);
+	printf("\nDB2:\t\t - [X:%lld][Y:%lld] * [Scale:%d]\n", data->player.xpos, data->player.ypos, data->mlx.game_scale);
+	printf("\nDB3:\t\t[X:%.1f][Y:%.1f]\n", minimap->x_y[0], minimap->x_y[1]);
+	minimap->data = data;
 	return (EXIT_SUCCESS);
 }
 
-int	init_map_struct(t_map *map, char *file)
+int	init_mlx_struct(t_data *data, t_mlx *mlx)
 {
-	char		**temp;
-	long long	my;
-
-	my = -1;
-	temp = conv_file2tab(file);
-	if (!map || !temp)
-		return (err_return(EXIT_FAILURE, "Memory issue", 1));
-	res_map_struct(map, 0);
-	map->ylen = me_tablen(temp);
-	while (++my < map->ylen)
-	{
-		if (ft_strchr(temp[my], '\n'))
-			temp[my][ft_strlen(temp[my]) - 1] = 0;
-		if ((long long)ft_strlen(temp[my]) > map->xlen)
-			map->xlen = ft_strlen(temp[my]);
-	}
-	if (init_map_trim(map, temp))
-		return (s_freetab(temp, me_tablen(temp)) \
-		, err_return(EXIT_FAILURE, "Map trim failed", 1));
-	map->map_bis = me_tabdup(map->map, me_tablen(map->map));
-	if (!map->map_bis)
-		err_return(EXIT_FAILURE, "Failed to clone", 1);
-	return (s_freetab(temp, me_tablen(temp)), !map->map_bis);
+	if (!data)
+		return (err_return(EXIT_FAILURE, "Memory issue", 3));
+	mlx->init = mlx_init();
+	if (!mlx->init)
+		return (err_return(EXIT_FAILURE, "MLX init failed", 3));
+	mlx_get_screen_size(mlx->init, &mlx->win_w, &mlx->win_h);
+	mlx->game_scale = GAME_SCALING;
+	mlx->win_h /= 2;
+	mlx->win_w /= 2;
+	mlx->win_hmid = (mlx->win_h / 2);
+	mlx->win_wmid = (mlx->win_w / 2);
+	mlx->map_limit[0] = data->map.xlen * mlx->game_scale;
+	mlx->map_limit[1] = data->map.ylen * mlx->game_scale;
+	mlx->speed = PLAYER_SPEED;
+	mlx->speed /= mlx->game_scale;
+	init_minimap_struct(data, &data->minimap);
+	mlx->data = data;
+	mlx->minimap = &data->minimap;
+	return (EXIT_SUCCESS);
 }
 
-int	init_player_struct(t_player *ply, t_map map)
+int	init_player_struct(t_data *data, t_player *pl, t_map map)
 {
-	if (!ply || !map.map || !map.map[0])
+	if (!pl || !map.map || !map.map[0] || !map.map[0][0])
 		return (err_return(EXIT_FAILURE, "Memory issue", 1));
-	res_player_struct(ply, 0);
-	while (ply->ypos < map.ylen && !ft_strchr(map.map[ply->ypos], 'N') \
-	&& !ft_strchr(map.map[ply->ypos], 'S') \
-	&& !ft_strchr(map.map[ply->ypos], 'E') \
-	&& !ft_strchr(map.map[ply->ypos], 'W'))
-		ply->ypos++;
-	while (map.map[ply->ypos][ply->xpos] \
-	&& map.map[ply->ypos][ply->xpos] != 'N' \
-	&& map.map[ply->ypos][ply->xpos] != 'S' \
-	&& map.map[ply->ypos][ply->xpos] != 'E' \
-	&& map.map[ply->ypos][ply->xpos] != 'W')
-		ply->xpos++;
-	if (ply->xpos == map.xlen && ply->ypos == map.ylen)
+	res_player_struct(pl, 0);
+	while (pl->ypos < map.ylen && !ft_strchr(map.map[pl->ypos], 'N') \
+	&& !ft_strchr(map.map[pl->ypos], 'S') && !ft_strchr(map.map[pl->ypos], 'E') \
+	&& !ft_strchr(map.map[pl->ypos], 'W'))
+		pl->ypos++;
+	while (map.map[pl->ypos][pl->xpos] && map.map[pl->ypos][pl->xpos] != 'N' \
+	&& map.map[pl->ypos][pl->xpos] != 'S' && map.map[pl->ypos][pl->xpos] != 'E' \
+	&& map.map[pl->ypos][pl->xpos] != 'W')
+		pl->xpos++;
+	if (pl->xpos == map.xlen && pl->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
-	ply->compass = map.map[ply->ypos][ply->xpos];
-	ply->x = (double)ply->xpos;
-	ply->y = (double)ply->ypos;
-	ply->invert = 1;
+	pl->compass = map.map[pl->ypos][pl->xpos];
+	pl->x_y[0] = (double)pl->xpos;
+	pl->x_y[1] = (double)pl->ypos;
+	if (pl->compass == 'O')
+		pl->angle += 90;
+	if (pl->compass == 'E')
+		pl->angle -= 90;
+	if (pl->compass == 'S')
+		pl->angle += 180;
+	pl->angle -= 90;
+	pl->data = data;
 	return (EXIT_SUCCESS);
 }

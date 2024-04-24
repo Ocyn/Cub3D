@@ -6,11 +6,16 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:03:20 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/18 21:34:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 19:08:32 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+size_t	*me_gentab(size_t one, size_t two)
+{
+	return ((size_t[2]){one, two});
+}
 
 int	me_strcat(char *dest, char *src)
 {

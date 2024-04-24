@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 18:19:38 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 19:44:47 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ inline void	draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 	while (one[0] != two[0] || one[1] != two[1])
 	{
 		re_pixeltoimg(mlx->game, one[0], one[1], color);
-		if (one[0] == two[0] || one[1] == two[1])
-			break;
 		angle[1] = angle[0] * 2;
 		if (angle[1] > -y[0])
 		{

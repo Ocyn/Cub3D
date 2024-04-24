@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/23 21:23:14 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:11:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,29 @@
 # define PLAYER_SPEED		1
 # define PLAYER_FOV			110
 
+# define MINIMAP_SCALE		6
 # define MINIMAP_POS_X		0
 # define MINIMAP_POS_Y		0
+
+
+typedef struct s_data		t_data;
+typedef struct s_mlx		t_mlx;
+typedef struct s_player		t_player;
+typedef struct s_map		t_map;
+typedef struct s_tex		t_tex;
+typedef struct s_minimap	t_minimap;
+
 
 typedef struct s_player
 {
 	char		compass;
-	double		angle_rot;
-	int			invert;
+	double		angle;
+	int			a_move[2];
 	long long	xpos;
 	long long	ypos;
-	double		x;
-	double		y;
+	double		*x;
+	double		*y;
+	double		x_y[2];
 	int			b_touch;
 	int			b_move;
 	int			move_up;
@@ -95,6 +106,7 @@ typedef struct s_player
 	int			move_left;
 	int			turn_right;
 	int			turn_left;
+	t_data		*data;
 }				t_player;
 
 typedef struct s_tex
@@ -108,6 +120,17 @@ typedef struct s_tex
 	int			ipsum;
 }				t_tex;
 
+typedef struct s_minimap
+{
+	double		*x;
+	double		*y;
+	double		angle;
+	double		x_y[2];
+	int			win_size[2];
+	int			win_pos[2];
+	t_data		*data;
+}				t_minimap;
+
 typedef struct s_map
 {
 	char		**map;
@@ -120,6 +143,8 @@ typedef struct s_map
 	int			roof[3];
 	long long	xlen;
 	long long	ylen;
+	t_minimap	*minimap;
+	t_data		*data;
 }				t_map;
 
 typedef struct s_mlx
@@ -133,14 +158,11 @@ typedef struct s_mlx
 	int			win_hmid;
 	int			mouse_pos[2];
 	double		map_limit[2];
-	double		minimap_x;
-	double		minimap_y;
-	double		game_scale;
-	double		minimap_angle;
-	long		minimap_size[2];
-	long		minimap_pos[2];
+	int			game_scale;
 	double		speed;
-	long long	ips;
+	long long	fps;
+	t_minimap	*minimap;
+	t_data		*data;
 }				t_mlx;
 
 typedef struct s_data
@@ -151,6 +173,7 @@ typedef struct s_data
 	t_map		map;
 	t_player	player;
 	t_mlx		mlx;
+	t_minimap	minimap;
 }				t_data;
 
 void		db_ascii_title(char *tab);
@@ -181,17 +204,18 @@ int			err_stderr(int launch);
 int			err_return(int value, char *log, int level);
 
 int			init_data_struct(t_data *data, int argc, char **argv);
-int			init_map_struct(t_map *map, char *file);
+int			init_map_struct(t_data *data, t_map *map, char *file);
 int			init_map_texture(t_tex *asset, char **map, char *set, size_t *pos);
 int			init_map_trim(t_map *map, char **temp);
-int			init_player_struct(t_player *player, t_map map);
+int			init_player_struct(t_data *data, t_player *player, t_map map);
 int			init_texture_struct(t_data *data, t_tex	*texture);
-int			init_mlx_struct(t_data *data);
+int			init_mlx_struct(t_data *data, t_mlx *mlx);
 
 void		res_tex_struct(t_tex *tex, int free);
 void		res_map_struct(t_map *map, int free);
 void		res_player_struct(t_player *player, int free);
 void		res_data_struct(t_data *data, int free);
+void		res_minimap_struct(t_minimap *minimap);
 
 int			parse_main(t_data *data);
 int			parse_map(t_map map, t_player player);
@@ -228,6 +252,7 @@ void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
 
 int			math_coeff_circle(int radius, double angle, int *out);
 
+size_t		*me_gentab(size_t one, size_t two);
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);

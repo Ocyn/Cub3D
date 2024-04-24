@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/19 16:33:43 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 20:45:23 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@ int	mmap_move(t_data *data)
 {
 	t_player	*player;
 	t_mlx		*mlx;
+	t_minimap	*minimap;
 
 	player = &data->player;
 	mlx = &data->mlx;
+	minimap = &data->minimap;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
-	mlx->minimap_y = mlx->minimap_size[1] / 2;
-	mlx->minimap_x = mlx->minimap_size[0] / 2;
-	mlx->minimap_y -= player->y * mlx->game_scale;
-	mlx->minimap_x -= player->x * mlx->game_scale;
-	mlx->minimap_y -= mlx->game_scale / 2;
-	mlx->minimap_x -= mlx->game_scale / 2;
-	mlx->minimap_angle = player->angle_rot;
+	minimap->x_y[0] = minimap->win_size[0] / 2;
+	minimap->x_y[1] = minimap->win_size[1] / 2;
+	minimap->x_y[0] -= player->x_y[0] * mlx->game_scale;
+	minimap->x_y[1] -= player->x_y[1] * mlx->game_scale;
+	minimap->x_y[0] -= mlx->game_scale / 2;
+	minimap->x_y[1] -= mlx->game_scale / 2;
+	minimap->angle = player->angle;
 	return (EXIT_SUCCESS);
 }
 
@@ -46,7 +48,7 @@ int	mmap_area(t_data *data, size_t area[2], size_t cord[2], char c)
 		if (c == '1')
 			return (conv_rgbtab(255, 255, 255));
 	}
-	// return (conv_rgbtab(30, 30, 30));
+	//return (conv_rgbtab(30, 30, 30));
 	return (0);
 }
 
@@ -77,19 +79,30 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	}
 }
 
-void	mmap_draw_hud(t_mlx *mlx, int mode)
+void	mmap_draw_hud(t_data *data, int mode)
 {
+	t_mlx	*mlx;
+	//int	coeff[2];
+
+	mlx = &data->mlx;
 	if (!mode)
 	{
-		draw_square(mlx, (size_t[2]){mlx->minimap_size[0] + mlx->game_scale \
-		, mlx->minimap_size[1] + mlx->game_scale}, (size_t[2]){mlx->minimap_pos[0] \
-		, mlx->minimap_pos[1]}, conv_rgbtab(30, 30, 30));
+		draw_square(mlx, (size_t[2]){mlx->minimap->win_size[0] + mlx->game_scale \
+		, mlx->minimap->win_size[1] + mlx->game_scale}, (size_t[2]){mlx->minimap->win_pos[0] \
+		, mlx->minimap->win_pos[1]} \
+		, conv_rgbtab(30, 30, 30));
+		draw_square(mlx, (size_t[2]){mlx->minimap->win_size[0], mlx->minimap->win_size[1]} \
+		, (size_t[2]){mlx->minimap->win_pos[0], mlx->minimap->win_pos[1]}, 0);
 	}
 	if (mode == 1)
 	{
 		draw_square(mlx, (size_t[2]){mlx->game_scale, mlx->game_scale} \
-		, (size_t[2]){mlx->minimap_size[0] / 2 - (mlx->game_scale / 2), mlx->minimap_size[1] / 2 - (mlx->game_scale / 2)} \
+		, (size_t[2]){mlx->minimap->win_size[0] / 2 - (mlx->game_scale / 2) \
+		, mlx->minimap->win_size[1] / 2 - (mlx->game_scale / 2)} \
 		, conv_rgbtab(81, 254, 0));
+		// math_coeff_circle(mlx->speed, data->player.angle, coeff);
+		// draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
+		// , (size_t[2]){mlx->win_wmid + coeff[0], mlx->win_hmid + coeff[1]}, conv_rgbtab(255, 255, 255));
 	}
 }
 
@@ -100,10 +113,9 @@ int	mmap_minimap(t_data *data)
 	(void)data;
 	mlx = &data->mlx;
 	mmap_move(data);
-	mmap_draw_hud(mlx, 0);
-	draw_square(mlx, (size_t *)mlx->minimap_size, (size_t *)mlx->minimap_pos, 0);
-	mmap_draw_map(data, (size_t *)mlx->minimap_size, mlx->game_scale \
-	, (size_t[2]){(mlx->minimap_x), (mlx->minimap_y)});
-	mmap_draw_hud(mlx, 1);
+	mmap_draw_hud(data, 0);
+	mmap_draw_map(data, (size_t[2]){mlx->minimap->win_size[0], mlx->minimap->win_size[1]}, mlx->game_scale \
+	, (size_t[2]){*mlx->minimap->x, *mlx->minimap->y});
+	mmap_draw_hud(data, 1);
 	return (EXIT_SUCCESS);
 }

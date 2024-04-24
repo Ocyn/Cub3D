@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 12:13:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:46:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	parse_map_borders(t_map map, t_player player)
 		return (s_freetab(temp, me_tablen(temp)) \
 		, err_return(EXIT_FAILURE, "No player found", 2));
 	me_diffusion(temp, player.ypos, player.xpos, '1');
-	// /* DEBUG */	db_showtab(temp);
 	if (!temp)
 		return (err_return(EXIT_FAILURE, "Diffusion failed", 2));
 	while (temp && temp[y] && temp[y])
@@ -92,9 +91,9 @@ int	parse_main(t_data *data)
 	file = data->arg_tab[1];
 	if (parse_file(file))
 		return (err_return(EXIT_FAILURE, "Parse file failed", 0));
-	if (init_map_struct(&data->map, file))
+	if (init_map_struct(data, &data->map, file))
 		return (err_return(EXIT_FAILURE, "Map init failed", 0));
-	if (init_player_struct(&data->player, data->map))
+	if (init_player_struct(data, &data->player, data->map))
 		return (err_return(EXIT_FAILURE, "Player init failed", 0));
 	if (parse_map(data->map, data->player))
 		return (err_return(EXIT_FAILURE, "Parse map failed", 0));

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/23 16:50:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:43:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	graph_init(t_data *data)
 {
 	char	title[] = "Cub3D";
 
-	if (init_mlx_struct(data))
+	if (init_mlx_struct(data, &data->mlx))
 		return (err_return(EXIT_FAILURE, "MLX init failed", 2));
 	if (init_texture_struct(data, &data->map.tex_no))
 		return (err_return(EXIT_FAILURE, "North texture loading failed", 2));

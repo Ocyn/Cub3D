@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 01:52:29 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/24 18:27:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	init_map_struct(t_data *data, t_map *map, char *file)
+{
+	char		**temp;
+	long long	my;
+
+	my = -1;
+	temp = conv_file2tab(file);
+	if (!map || !temp)
+		return (err_return(EXIT_FAILURE, "Memory issue", 1));
+	res_map_struct(map, 0);
+	map->ylen = me_tablen(temp);
+	while (++my < map->ylen)
+	{
+		if (ft_strchr(temp[my], '\n'))
+			temp[my][ft_strlen(temp[my]) - 1] = 0;
+		if ((long long)ft_strlen(temp[my]) > map->xlen)
+			map->xlen = ft_strlen(temp[my]);
+	}
+	if (init_map_trim(map, temp))
+		return (s_freetab(temp, me_tablen(temp)) \
+		, err_return(EXIT_FAILURE, "Map trim failed", 1));
+	map->map_bis = me_tabdup(map->map, me_tablen(map->map));
+	if (!map->map_bis)
+		err_return(EXIT_FAILURE, "Failed to clone", 1);
+	return (s_freetab(temp, me_tablen(temp)), !map->map_bis);
+	map->data = data;
+	map->minimap = &data->minimap;
+}
 
 int	init_map_texture_bis(int *asset, char **map, char *set, size_t *pos)
 {
