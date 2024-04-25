@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 18:27:08 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/25 23:21:31 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ int	init_map_trim(t_map *map, char **temp)
 	if (init_map_texture(&map->tex_we, temp, "WE ", &trim))
 		return (err_return(EXIT_FAILURE, "West texture missing", 2));
 	if (init_map_texture_bis(map->floor, temp, "F ", &trim) \
-	|| init_map_texture_bis(map->roof, temp, "C ", &trim))
+	|| init_map_texture_bis(map->sky, temp, "C ", &trim))
 		return (err_return(EXIT_FAILURE, "F / C not defined", 2));
+	map->floor_h = conv_rgb(map->floor);
+	map->sky_h = conv_rgb(map->sky);
 	trim += (trim > 0);
 	while (!ft_strlen(temp[trim]))
 		trim++;

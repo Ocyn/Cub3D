@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 20:47:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/25 23:17:18 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	res_map_struct(t_map *map, int free)
 	res_tex_struct(&map->tex_ea, free);
 	res_tex_struct(&map->tex_we, free);
 	me_set_color(map->floor, 0, 0, 0);
-	me_set_color(map->roof, 0, 0, 0);
-	map->floor[0] = 0;
+	me_set_color(map->sky, 0, 0, 0);
+	map->floor_h = 0;
+	map->sky_h = 0;
 }
 
 void	res_player_struct(t_player *player, int free)
@@ -73,8 +74,8 @@ void	res_player_struct(t_player *player, int free)
 
 void	res_minimap_struct(t_minimap *minimap)
 {
-	ft_memset(minimap->win_size, 0, sizeof(int) * 2);
-	ft_memset(minimap->win_pos, 0, sizeof(int) * 2);
+	ft_memset(minimap->size, 0, sizeof(int) * 2);
+	ft_memset(minimap->pos, 0, sizeof(int) * 2);
 	ft_memset(minimap->x_y, 0, sizeof(double) * 2);
 	minimap->x = &minimap->x_y[0];
 	minimap->y = &minimap->x_y[1];
@@ -96,6 +97,7 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.win_hmid = 0;
 	data->mlx.fps = 0;
 	data->mlx.game_scale = 0;
+	data->mlx.deadzone = 0;
 	res_minimap_struct(&data->minimap);
 	ft_memset(data->mlx.map_limit, 0, sizeof(double) * 2);
 	ft_memset(data->mlx.mouse_pos, 0, sizeof(int) * 2);

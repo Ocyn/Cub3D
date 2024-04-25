@@ -6,15 +6,16 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 18:44:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/25 23:52:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline void	misc_clear_screen(t_img *img)
+inline void	misc_clear_screen(t_mlx *mlx)
 {
-	ft_memset(img->data, 0, (img->width * img->height) * 4);
+	//ft_memset((char *)img->data, 0x0, (img->width * img->height) * 4);
+	draw_square_snap(mlx, (size_t[2]){0, 0}, (size_t[2]){mlx->win_w, mlx->win_h}, 0x0);
 }
 
 inline void	misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color)
@@ -32,9 +33,10 @@ inline void	misc_default_game(t_data *data, int mode)
 	player = &data->player;
 	minimap = &data->minimap;
 	mlx = &data->mlx;
+	mlx->deadzone = (10 * data->mlx.game_scale) % data->mlx.win_h;
 	if (mode == 0)
 	{
-		misc_clear_screen(mlx->game);
+		misc_clear_screen(mlx);
 		re_draw_environnment(data, 1);
 	}
 	if (mode == 1)
@@ -42,8 +44,9 @@ inline void	misc_default_game(t_data *data, int mode)
 		mlx->game_scale = GAME_SCALING;
 		*player->x = player->xpos;
 		*player->y = player->ypos;
-		*minimap->y = (minimap->win_size[1] / 2) - player->ypos * mlx->game_scale;
-		*minimap->x = (minimap->win_size[0] / 2) - player->xpos * mlx->game_scale;
+		player->angle = 0;
+		*minimap->y = (minimap->size[1] / 2) - player->ypos * mlx->game_scale;
+		*minimap->x = (minimap->size[0] / 2) - player->xpos * mlx->game_scale;
 	}
 }
 

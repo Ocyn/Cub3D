@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 19:50:29 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/25 22:04:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void	db_showmap(t_map map, int mode)
 		db_showtexture(map.tex_ea, "East");
 		db_showtexture(map.tex_we, "West");
 		db_showtexturebis(map.floor, "Floor");
-		db_showtexturebis(map.roof, "Roof");
+		db_showtexturebis(map.sky, "sky");
 	}
 	if (!mode || mode == 2)
 	{

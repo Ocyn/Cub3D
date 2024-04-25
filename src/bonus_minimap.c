@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 20:45:23 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 00:09:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	mmap_move(t_data *data)
 	minimap = &data->minimap;
 	if (!player->b_move)
 		return (EXIT_SUCCESS);
-	minimap->x_y[0] = minimap->win_size[0] / 2;
-	minimap->x_y[1] = minimap->win_size[1] / 2;
+	minimap->x_y[0] = minimap->size[0] / 2;
+	minimap->x_y[1] = minimap->size[1] / 2;
 	minimap->x_y[0] -= player->x_y[0] * mlx->game_scale;
 	minimap->x_y[1] -= player->x_y[1] * mlx->game_scale;
 	minimap->x_y[0] -= mlx->game_scale / 2;
 	minimap->x_y[1] -= mlx->game_scale / 2;
-	minimap->angle = player->angle;
+	minimap->angle = player->angle + 90;
 	return (EXIT_SUCCESS);
 }
 
@@ -42,14 +42,14 @@ int	mmap_area(t_data *data, size_t area[2], size_t cord[2], char c)
 	if (cord[0] + border < area[0] && cord[1] + border < area[1])
 	{
 		if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
-			return (conv_rgbtab(255, 0, 0));
+			return (0xFF0000);
 		// if (c == '0')
 		// 	return (conv_rgb(data->map.floor));
 		if (c == '1')
-			return (conv_rgbtab(255, 255, 255));
+			return (0xFFFFFF);
 	}
 	//return (conv_rgbtab(30, 30, 30));
-	return (0);
+	return (0x0);
 }
 
 inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
@@ -82,27 +82,27 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 void	mmap_draw_hud(t_data *data, int mode)
 {
 	t_mlx	*mlx;
-	//int	coeff[2];
+	int	coeff[2];
 
 	mlx = &data->mlx;
 	if (!mode)
-	{
-		draw_square(mlx, (size_t[2]){mlx->minimap->win_size[0] + mlx->game_scale \
-		, mlx->minimap->win_size[1] + mlx->game_scale}, (size_t[2]){mlx->minimap->win_pos[0] \
-		, mlx->minimap->win_pos[1]} \
-		, conv_rgbtab(30, 30, 30));
-		draw_square(mlx, (size_t[2]){mlx->minimap->win_size[0], mlx->minimap->win_size[1]} \
-		, (size_t[2]){mlx->minimap->win_pos[0], mlx->minimap->win_pos[1]}, 0);
-	}
+		draw_square(mlx, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]} \
+		, (size_t[2]){mlx->minimap->pos[0], mlx->minimap->pos[1]}, 0x0);
 	if (mode == 1)
 	{
 		draw_square(mlx, (size_t[2]){mlx->game_scale, mlx->game_scale} \
-		, (size_t[2]){mlx->minimap->win_size[0] / 2 - (mlx->game_scale / 2) \
-		, mlx->minimap->win_size[1] / 2 - (mlx->game_scale / 2)} \
-		, conv_rgbtab(81, 254, 0));
-		// math_coeff_circle(mlx->speed, data->player.angle, coeff);
-		// draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
-		// , (size_t[2]){mlx->win_wmid + coeff[0], mlx->win_hmid + coeff[1]}, conv_rgbtab(255, 255, 255));
+		, (size_t[2]){mlx->minimap->size[0] / 2 - (mlx->game_scale / 2) \
+		, mlx->minimap->size[1] / 2 - (mlx->game_scale / 2)} \
+		, 0x51FE00);
+		math_coeff_circle(mlx->game_scale, data->player.angle, coeff);
+		draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
+		, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0], mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
+		draw_square_snap(mlx, (size_t[2]){mlx->minimap->size[0], 0} \
+		, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1]} \
+		, 0x151515);
+		draw_square_snap(mlx, (size_t[2]){0, mlx->minimap->size[1]} \
+		, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1] + mlx->game_scale} \
+		, 0x151515);
 	}
 }
 
@@ -114,7 +114,7 @@ int	mmap_minimap(t_data *data)
 	mlx = &data->mlx;
 	mmap_move(data);
 	mmap_draw_hud(data, 0);
-	mmap_draw_map(data, (size_t[2]){mlx->minimap->win_size[0], mlx->minimap->win_size[1]}, mlx->game_scale \
+	mmap_draw_map(data, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]}, mlx->game_scale \
 	, (size_t[2]){*mlx->minimap->x, *mlx->minimap->y});
 	mmap_draw_hud(data, 1);
 	return (EXIT_SUCCESS);

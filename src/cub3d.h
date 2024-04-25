@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 20:11:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 00:19:40 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@
 
 # define PLAYER_SPEED		1
 # define PLAYER_FOV			110
+# define CAMERA_SPEED		2
 
 # define MINIMAP_SCALE		6
 # define MINIMAP_POS_X		0
@@ -126,8 +127,8 @@ typedef struct s_minimap
 	double		*y;
 	double		angle;
 	double		x_y[2];
-	int			win_size[2];
-	int			win_pos[2];
+	int			size[2];
+	int			pos[2];
 	t_data		*data;
 }				t_minimap;
 
@@ -140,7 +141,9 @@ typedef struct s_map
 	t_tex		tex_ea;
 	t_tex		tex_we;
 	int			floor[3];
-	int			roof[3];
+	int			sky[3];
+	int			floor_h;
+	int			sky_h;
 	long long	xlen;
 	long long	ylen;
 	t_minimap	*minimap;
@@ -160,6 +163,7 @@ typedef struct s_mlx
 	double		map_limit[2];
 	int			game_scale;
 	double		speed;
+	int			deadzone;
 	long long	fps;
 	t_minimap	*minimap;
 	t_data		*data;
@@ -227,8 +231,10 @@ int			graph_close(t_data *data);
 int			re_render(t_data *data);
 int			re_nothing(void *data);
 int			re_draw_image(t_data *data);
-void		re_draw_environnment(t_data *data, int mode);
+void		re_draw_environnment(t_data *data, int full);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
+
+void		draw_square_snap2(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
 void		draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
@@ -246,7 +252,7 @@ int			bind_mouse(int key, int m_x, int m_y, t_data *data);
 
 int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);
-void		misc_clear_screen(t_img *img);
+void		misc_clear_screen(t_mlx *mlx);
 void		misc_default_game(t_data *data, int mode);
 void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
 

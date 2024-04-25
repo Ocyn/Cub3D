@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 19:44:47 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/25 23:02:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,15 @@ inline void	draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color
 		}
 		one[1]++;
 	}
+}
+
+inline void	draw_square_snap2(t_mlx *mlx, size_t one[2], size_t two[2], int color)
+{
+	t_img	*img;
+
+	img = ((t_img *)mlx->game);
+	ft_memset(img->data + ((img->width * one[1]) + one[0]) \
+	, (int)color, 4 * (img->width * two[1]) + two[0]);
 }
 
 inline void	draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color)

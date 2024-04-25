@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 19:39:42 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 00:20:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	gp_move(t_data *data)
 	gp_move_event(data);
 	ply = &data->player;
 	if (ply->turn_right && !ply->turn_left)
-		ply->angle += (data->mlx.speed);
+		ply->angle += (data->mlx.speed) * CAMERA_SPEED;
 	if (ply->turn_left && !ply->turn_right)
-		ply->angle -= (data->mlx.speed);
+		ply->angle -= (data->mlx.speed) * CAMERA_SPEED;
 	if (ply->angle < 0)
 		ply->angle = 360;
 	if (ply->angle > 360)
