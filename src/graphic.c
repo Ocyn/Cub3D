@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 02:45:59 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 04:07:15 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	graph_init(t_data *data)
 	data->mlx.win = mlx_new_window(data->mlx.init, data->mlx.win_w, data->mlx.win_h, title);
 	if (!data->mlx.win)
 		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
+	mlx_mouse_show(data->mlx.init, data->mlx.win);
 	return (EXIT_SUCCESS);
 }
 

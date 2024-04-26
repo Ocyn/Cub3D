@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 00:20:11 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 05:36:45 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ int	gp_move_event(t_data *data)
 	if (player->x < 0)
 		player->x = 0;
 	math_coeff_circle(data->mlx.speed, player->angle, player->a_move);
+	return (EXIT_SUCCESS);
+}
+
+int	gp_mouse_camera(int x, int y, t_data *data)
+{
+	int			mouse;
+
+	if (!data->mlx.mouse_cam)
+		return (EXIT_SUCCESS);
+	data->mlx.mouse_xy[0] = x;
+	data->mlx.mouse_xy[1] = y;
+	mouse = data->mlx.win_wmid - data->mlx.mouse_xy[0];
+	if (abs(mouse) > 30)
+	{
+		mlx_mouse_move(data->mlx.init, data->mlx.win \
+		, data->mlx.win_wmid, data->mlx.win_hmid);
+		data->player.angle -= (mouse * CAMERA_SPEED) / 100;
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -73,6 +91,7 @@ int	gp_gameplay(t_data *data)
 	winp = data->mlx.win;
 	mlx_hook(winp, 17, 0, graph_close, data);
 	mlx_key_hook(winp, bind_bindings, data);
+	mlx_hook(winp, 6, 1L<<6, gp_mouse_camera, data);
 	mlx_mouse_hook(winp, bind_mouse, data);
 	mlx_hook(winp, 02, 1L<<0, bind_keyboard_press, data);
 	mlx_hook(winp, 03, 1L<<1, bind_keyboard_release, data);

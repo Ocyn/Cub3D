@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 03:31:38 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 05:18:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@
 # define GAME_SCALING		10
 
 # define PLAYER_SPEED		1
-# define PLAYER_FOV			110
-# define CAMERA_SPEED		15
+# define PLAYER_FOV			90
+# define CAMERA_SPEED		10
 
 # define MINIMAP_SCALE		6
 # define MINIMAP_POS_X		0
@@ -160,8 +160,9 @@ typedef struct s_mlx
 	int			win_wmid;
 	int			win_hmid;
 	int			mouse_cam;
-	int			mouse_pos[2];
+	int			mouse_xy[2];
 	double		map_limit[2];
+	int			fov;
 	int			game_scale;
 	double		speed;
 	int			deadzone;
@@ -230,9 +231,10 @@ int			graph_main(t_data *data);
 int			graph_close(t_data *data);
 
 int			re_render(t_data *data);
-int			re_nothing(void *data);
 int			re_draw_image(t_data *data);
+void		re_draw_wall(t_data *data);
 void		re_draw_environnment(t_data *data, int full);
+void		re_pixel_column(t_data *data, int color, int x, int distance);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
 void		draw_square(t_mlx *mlx, size_t one[2], size_t two[2], int color);
@@ -242,6 +244,7 @@ void		draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 int			gp_gameplay(t_data *data);
 int			gp_move(t_data *data);
+int			gp_mouse_camera(int x, int y, t_data *data);
 
 int			bind_bindings(int key, t_data *data);
 int			bind_keyboard_press(int key, t_data *data);
@@ -258,6 +261,7 @@ int			math_coeff_circle(int radius, double angle, int *out);
 
 size_t		*me_tabedit(size_t *tab, size_t one, size_t two);
 void		me_memset_pix(char *p, int c, size_t n);
+void		me_memset_pix_vertical(t_img *img, char *p, int c, size_t n);
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);

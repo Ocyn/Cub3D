@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 00:17:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 05:19:21 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	init_mlx_struct(t_data *data, t_mlx *mlx)
 	mlx->map_limit[1] = data->map.ylen * mlx->game_scale;
 	mlx->speed = PLAYER_SPEED;
 	mlx->speed /= mlx->game_scale;
+	mlx->fov = mlx->win_w / PLAYER_FOV;
 	init_minimap_struct(data, &data->minimap);
 	mlx->data = data;
 	mlx->minimap = &data->minimap;

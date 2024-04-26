@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 03:31:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 05:37:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,41 @@ inline void	re_draw_environnment(t_data *data, int full)
 	misc_fill_screen(data->mlx.game \
 	, data->mlx.win_hmid, data->mlx.win_hmid - 1, data->map.floor_h);
 }
+
+inline void	re_draw_wall(t_data *data)
+{
+	int		column;
+
+	column = 0;
+	while (column < data->mlx.win_w)
+	{
+		re_pixel_column(data, 0xFF00AE, column, 100);
+		column += data->mlx.fov;
+	}
+	return ;
+}
+
+inline void	re_pixel_column(t_data *data, int color, int x, int distance)
+{
+	// draw_square(&data->mlx, (size_t[2]){x, 0} \
+	// , (size_t[2]){x + data->mlx.fov, data->mlx.win_hmid - distance}, 0x0);
+	draw_square(&data->mlx, (size_t[2]){x, data->mlx.win_hmid - distance} \
+	, (size_t[2]){x + data->mlx.fov, data->mlx.win_hmid + distance}, color);
+	// draw_square(&data->mlx, (size_t[2]){x, data->mlx.win_hmid + distance} \
+	// , (size_t[2]){x + data->mlx.fov, data->mlx.win_h}, 0x0);
+}
+
 int	re_events_loop(t_data *data)
 {
 	if (!data)
 		return (EXIT_FAILURE);
-	// mlx_mouse_get_pos(data->mlx.init, data->mlx.win \
-	// , &data->mlx.mouse_pos[0], &data->mlx.mouse_pos[1]);
 	gp_move(data);
 	//sb_circle(data);
 	//re_draw_environnment(data, 0);
 	//draw_square(&data->mlx, (size_t[2]){500, 500}, (size_t[2]){800, 800}, 0xFF00AE);
 	//draw_square2(&data->mlx, (size_t[2]){500, 500}, (size_t[2]){800, 800}, 0xFF00AE);
 	//misc_fill_screen(data->mlx.game, data->mlx.win_hmid, 100, 0xFF00AE);
+	re_draw_wall(data);
 	mmap_minimap(data);
 	db_game_monitoring(data);
 	return (EXIT_SUCCESS);
@@ -56,10 +79,4 @@ int	re_render(t_data *data)
 	re_events_loop(data);
 	mlx_put_image_to_window(data->mlx.init, data->mlx.win, data->mlx.game, 0, 0);
 	return (EXIT_SUCCESS);
-}
-
-int	re_nothing(void *data)
-{
-	(void)data;
-	return (0);
 }

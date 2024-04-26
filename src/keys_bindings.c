@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 01:41:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 04:35:52 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,10 @@ int	bind_keyboard_release(int key, t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	bind_mouse_camera(int key, int m_x, int m_y, t_data *data)
-{
-	(void)key;
-	(void)m_x;
-	(void)m_y;
-	(void)data;
-	return (EXIT_SUCCESS);
-}
-
 int	bind_mouse(int key, int m_x, int m_y, t_data *data)
 {
-	data->mlx.mouse_pos[0] = m_x;
-	data->mlx.mouse_pos[1] = m_y;
+	data->mlx.mouse_xy[0] = m_x;
+	data->mlx.mouse_xy[1] = m_y;
 	if (key == MOUSE_LCLICK)
 		(void)data;
 	if (key == MOUSE_RCLICK)
@@ -87,7 +78,13 @@ int	bind_bindings(int key, t_data *data)
 		misc_default_game(data, 0);
 	if (key == TAB_KEY)
 		misc_default_game(data, 1);
-	// if (key == MULT_KEY)
-	// 	re_draw_environnment(data, 0);
+	if (key == MULT_KEY)
+	{
+		data->mlx.mouse_cam = (!data->mlx.mouse_cam);
+		if (data->mlx.mouse_cam)
+			mlx_mouse_hide(data->mlx.init, data->mlx.win);
+		else
+			mlx_mouse_show(data->mlx.init, data->mlx.win);
+	}
 	return (EXIT_SUCCESS);
 }
