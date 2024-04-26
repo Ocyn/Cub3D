@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 02:47:27 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 03:35:56 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	int		color;
 	size_t	line;
 	size_t	i[2];
+	size_t	pmark[2];
 
 	i[1] = 0;
 	line = ft_strlen(data->map.map[0]);
@@ -69,9 +70,10 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 			, xy[1] + (i[1] * scale)}, data->map.map[i[1]][i[0]]);
 			if (color)
 			{
-				draw_square(&data->mlx, (size_t[2]){scale - 1, scale - 1} \
-				, (size_t[2]){xy[0] + (i[0] * scale) \
-				, xy[1] + (i[1] * scale)}, color);
+				pmark[0] = xy[0] + (i[0] * scale);
+				pmark[1] = xy[1] + (i[1] * scale);
+				draw_square(&data->mlx, (size_t[2]){pmark[0] + 1, pmark[1] + 1} \
+				, (size_t[2]){pmark[0] + scale, pmark[1] + scale - 1}, color);
 			}
 			i[0]++;
 		}
@@ -81,14 +83,15 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 
 void	mmap_draw_hud(t_data *data)
 {
-	t_mlx	*mlx;
-	int	coeff[2];
+	t_mlx		*mlx;
+	size_t		pmark[2];
+	int			coeff[2];
 
 	mlx = &data->mlx;
-	draw_square(mlx, (size_t[2]){mlx->game_scale, mlx->game_scale} \
-	, (size_t[2]){mlx->minimap->size[0] / 2 - (mlx->game_scale / 2) \
-	, mlx->minimap->size[1] / 2 - (mlx->game_scale / 2)} \
-	, 0x51FE00);
+	pmark[0] = mlx->minimap->size[0] / 2 - (mlx->game_scale / 2);
+	pmark[1] = mlx->minimap->size[1] / 2 - (mlx->game_scale / 2);
+	draw_square(mlx, pmark, (size_t[2]){pmark[0] + mlx->game_scale \
+	, pmark[1] + mlx->game_scale}, 0x51FE00);
 	math_coeff_circle(mlx->game_scale, data->player.angle, coeff);
 	draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
 	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0], mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
@@ -96,10 +99,10 @@ void	mmap_draw_hud(t_data *data)
 	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0] - 1, mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
 	draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
 	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0] + 1, mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
-	draw_square_snap(mlx, (size_t[2]){mlx->minimap->size[0], 0} \
+	draw_square(mlx, (size_t[2]){mlx->minimap->size[0], 0} \
 	, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1]} \
 	, 0x151515);
-	draw_square_snap(mlx, (size_t[2]){0, mlx->minimap->size[1]} \
+	draw_square(mlx, (size_t[2]){0, mlx->minimap->size[1]} \
 	, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1] + mlx->game_scale} \
 	, 0x151515);
 }
@@ -111,8 +114,8 @@ int	mmap_minimap(t_data *data)
 	(void)data;
 	mlx = &data->mlx;
 	mmap_move(data);
-	draw_square(mlx, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]} \
-	, (size_t[2]){mlx->minimap->pos[0], mlx->minimap->pos[1]}, 0x0);
+	draw_square(mlx, (size_t[2]){0, 0} \
+	, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]}, 0x0);
 	mmap_draw_map(data, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]}, mlx->game_scale \
 	, (size_t[2]){*mlx->minimap->x, *mlx->minimap->y});
 	mmap_draw_hud(data);

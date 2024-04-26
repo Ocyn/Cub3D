@@ -6,28 +6,11 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 03:10:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 03:32:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-inline void	draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color)
-{
-	size_t	i[2];
-
-	i[1] = 0;
-	while (i[1] < size[1])
-	{
-		i[0] = 0;
-		while (i[0] < size[0])
-		{
-			re_pixeltoimg(mlx->game, xy[0] + i[0], xy[1] + i[1], color);
-			i[0]++;
-		}
-		i[1]++;
-	}
-}
 
 inline void	draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 {
@@ -61,7 +44,7 @@ inline void	draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 	}
 }
 
-inline void	draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
+inline void	draw_square(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 {
 	t_img	*img;
 
