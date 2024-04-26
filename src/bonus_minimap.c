@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 07:55:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 10:31:21 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 
 	i[1] = 0;
 	line = ft_strlen(data->map.map[0]);
+	pmark[0] = xy[0] + (i[0] * scale);
 	while (i[1] < (size_t)data->map.ylen)
 	{
 		i[0] = 0;
