@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 04:07:15 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 11:33:49 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	graph_close(t_data *data)
 
 int	graph_init(t_data *data)
 {
-	char	title[] = "Cub3D";
-
 	if (init_mlx_struct(data, &data->mlx))
 		return (err_return(EXIT_FAILURE, "MLX init failed", 2));
 	if (init_texture_struct(data, &data->map.tex_no))
@@ -57,11 +55,37 @@ int	graph_init(t_data *data)
 	re_draw_environnment(data, 1);
 	if (!data->mlx.game)
 		return (err_return(EXIT_FAILURE, "Rendering image failed to init", 2));
-	data->mlx.win = mlx_new_window(data->mlx.init, data->mlx.win_w, data->mlx.win_h, title);
+	data->mlx.win = mlx_new_window(data->mlx.init \
+	, data->mlx.win_w, data->mlx.win_h, "Cub3D");
 	if (!data->mlx.win)
 		return (err_return(EXIT_FAILURE, "MLX windows failed to create", 2));
 	mlx_mouse_show(data->mlx.init, data->mlx.win);
 	return (EXIT_SUCCESS);
+}
+
+void	graph_window_bench(t_data *data, t_mlx *mlx)
+{
+	t_win_list	*win;
+	t_xvar		*xvar;
+	char		*stat;
+	char		*temp;
+	char		*title;
+
+	win = mlx->win;
+	xvar = mlx->init;
+	stat = ft_itoa(db_framepersecond());
+	title = me_auto_joinstr("Cub3D - FPS:", stat, 2);
+	temp = me_auto_joinstr(title, " | Player X/Y/Angle: ", 1);
+	stat = ft_itoa(round(*data->player.x));
+	title = me_auto_joinstr(temp, stat, 3);
+	temp = me_auto_joinstr(title, " / ", 1);
+	stat = ft_itoa(round(*data->player.y));
+	title = me_auto_joinstr(temp, stat, 3);
+	temp = me_auto_joinstr(title, " / ", 1);
+	stat = ft_itoa(round(data->player.angle));
+	title = me_auto_joinstr(temp, stat, 3);
+	XStoreName(xvar->display, win->window, title);
+	free(title);
 }
 
 int	graph_main(t_data *data)

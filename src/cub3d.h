@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 10:32:39 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 11:24:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,7 @@ int			parse_map(t_map map, t_player player);
 int			parse_file(char *file);
 
 int			graph_main(t_data *data);
+void		graph_window_bench(t_data *data, t_mlx *mlx);
 int			graph_close(t_data *data);
 
 int			re_render(t_data *data);
@@ -263,6 +264,7 @@ void		misc_fill_screen(t_img *img, size_t start, size_t len, int color);
 int			math_coeff_circle(int radius, double angle, int *out);
 
 size_t		*me_tabedit(size_t *tab, size_t one, size_t two);
+char		*me_auto_joinstr(char *s1, char *s2, int frees);
 void		me_memset_pix(char *p, int c, size_t n);
 void		me_memset_pix_vertical(t_img *img, char *p, int c, size_t n);
 char		**me_tabdup(char **src, size_t src_len);

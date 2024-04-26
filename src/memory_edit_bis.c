@@ -6,11 +6,23 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:03:20 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:08:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 11:24:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	*me_auto_joinstr(char *s1, char *s2, int frees)
+{
+	char	*new;
+
+	new = ft_strjoin(s1, s2);
+	if (frees == 1 || frees == 3)
+		free(s1);
+	if (frees == 2 || frees == 3)
+		free(s2);
+	return (new);
+}
 
 void	me_memset_pix(char *p, int c, size_t n)
 {
