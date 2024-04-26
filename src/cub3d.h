@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 00:19:40 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:28:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@
 
 # define PLAYER_SPEED		1
 # define PLAYER_FOV			110
-# define CAMERA_SPEED		2
+# define CAMERA_SPEED		10
 
 # define MINIMAP_SCALE		6
 # define MINIMAP_POS_X		0
@@ -159,6 +159,7 @@ typedef struct s_mlx
 	int			win_h;
 	int			win_wmid;
 	int			win_hmid;
+	int			mouse_cam;
 	int			mouse_pos[2];
 	double		map_limit[2];
 	int			game_scale;
@@ -234,8 +235,6 @@ int			re_draw_image(t_data *data);
 void		re_draw_environnment(t_data *data, int full);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
-void		draw_square_snap2(t_mlx *mlx, size_t one[2], size_t two[2], int color);
-
 void		draw_square(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
 void		draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 void		draw_grid_sq(t_mlx *mlx, size_t size[2], size_t xy[2], int color);
@@ -254,11 +253,12 @@ int			misc_player_location(t_map map, long long *y, long long *x);
 void		misc_opposite_color(int *color);
 void		misc_clear_screen(t_mlx *mlx);
 void		misc_default_game(t_data *data, int mode);
-void		misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color);
+void		misc_fill_screen(t_img *img, size_t start, size_t len, int color);
 
 int			math_coeff_circle(int radius, double angle, int *out);
 
-size_t		*me_gentab(size_t one, size_t two);
+size_t		*me_tabedit(size_t *tab, size_t one, size_t two);
+void		me_memset_pix(char *p, int c, size_t n);
 char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);

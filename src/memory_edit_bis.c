@@ -6,15 +6,29 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 20:03:20 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/24 19:08:32 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:18:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	*me_gentab(size_t one, size_t two)
+void	me_memset_pix(char *p, int c, size_t n)
 {
-	return ((size_t[2]){one, two});
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((int *)p)[i] = c;
+		i++;
+	}
+}
+
+size_t	*me_tabedit(size_t *tab, size_t one, size_t two)
+{
+	tab[0] = one;
+	tab[1] = two;
+	return (tab);
 }
 
 int	me_strcat(char *dest, char *src)

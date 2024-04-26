@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/25 23:52:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:26:44 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 inline void	misc_clear_screen(t_mlx *mlx)
 {
-	//ft_memset((char *)img->data, 0x0, (img->width * img->height) * 4);
-	draw_square_snap(mlx, (size_t[2]){0, 0}, (size_t[2]){mlx->win_w, mlx->win_h}, 0x0);
+	t_img	*img;
+
+	img = mlx->game;
+	me_memset_pix(img->data, 0x0, (img->width * img->height));
 }
 
-inline void	misc_fill_screen(t_img *img, size_t one[2], size_t two[2], int color)
+inline void	misc_fill_screen(t_img *img, size_t start, size_t len, int color)
 {
-	ft_memset((int *)(img->data) + ((img->width * one[1]) + one[0]) \
-	, (int)color, 4 * (img->width * two[1]) + two[0]);
+	if (start + len >= (size_t)img->height)
+		return ;
+	me_memset_pix((img->data + (img->width * start * 4)) \
+	, color, (img->width * len));
 }
 
 inline void	misc_default_game(t_data *data, int mode)
@@ -44,7 +48,7 @@ inline void	misc_default_game(t_data *data, int mode)
 		mlx->game_scale = GAME_SCALING;
 		*player->x = player->xpos;
 		*player->y = player->ypos;
-		player->angle = 0;
+		player->angle = 270;
 		*minimap->y = (minimap->size[1] / 2) - player->ypos * mlx->game_scale;
 		*minimap->x = (minimap->size[0] / 2) - player->xpos * mlx->game_scale;
 	}

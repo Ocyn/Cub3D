@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:22:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/25 22:43:19 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:35:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memset(void *str, int c, size_t n)
 	size_t	i;
 
 	i = 0;
-	while (++i < n)
+	while (i < n)
 	{
 		((unsigned char *)str)[i] = c;
 		i++;

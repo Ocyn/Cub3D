@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/25 23:23:31 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 01:41:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ int	bind_keyboard_release(int key, t_data *data)
 		data->player.turn_right = 0;
 	if (key == LEFT_ARROW_KEY)
 		data->player.turn_left = 0;
+	return (EXIT_SUCCESS);
+}
+
+int	bind_mouse_camera(int key, int m_x, int m_y, t_data *data)
+{
+	(void)key;
+	(void)m_x;
+	(void)m_y;
+	(void)data;
 	return (EXIT_SUCCESS);
 }
 
