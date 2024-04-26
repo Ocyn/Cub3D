@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:37:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 05:51:21 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	re_events_loop(t_data *data)
 	//draw_square(&data->mlx, (size_t[2]){500, 500}, (size_t[2]){800, 800}, 0xFF00AE);
 	//draw_square2(&data->mlx, (size_t[2]){500, 500}, (size_t[2]){800, 800}, 0xFF00AE);
 	//misc_fill_screen(data->mlx.game, data->mlx.win_hmid, 100, 0xFF00AE);
-	re_draw_wall(data);
+	//re_draw_wall(data);
 	mmap_minimap(data);
 	db_game_monitoring(data);
 	return (EXIT_SUCCESS);

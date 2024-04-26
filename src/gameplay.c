@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:36:45 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 06:24:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ int	gp_move_event(t_data *data)
 	player = &data->player;
 	mlx = &data->mlx;
 	player->b_move = 1;
-	if (player->y < 0)
-		player->y = 0;
-	if (player->x < 0)
-		player->x = 0;
-	math_coeff_circle(data->mlx.speed, player->angle, player->a_move);
+	if (*player->y < 0)
+		*player->y = 0;
+	if (*player->x < 0)
+		*player->x = 0;
+	if (*player->y > (double)data->map.ylen)
+		*player->y = data->map.ylen;
+	if (*player->y > (double)data->map.xlen)
+		*player->y = data->map.xlen;
+	if (player->angle < 0)
+		player->angle = 360;
+	if (player->angle > 360)
+		player->angle = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -57,20 +64,21 @@ int	gp_move(t_data *data)
 		ply->angle += (data->mlx.speed) * CAMERA_SPEED;
 	if (ply->turn_left && !ply->turn_right)
 		ply->angle -= (data->mlx.speed) * CAMERA_SPEED;
-	if (ply->angle < 0)
-		ply->angle = 360;
-	if (ply->angle > 360)
-		ply->angle = 0;
 	if (!ply->b_move)
 		return (EXIT_SUCCESS);
-	if (ply->move_up && !ply->move_down && *ply->y > 0)
-		*ply->y -= data->mlx.speed;
-	if (ply->move_down && !ply->move_up && *ply->y < data->map.ylen)
-		*ply->y += data->mlx.speed;
-	if (ply->move_right && !ply->move_left && *ply->x < data->map.xlen)
-		*ply->x += data->mlx.speed;
-	if (ply->move_left && !ply->move_right && *ply->x > 0)
-		*ply->x -= data->mlx.speed;
+	if (ply->move_up && !ply->move_down)
+		math_coeff_circle(10, data->player.angle, data->player.a_move);
+	if (ply->move_down && !ply->move_up)
+		math_coeff_circle(10, data->player.angle + 180, data->player.a_move);
+	if (ply->move_left && !ply->move_right)
+		math_coeff_circle(10, data->player.angle - 90, data->player.a_move);
+	if (ply->move_right && !ply->move_left)
+		math_coeff_circle(10, data->player.angle + 90, data->player.a_move);
+	if (ply->move_up || ply->move_down || ply->move_left || ply->move_right)
+	{
+		*ply->x += data->mlx.speed * ply->a_move[0] / data->mlx.game_scale;
+		*ply->y += data->mlx.speed * ply->a_move[1] / data->mlx.game_scale;
+	}
 	return (EXIT_SUCCESS);
 }
 
