@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:50:50 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 07:55:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	mmap_area(t_data *data, size_t area[2], size_t cord[2], char c)
 	int	border;
 
 	(void)data;
-	border = 2;
+	border = 1;
 	if (cord[0] + border < area[0] && cord[1] + border < area[1])
 	{
 		if (c == 'N' || c == 'E' || c == 'W' || c == 'S')
@@ -64,17 +64,14 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	while (i[1] < (size_t)data->map.ylen)
 	{
 		i[0] = 0;
+		pmark[1] = xy[1] + (i[1] * scale);
 		while (i[0] < (size_t)data->map.xlen)
 		{
-			color = mmap_area(data, area, (size_t[2]){xy[0] + (i[0] * scale) \
-			, xy[1] + (i[1] * scale)}, data->map.map[i[1]][i[0]]);
+			pmark[0] = xy[0] + (i[0] * scale);
+			color = mmap_area(data, area, pmark, data->map.map[i[1]][i[0]]);
 			if (color)
-			{
-				pmark[0] = xy[0] + (i[0] * scale);
-				pmark[1] = xy[1] + (i[1] * scale);
 				draw_square(&data->mlx, (size_t[2]){pmark[0] + 1, pmark[1] + 1} \
 				, (size_t[2]){pmark[0] + scale, pmark[1] + scale - 1}, color);
-			}
 			i[0]++;
 		}
 		i[1]++;

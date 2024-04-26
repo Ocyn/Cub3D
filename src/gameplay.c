@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 07:03:16 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 07:12:01 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	gp_move(t_data *data)
 		math_coeff_circle(5, data->player.angle + 90, data->player.a_move);
 	if (ply->move_up || ply->move_down || ply->move_left || ply->move_right)
 	{
-		*ply->x += data->mlx.speed * ply->a_move[0] / data->mlx.game_scale;
-		*ply->y += data->mlx.speed * ply->a_move[1] / data->mlx.game_scale;
+		*ply->x += data->mlx.speed * ply->a_move[0] / 10;
+		*ply->y += data->mlx.speed * ply->a_move[1] / 10;
 	}
 	return (EXIT_SUCCESS);
 }
