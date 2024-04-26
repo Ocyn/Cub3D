@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 02:29:25 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:38:37 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	res_tex_struct(t_tex *tex, int free)
 	tex->life = 0;
 	if (free && tex->file)
 		tex->file = s_free(&tex->file);
-	//ft_memset(tex, 0, sizeof(t_tex));
+	ft_memset(tex, 0, sizeof(t_tex));
 	tex->file = NULL;
 	tex->id = NULL;
 	tex->he = 0;
@@ -36,15 +36,15 @@ void	res_map_struct(t_map *map, int free)
 		map->map = s_freetab(map->map, me_tablen(map->map));
 	if (free && map->map_bis)
 		map->map_bis = s_freetab(map->map_bis, me_tablen(map->map_bis));
-	//ft_memset(map, 0, sizeof(t_map));
-	map->map = NULL;
-	map->map_bis = NULL;
-	map->xlen = 0;
-	map->ylen = 0;
 	res_tex_struct(&map->tex_no, free);
 	res_tex_struct(&map->tex_so, free);
 	res_tex_struct(&map->tex_ea, free);
 	res_tex_struct(&map->tex_we, free);
+	ft_memset(map, 0, sizeof(t_map));
+	map->map = NULL;
+	map->map_bis = NULL;
+	map->xlen = 0;
+	map->ylen = 0;
 	me_set_color(map->floor, 0, 0, 0);
 	me_set_color(map->sky, 0, 0, 0);
 	map->floor_h = 0;
@@ -56,7 +56,7 @@ void	res_player_struct(t_player *player, int free)
 	(void)free;
 	if (!player)
 		return ;
-	//ft_memset(player, 0, sizeof(t_player));
+	ft_memset(player, 0, sizeof(t_player));
 	player->compass = 0;
 	player->xpos = 0;
 	player->ypos = 0;
@@ -77,7 +77,7 @@ void	res_player_struct(t_player *player, int free)
 
 void	res_minimap_struct(t_minimap *minimap)
 {
-	//ft_memset(minimap, 0, sizeof(t_minimap));
+	ft_memset(minimap, 0, sizeof(t_minimap));
 	ft_memset(minimap->size, 0, sizeof(int) * 2);
 	ft_memset(minimap->pos, 0, sizeof(int) * 2);
 	ft_memset(minimap->x_y, 0, sizeof(double) * 2);
@@ -90,7 +90,11 @@ void	res_data_struct(t_data *data, int free)
 {
 	if (!data)
 		return ;
-	//ft_memset(data, 0, sizeof(t_data));
+	res_minimap_struct(&data->minimap);
+	res_map_struct(&data->map, free);
+	res_player_struct(&data->player, free);
+	ft_memset(&data->mlx, 0, sizeof(t_mlx));
+	ft_memset(data, 0, sizeof(t_data));
 	data->arg_nb = 0;
 	data->arg_tab = NULL;
 	data->mlx.init = NULL;
@@ -104,10 +108,6 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.game_scale = 0;
 	data->mlx.deadzone = 0;
 	data->mlx.mouse_cam = 0;
-	//ft_memset(&data->mlx, 0, sizeof(t_mlx));
-	res_minimap_struct(&data->minimap);
 	ft_memset(data->mlx.map_limit, 0, sizeof(double) * 2);
 	ft_memset(data->mlx.mouse_pos, 0, sizeof(int) * 2);
-	res_map_struct(&data->map, free);
-	res_player_struct(&data->player, free);
 }

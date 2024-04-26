@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:16:36 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 00:09:35 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 02:47:27 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,31 +79,29 @@ inline void	mmap_draw_map(t_data *data, size_t area[2], int scale, size_t xy[2])
 	}
 }
 
-void	mmap_draw_hud(t_data *data, int mode)
+void	mmap_draw_hud(t_data *data)
 {
 	t_mlx	*mlx;
 	int	coeff[2];
 
 	mlx = &data->mlx;
-	if (!mode)
-		draw_square(mlx, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]} \
-		, (size_t[2]){mlx->minimap->pos[0], mlx->minimap->pos[1]}, 0x0);
-	if (mode == 1)
-	{
-		draw_square(mlx, (size_t[2]){mlx->game_scale, mlx->game_scale} \
-		, (size_t[2]){mlx->minimap->size[0] / 2 - (mlx->game_scale / 2) \
-		, mlx->minimap->size[1] / 2 - (mlx->game_scale / 2)} \
-		, 0x51FE00);
-		math_coeff_circle(mlx->game_scale, data->player.angle, coeff);
-		draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
-		, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0], mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
-		draw_square_snap(mlx, (size_t[2]){mlx->minimap->size[0], 0} \
-		, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1]} \
-		, 0x151515);
-		draw_square_snap(mlx, (size_t[2]){0, mlx->minimap->size[1]} \
-		, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1] + mlx->game_scale} \
-		, 0x151515);
-	}
+	draw_square(mlx, (size_t[2]){mlx->game_scale, mlx->game_scale} \
+	, (size_t[2]){mlx->minimap->size[0] / 2 - (mlx->game_scale / 2) \
+	, mlx->minimap->size[1] / 2 - (mlx->game_scale / 2)} \
+	, 0x51FE00);
+	math_coeff_circle(mlx->game_scale, data->player.angle, coeff);
+	draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
+	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0], mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
+	draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
+	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0] - 1, mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
+	draw_line_snap(mlx, (size_t[2]){mlx->minimap->size[0] / 2, mlx->minimap->size[1] / 2} \
+	, (size_t[2]){mlx->minimap->size[0] / 2 + coeff[0] + 1, mlx->minimap->size[1] / 2 + coeff[1]}, 0xFFFFFF);
+	draw_square_snap(mlx, (size_t[2]){mlx->minimap->size[0], 0} \
+	, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1]} \
+	, 0x151515);
+	draw_square_snap(mlx, (size_t[2]){0, mlx->minimap->size[1]} \
+	, (size_t[2]){mlx->minimap->size[0] + mlx->game_scale, mlx->minimap->size[1] + mlx->game_scale} \
+	, 0x151515);
 }
 
 int	mmap_minimap(t_data *data)
@@ -113,9 +111,10 @@ int	mmap_minimap(t_data *data)
 	(void)data;
 	mlx = &data->mlx;
 	mmap_move(data);
-	mmap_draw_hud(data, 0);
+	draw_square(mlx, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]} \
+	, (size_t[2]){mlx->minimap->pos[0], mlx->minimap->pos[1]}, 0x0);
 	mmap_draw_map(data, (size_t[2]){mlx->minimap->size[0], mlx->minimap->size[1]}, mlx->game_scale \
 	, (size_t[2]){*mlx->minimap->x, *mlx->minimap->y});
-	mmap_draw_hud(data, 1);
+	mmap_draw_hud(data);
 	return (EXIT_SUCCESS);
 }

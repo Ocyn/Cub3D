@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 02:28:11 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 03:00:24 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@
 
 # define PLAYER_SPEED		1
 # define PLAYER_FOV			110
-# define CAMERA_SPEED		10
+# define CAMERA_SPEED		15
 
 # define MINIMAP_SCALE		6
 # define MINIMAP_POS_X		0
@@ -180,6 +180,8 @@ typedef struct s_data
 	t_mlx		mlx;
 	t_minimap	minimap;
 }				t_data;
+
+void		draw_square2(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 void		db_ascii_title(char *tab);
 void		db_ascii_safemode(char *tab);

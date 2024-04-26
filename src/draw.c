@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:32:21 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 02:01:54 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 03:10:45 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,14 @@ inline void	draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 
 inline void	draw_square_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color)
 {
-	size_t	x;
+	t_img	*img;
 
+	img = mlx->game;
 	if (one[0] >= two[0] || one[1] >= two[1])
 		return ;
-	x = one[0];
 	while (one[1] <= two[1])
 	{
-		one[0] = x;
-		while (one[0] <= two[0])
-		{
-			re_pixeltoimg(mlx->game, one[0], one[1], color);
-			one[0]++;
-		}
+		me_memset_pix(img->data + ((img->width * one[1]) + one[0]) * 4, color, two[0] - one[0]);
 		one[1]++;
 	}
 }
