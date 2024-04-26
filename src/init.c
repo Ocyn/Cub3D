@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:19:21 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 07:01:26 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	init_mlx_struct(t_data *data, t_mlx *mlx)
 	mlx->data = data;
 	mlx->minimap = &data->minimap;
 	mlx->deadzone = (10 * data->mlx.game_scale) % data->mlx.win_h;
+	data->player.b_move = 1;
 	return (EXIT_SUCCESS);
 }
 

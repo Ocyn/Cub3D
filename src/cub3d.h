@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 06:17:16 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 06:57:20 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@
 
 # define SLOW_MODE			30
 
-# define MINIMAP_SCALE		6
+# define MINIMAP_SCALE		5
 # define MINIMAP_POS_X		0
 # define MINIMAP_POS_Y		0
 

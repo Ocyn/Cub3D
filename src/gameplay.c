@@ -6,33 +6,31 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 06:24:29 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/26 07:03:16 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	gp_move_event(t_data *data)
+int	gp_physic_engine(t_data *data)
 {
-	t_player	*player;
+	t_player	*mc;
 	t_mlx		*mlx;
 
-	(void)player;
-	player = &data->player;
+	mc = &data->player;
 	mlx = &data->mlx;
-	player->b_move = 1;
-	if (*player->y < 0)
-		*player->y = 0;
-	if (*player->x < 0)
-		*player->x = 0;
-	if (*player->y > (double)data->map.ylen)
-		*player->y = data->map.ylen;
-	if (*player->y > (double)data->map.xlen)
-		*player->y = data->map.xlen;
-	if (player->angle < 0)
-		player->angle = 360;
-	if (player->angle > 360)
-		player->angle = 0;
+	if (data->map.map[(int)round(*mc->y + 0.5)][(int)round(*mc->x)] == '1')
+		*mc->y -= 0.1;
+	if (data->map.map[(int)round(*mc->y - 0.5)][(int)round(*mc->x)] == '1')
+		*mc->y += 0.1;
+	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x + 0.5)] == '1')
+		*mc->x -= 0.1;
+	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x - 0.5)] == '1')
+		*mc->x += 0.1;
+	if (mc->angle < 0)
+		mc->angle = 360;
+	if (mc->angle > 360)
+		mc->angle = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -45,7 +43,7 @@ int	gp_mouse_camera(int x, int y, t_data *data)
 	data->mlx.mouse_xy[0] = x;
 	data->mlx.mouse_xy[1] = y;
 	mouse = data->mlx.win_wmid - data->mlx.mouse_xy[0];
-	if (abs(mouse) > 30)
+	if (abs(mouse) > 30 || abs(data->mlx.win_hmid - data->mlx.mouse_xy[1]) > 100)
 	{
 		mlx_mouse_move(data->mlx.init, data->mlx.win \
 		, data->mlx.win_wmid, data->mlx.win_hmid);
@@ -58,7 +56,7 @@ int	gp_move(t_data *data)
 {
 	t_player	*ply;
 
-	gp_move_event(data);
+	gp_physic_engine(data);
 	ply = &data->player;
 	if (ply->turn_right && !ply->turn_left)
 		ply->angle += (data->mlx.speed) * CAMERA_SPEED;
@@ -71,9 +69,9 @@ int	gp_move(t_data *data)
 	if (ply->move_down && !ply->move_up)
 		math_coeff_circle(10, data->player.angle + 180, data->player.a_move);
 	if (ply->move_left && !ply->move_right)
-		math_coeff_circle(10, data->player.angle - 90, data->player.a_move);
+		math_coeff_circle(5, data->player.angle - 90, data->player.a_move);
 	if (ply->move_right && !ply->move_left)
-		math_coeff_circle(10, data->player.angle + 90, data->player.a_move);
+		math_coeff_circle(5, data->player.angle + 90, data->player.a_move);
 	if (ply->move_up || ply->move_down || ply->move_left || ply->move_right)
 	{
 		*ply->x += data->mlx.speed * ply->a_move[0] / data->mlx.game_scale;

@@ -1,10 +1,12 @@
-SO ./texture/Texture_1.xpm
-WE ./texture/Texture_2.xpm
-EA ./texture/Texture_3.xpm
-NO ./texture/Texture_4.xpm
+NO ./maps/assets/ldurieux.xpm
+EA ./maps/assets/aammirat.xpm
+WE ./maps/assets/jcuzin.xpm
+SO ./maps/assets/llevasse.xpm
 
-F 80,0,0
-C 80,80,80
+F 0, 255, 35 
+
+C 182, 247, 255
+
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1111111111111111111111111111111111111111111111111111111 1111111111111111111111111111111111
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         11000000000000000000000000000000000000000000000000000001110000000000000000000000000000000011
