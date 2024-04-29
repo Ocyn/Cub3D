@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 03:47:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/29 23:16:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,22 @@ void	db_key_event(int key)
 
 void	db_game_info(t_data *data)
 {
-	printf("\nScreen\t\tW[%d] H[%d]\n", data->mlx.win_w, data->mlx.win_h);
+	t_player	*player;
+	t_map		*map;
+	t_mlx		*mlx;
+	t_minimap	*mimap;
+
+	player = &data->player;
+	mlx = &data->mlx;
+	map = &data->map;
+	mimap = &data->minimap;
+	printf("\nScreen\t\tW[%d] H[%d]\n", mlx->win_w, mlx->win_h);
 	printf("InGame Data:\n");
 	printf(" Map Scale:\t\t[%d]:[X:%.1f][Y:%.1f]\n" \
-	, GAME_SCALING, data->mlx.map_limit[0], data->mlx.map_limit[1]);
+	, GAME_SCALING, mlx->map_limit[0], mlx->map_limit[1]);
 	printf(" Speed:\t\t3D[%.2f] | Minimap[%.2f]\n" \
-	, data->mlx.speed, data->mlx.speed);
-	printf(" Minimap Coord:\t\t[X:%.1f][Y:%.1f]\n", data->minimap.x_y[0], data->minimap.x_y[1]);
+	, mlx->speed, mlx->speed / mlx->game_scale);
+	printf(" Minimap Coord:\t\t[X:%.1f][Y:%.1f]\n", mimap->x_y[0], mimap->x_y[1]);
 	printf("\n\n");
 }
 

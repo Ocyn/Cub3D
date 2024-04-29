@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 07:12:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/29 23:17:58 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 int	gp_physic_engine(t_data *data)
 {
+	double		border;
 	t_player	*mc;
 	t_mlx		*mlx;
 
+	border = 0.5;
 	mc = &data->player;
 	mlx = &data->mlx;
-	if (data->map.map[(int)round(*mc->y + 0.5)][(int)round(*mc->x)] == '1')
-		*mc->y -= 0.1;
-	if (data->map.map[(int)round(*mc->y - 0.5)][(int)round(*mc->x)] == '1')
-		*mc->y += 0.1;
-	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x + 0.5)] == '1')
-		*mc->x -= 0.1;
-	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x - 0.5)] == '1')
-		*mc->x += 0.1;
+	if (data->map.map[(int)round(*mc->y + border)][(int)round(*mc->x)] == '1')
+		*mc->y -= mlx->speed;
+	if (data->map.map[(int)round(*mc->y - border)][(int)round(*mc->x)] == '1')
+		*mc->y += mlx->speed;
+	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x + border)] == '1')
+		*mc->x -= mlx->speed;
+	if (data->map.map[(int)round(*mc->y)][(int)round(*mc->x - border)] == '1')
+		*mc->x += mlx->speed;
 	if (mc->angle < 0)
 		mc->angle = 360;
 	if (mc->angle > 360)
@@ -47,12 +49,12 @@ int	gp_mouse_camera(int x, int y, t_data *data)
 	{
 		mlx_mouse_move(data->mlx.init, data->mlx.win \
 		, data->mlx.win_wmid, data->mlx.win_hmid);
-		data->player.angle -= (mouse * CAMERA_SPEED) / 100;
+		data->player.angle -= mouse * CAMERA_SPEED * 0.001;
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	gp_move(t_data *data)
+void	gp_move(t_data *data)
 {
 	t_player	*ply;
 
@@ -63,7 +65,7 @@ int	gp_move(t_data *data)
 	if (ply->turn_left && !ply->turn_right)
 		ply->angle -= (data->mlx.speed) * CAMERA_SPEED;
 	if (!ply->b_move)
-		return (EXIT_SUCCESS);
+		return ;
 	if (ply->move_up && !ply->move_down)
 		math_coeff_circle(10, data->player.angle, data->player.a_move);
 	if (ply->move_down && !ply->move_up)
@@ -77,7 +79,7 @@ int	gp_move(t_data *data)
 		*ply->x += data->mlx.speed * ply->a_move[0] / 10;
 		*ply->y += data->mlx.speed * ply->a_move[1] / 10;
 	}
-	return (EXIT_SUCCESS);
+	return ;
 }
 
 

@@ -6,13 +6,14 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/13 13:05:46 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/29 21:55:35 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rc_main(void)
+int		rc_minimap_ray(t_data *data)
 {
-	return ;
+	(void)data;
+	return (EXIT_SUCCESS);
 }
