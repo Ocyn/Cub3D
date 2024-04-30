@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/29 23:12:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:23:56 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@
 
 # define GAME_SCALING		10
 
-# define PLAYER_SPEED		5
+# define PLAYER_SPEED		1
 # define PLAYER_FOV			90
 # define PLAYER_DIAG_RATIO	10
-# define CAMERA_SPEED		10
+# define CAMERA_SPEED		20
 
 # define SLOW_MODE			30
 
@@ -316,7 +316,7 @@ void		draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 //		########	RAY CASTING
 
-int			rc_minimap_ray(t_data *data);
+int			rc_minimap_ray(t_data *data, t_mlx *mlx, int pos[2]);
 
 //		########	GAMEPLAY
 

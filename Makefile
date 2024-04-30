@@ -43,6 +43,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					parser.c error.c \
 					misc.c convert.c math_ft.c \
 					keys_bindings.c \
+					ray_casting.c \
 					graphic.c gameplay.c render.c draw.c \
 					\
 					bonus_minimap.c \

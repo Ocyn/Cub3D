@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/29 23:17:58 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:15:19 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	gp_mouse_camera(int x, int y, t_data *data)
 	{
 		mlx_mouse_move(data->mlx.init, data->mlx.win \
 		, data->mlx.win_wmid, data->mlx.win_hmid);
-		data->player.angle -= mouse * CAMERA_SPEED * 0.001;
+		data->player.angle -= mouse * CAMERA_SPEED * 0.003;
 	}
 	return (EXIT_SUCCESS);
 }

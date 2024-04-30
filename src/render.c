@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 11:13:25 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 00:19:12 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ inline void	re_draw_wall(t_data *data)
 	while (column < data->mlx.win_w)
 	{
 		re_pixel_column(data, 0xFF00AE, column, 100);
-		column += data->mlx.fov;
+		column += 2;
 	}
 	return ;
 }
@@ -51,7 +51,7 @@ inline void	re_pixel_column(t_data *data, int color, int x, int distance)
 	// draw_square(&data->mlx, (size_t[2]){x, 0} \
 	// , (size_t[2]){x + data->mlx.fov, data->mlx.win_hmid - distance}, 0x0);
 	draw_square(&data->mlx, (size_t[2]){x, data->mlx.win_hmid - distance} \
-	, (size_t[2]){x + data->mlx.fov, data->mlx.win_hmid + distance}, color);
+	, (size_t[2]){x + 1, data->mlx.win_hmid + distance}, color);
 	// draw_square(&data->mlx, (size_t[2]){x, data->mlx.win_hmid + distance} \
 	// , (size_t[2]){x + data->mlx.fov, data->mlx.win_h}, 0x0);
 }
