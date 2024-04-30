@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/30 02:22:02 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 03:24:33 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int	bind_bindings(int key, t_data *data)
 	//db_key_event(key);
 	if (key == ESC_KEY)
 		graph_close(data);
-	if (key == PLUS_KEY && data->mlx.game_scale < 50)
-		data->mlx.game_scale += 1;
-	if (key == MINUS_KEY && data->mlx.game_scale > 5)
-		data->mlx.game_scale -= 1;
+	if (key == PLUS_KEY && data->mlx.gscale < 50)
+		data->mlx.gscale += 1;
+	if (key == MINUS_KEY && data->mlx.gscale > 4)
+		data->mlx.gscale -= 1;
 	if (key == PLUS_KEY || key == MINUS_KEY || key == TAB_KEY)
 		misc_default_game(data, 0);
 	if (key == TAB_KEY)

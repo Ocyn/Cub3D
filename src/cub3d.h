@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/30 02:23:56 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 03:55:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@
 
 
 //		########	GAME PROPERTIES
+
+// Rendering Process Speed: Increase to reduce processing accuracy and speed up rendering
+# define RPS				8
 
 # define GAME_SCALING		10
 
@@ -211,7 +214,7 @@ typedef struct s_mlx
 	int			mouse_xy[2];
 	double		map_limit[2];
 	int			fov;
-	int			game_scale;
+	int			gscale;
 	double		speed;
 	int			deadzone;
 	long long	fps;
@@ -316,7 +319,7 @@ void		draw_line_snap(t_mlx *mlx, size_t one[2], size_t two[2], int color);
 
 //		########	RAY CASTING
 
-int			rc_minimap_ray(t_data *data, t_mlx *mlx, int pos[2]);
+void		rc_minimap_ray(t_data *dt, t_mlx *mlx, int pos[2]);
 
 //		########	GAMEPLAY
 

@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/30 00:19:12 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ inline void	re_draw_environnment(t_data *data, int full)
 {
 	(void)full;
 	draw_square(&data->mlx \
-	, (size_t[2]){data->minimap.size[0] + data->mlx.game_scale, 0} \
-	, (size_t[2]){data->mlx.win_w, data->minimap.size[1] + data->mlx.game_scale} \
+	, (size_t[2]){data->minimap.size[0] + data->mlx.gscale, 0} \
+	, (size_t[2]){data->mlx.win_w, data->minimap.size[1] + data->mlx.gscale} \
 	, data->map.sky_h);
 	misc_fill_screen(data->mlx.game \
-	, data->minimap.size[1] + data->mlx.game_scale \
+	, data->minimap.size[1] + data->mlx.gscale\
 	, data->mlx.win_hmid - 1, data->map.sky_h);
 	misc_fill_screen(data->mlx.game \
 	, data->mlx.win_hmid, data->mlx.win_hmid - 1, data->map.floor_h);

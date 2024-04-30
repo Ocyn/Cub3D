@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 10:46:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ inline void	misc_default_game(t_data *data, int mode)
 	player = &data->player;
 	minimap = &data->minimap;
 	mlx = &data->mlx;
-	mlx->deadzone = (10 * data->mlx.game_scale) % data->mlx.win_h;
+	mlx->deadzone = (10 * data->mlx.gscale) % data->mlx.win_h;
 	if (mode == 0)
 	{
 		misc_clear_screen(mlx);
@@ -45,12 +45,12 @@ inline void	misc_default_game(t_data *data, int mode)
 	}
 	if (mode == 1)
 	{
-		mlx->game_scale = GAME_SCALING;
+		mlx->gscale= GAME_SCALING;
 		*player->x = player->xpos;
 		*player->y = player->ypos;
 		player->angle = 270;
-		*minimap->y = (minimap->size[1] / 2) - player->ypos * mlx->game_scale;
-		*minimap->x = (minimap->size[0] / 2) - player->xpos * mlx->game_scale;
+		*minimap->y = (minimap->size[1] / 2) - player->ypos * mlx->gscale;
+		*minimap->x = (minimap->size[0] / 2) - player->xpos * mlx->gscale;
 	}
 }
 

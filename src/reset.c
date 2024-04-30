@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 05:19:37 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	res_data_struct(t_data *data, int free)
 	data->mlx.win_wmid = 0;
 	data->mlx.win_hmid = 0;
 	data->mlx.fps = 0;
-	data->mlx.game_scale = 0;
+	data->mlx.gscale= 0;
 	data->mlx.deadzone = 0;
 	data->mlx.mouse_cam = 0;
 	data->mlx.fov = 0;

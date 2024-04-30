@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:04:50 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 00:12:17 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ int	sb_circle(t_data *data)
 	mlx = &data->mlx;
 	if (player->turn_left || player->turn_right)
 	{
-		math_coeff_circle(10 * mlx->game_scale, player->angle - 1, coeff);
+		math_coeff_circle(10 * mlx->gscale, player->angle - 1, coeff);
 		draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
 		, (size_t[2]){mlx->win_wmid + coeff[0], mlx->win_hmid + coeff[1]} \
 		, conv_rgbtab(255, 255, 255));
-		math_coeff_circle(10 * mlx->game_scale, player->angle, coeff);
+		math_coeff_circle(10 * mlx->gscale, player->angle, coeff);
 		draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
 		, (size_t[2]){mlx->win_wmid + coeff[0], mlx->win_hmid + coeff[1]}, 0);
-		math_coeff_circle(10 * mlx->game_scale, player->angle + 1, coeff);
+		math_coeff_circle(10 * mlx->gscale, player->angle + 1, coeff);
 		draw_line_snap(mlx, (size_t[2]){mlx->win_wmid, mlx->win_hmid} \
 		, (size_t[2]){mlx->win_wmid + coeff[0], mlx->win_hmid + coeff[1]} \
 		, conv_rgbtab(255, 255, 255));

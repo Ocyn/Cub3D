@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:57:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/29 23:16:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	db_game_info(t_data *data)
 	printf(" Map Scale:\t\t[%d]:[X:%.1f][Y:%.1f]\n" \
 	, GAME_SCALING, mlx->map_limit[0], mlx->map_limit[1]);
 	printf(" Speed:\t\t3D[%.2f] | Minimap[%.2f]\n" \
-	, mlx->speed, mlx->speed / mlx->game_scale);
+	, mlx->speed, mlx->speed / mlx->gscale);
 	printf(" Minimap Coord:\t\t[X:%.1f][Y:%.1f]\n", mimap->x_y[0], mimap->x_y[1]);
 	printf("\n\n");
 }
@@ -91,7 +91,7 @@ void	db_game_monitoring(t_data *data)
 	pmapx = data->mlx.win_w;
 	pmapy = data->mlx.win_h;
 	printf("\rFPS [%d]", db_framepersecond());
-	printf(" | Scale[%d]", mlx->game_scale);
+	printf(" | Scale[%d]", mlx->gscale);
 	printf(" | Player[%.1f][%.1f].[%.1f]->[%d|%d]", *player->x \
 	, *player->y, player->angle, player->a_move[0], player->a_move[1]);
 	printf(" | Mouse[%d][X:%d][Y:%d]", mlx->mouse_cam, mlx->mouse_xy[0] \

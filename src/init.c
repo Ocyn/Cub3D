@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/26 07:01:26 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/04/30 02:42:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	init_minimap_struct(t_data *data, t_minimap *minimap)
 	minimap->size[1] = data->mlx.win_h / MINIMAP_SCALE;
 	minimap->pos[0] = MINIMAP_POS_X;
 	minimap->pos[1] = MINIMAP_POS_Y;
-	*minimap->y = (minimap->size[1] / 2) - data->player.ypos * data->mlx.game_scale;
-	*minimap->x = (minimap->size[0] / 2) - data->player.xpos * data->mlx.game_scale;
+	*minimap->y = (minimap->size[1] / 2) - data->player.ypos * data->mlx.gscale;
+	*minimap->x = (minimap->size[0] / 2) - data->player.xpos * data->mlx.gscale;
 	printf("\nDB:\t\t[X:%d][Y:%d] / 2\n", minimap->size[0], minimap->size[1]);
-	printf("\nDB2:\t\t - [X:%lld][Y:%lld] * [Scale:%d]\n", data->player.xpos, data->player.ypos, data->mlx.game_scale);
+	printf("\nDB2:\t\t - [X:%lld][Y:%lld] * [Scale:%d]\n", data->player.xpos, data->player.ypos, data->mlx.gscale);
 	printf("\nDB3:\t\t[X:%.1f][Y:%.1f]\n", minimap->x_y[0], minimap->x_y[1]);
 	minimap->data = data;
 	return (EXIT_SUCCESS);
@@ -59,20 +59,20 @@ int	init_mlx_struct(t_data *data, t_mlx *mlx)
 	if (!mlx->init)
 		return (err_return(EXIT_FAILURE, "MLX init failed", 3));
 	mlx_get_screen_size(mlx->init, &mlx->win_w, &mlx->win_h);
-	mlx->game_scale = GAME_SCALING;
+	mlx->gscale= GAME_SCALING;
 	mlx->win_h /= 2;
 	mlx->win_w /= 2;
 	mlx->win_hmid = (mlx->win_h / 2);
 	mlx->win_wmid = (mlx->win_w / 2);
-	mlx->map_limit[0] = data->map.xlen * mlx->game_scale;
-	mlx->map_limit[1] = data->map.ylen * mlx->game_scale;
+	mlx->map_limit[0] = data->map.xlen * mlx->gscale;
+	mlx->map_limit[1] = data->map.ylen * mlx->gscale;
 	mlx->speed = PLAYER_SPEED;
-	mlx->speed /= mlx->game_scale;
+	mlx->speed /= mlx->gscale;
 	mlx->fov = mlx->win_w / PLAYER_FOV;
 	init_minimap_struct(data, &data->minimap);
 	mlx->data = data;
 	mlx->minimap = &data->minimap;
-	mlx->deadzone = (10 * data->mlx.game_scale) % data->mlx.win_h;
+	mlx->deadzone = (10 * data->mlx.gscale) % data->mlx.win_h;
 	data->player.b_move = 1;
 	return (EXIT_SUCCESS);
 }
