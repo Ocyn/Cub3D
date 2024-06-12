@@ -1,0 +1,15 @@
+# Ignore object files in src/OBJ
+/src/OBJ/*
+
+# Ignore object files in lib/libft/OBJ
+/lib/libft/src/OBJ/*
+/lib/gnl/src/OBJ/*
+/lib/mlx_linux/src/OBJ/*
+
+/*
+!.gitignore
+!Makefile
+!ignore_readline.supp
+!src/
+!lib/
+!maps/
