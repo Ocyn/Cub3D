@@ -3,7 +3,7 @@ EA ./maps/assets/eguelin.xpm
 WE ./maps/assets/ldurieux.xpm
 SO ./maps/assets/aammirat.xpm
 
-F 0, 255, 32
+F 0, 255, 53f2
 
 C 182, 247, 255
 

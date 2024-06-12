@@ -49,10 +49,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					\
 					bonus_minimap.c \
 					bonus_minimap_utils.c \
-					bonus_overlay.c \
-					\
-					safemode.c \
-					sandbox.c
+					bonus_overlay.c
 
 ALL_HEADERS			= cub3d.h
 

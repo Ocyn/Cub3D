@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aammirat <aammirat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/12 14:59:15 by aammirat         ###   ########.fr       */
+/*   Updated: 2024/06/12 18:02:13 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,7 +360,7 @@ char		**me_tabdup(char **src, size_t src_len);
 char		**me_tabdup_ratio(char **src, long long src_len);
 void		me_insert_tab_in_tab(char **insert, char ***tab, long where);
 void		me_str_edit(char **src, char *seek, char *replace);
-void		me_set_color(int *src, size_t red, size_t green, size_t blue);
+int			me_set_color(int *src, size_t red, size_t green, size_t blue);
 size_t		me_filelen(char *file);
 size_t		me_tablen(char **tab);
 size_t		me_strchrn(char *src, char seek);

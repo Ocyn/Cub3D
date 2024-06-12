@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:13:24 by jcuzin            #+#    #+#             */
-/*   Updated: 2022/12/07 17:54:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:01:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 	while (str[index] == '-' || str[index] == '+')
 	{
 		if (symb_count > 1)
-			return (0);
+			return (-1);
 		if (str[index] == '-' || str[index] == '+')
 		{
 			if (str[index] == '-')
@@ -49,6 +49,6 @@ int	ft_atoi(const char *str)
 		}
 	}
 	if (symb_count > 1)
-		return (0);
+		return (-1);
 	return (ft_print_result(str, index) * sign);
 }

@@ -6,22 +6,26 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 20:43:23 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/05 19:39:06 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/12 18:04:55 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	me_set_color(int *src, size_t red, size_t green, size_t blue)
+int	me_set_color(int *src, size_t red, size_t green, size_t blue)
 {
 	if (!src)
-		return ;
+		return (err_return(EXIT_FAILURE, "Color code unavailable", 4));
+	if (red > 256 || green > 256 || blue > 256 \
+	|| red < 0 || green < 0 || blue < 0)
+		return (err_return(EXIT_FAILURE, "Invalid color code", 4));
 	if (red <= 256)
 		src[0] = red;
 	if (green <= 256)
 		src[1] = green;
 	if (blue <= 256)
 		src[2] = blue;
+	return (EXIT_SUCCESS);
 }
 
 char	**me_tabdup_ratio(char **src, long long src_len)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gnl.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:45:16 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/02 21:25:39 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/12 16:23:37 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# define BUFFER_SIZE 25
+# define BUFFER_SIZE 200
 
 size_t	gnl_strlen(char *s);
 char	*get_next_line(int fd);
