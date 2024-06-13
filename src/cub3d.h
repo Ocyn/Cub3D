@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/12 18:02:13 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/13 18:47:08 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,6 +370,7 @@ int			me_strcat(char *dest, char *src);
 int			me_str2strcmp(char *src, char *reg);
 int			me_find_str_in_tab(int strict_mode, char *find, char **tab);
 int			me_find_str_in_str(const char *src, const char *seek);
+int			me_scan_digit(char *s);
 
 //		########	MINIMAP PART
 

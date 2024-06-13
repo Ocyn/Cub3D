@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   memory_scan.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcuzin <jcuzin@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/04/10 13:22:48 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/13 18:59:11 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	me_scan_digit(char *s)
+{
+	char	**temp;
+	int		i;
+
+	i = -1;
+	temp = ft_split(s, ' ');
+	if (me_tablen(temp) > 1)
+		return (s_freetab(temp, me_tablen(temp)), 1);
+	s_freetab(temp, me_tablen(temp));
+	while (s[++i])
+	{
+		if (!ft_isdigit(s[i]) && s[i] != ' ')
+			return (1);
+	}
+	return (0);
+}
 
 int	me_strcmp(char *s1, char *s2)
 {

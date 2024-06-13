@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/12 18:09:07 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:00:37 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ int	init_map_texture_bis(int *asset, char **map, char *set, size_t *pos)
 {
 	char		**col;
 	long long	id;
-	int			size;
 
-	id = -1;
-	col = NULL;
 	if (!asset)
 		return (err_return(EXIT_FAILURE, "Memory issue", 3));
 	me_set_color(asset, 0, 0, 0);
@@ -58,15 +55,17 @@ int	init_map_texture_bis(int *asset, char **map, char *set, size_t *pos)
 	if (id > (long long)*pos)
 		*pos = id;
 	col = ft_split(map[id] + ft_strlen(set), ',');
-	if (!col)
+	if (!col || me_tablen(col) != 3)
 		return (err_return(EXIT_FAILURE, "Asset extract failed", 3));
-	size = me_tablen(col);
-	if (size == 3)
-		if (me_set_color(asset, ft_atoi(col[0]), ft_atoi(col[1]), ft_atoi(col[2])))
-			size = -1;
+	else if (me_set_color(asset \
+	, ft_atoi(col[0]), ft_atoi(col[1]), ft_atoi(col[2])))
+		return (err_return(EXIT_FAILURE, "Asset extract failed", 3));
+	id = -1;
+	while (col[++id])
+		if (me_scan_digit(col[id]))
+			return (s_freetab(col, me_tablen(col)) \
+			, err_return(EXIT_FAILURE, "Invalid color code format", 3));
 	s_freetab(col, me_tablen(col));
-	if (size != 3)
-		return (err_return(EXIT_FAILURE, "Floor / Sky color init failed", 3));
 	return (EXIT_SUCCESS);
 }
 
