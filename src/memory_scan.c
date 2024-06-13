@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/13 18:59:11 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/13 19:31:44 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,33 @@ size_t	me_strchrn(char *src, char seek)
 		i++;
 	}
 	return (occur);
+}
+
+void	me_diffusion2(char **tab, long my, long mx, char limit)
+{
+	while (tab && tab[my] && tab[my][mx] \
+	&& tab[my][mx] != limit && tab[my][mx] != '*')
+	{
+		while (tab && tab[my] && tab[my][mx + 1] \
+		&& tab[my][mx + 1] != limit && tab[my][mx + 1] != '*')
+			tab[my][mx++] = '*';
+		while (tab && tab[my + 1] && tab[my + 1][mx] \
+		&& tab[my + 1][mx] != limit && tab[my + 1][mx] != '*')
+			tab[my++][mx] = '*';
+		while (tab && tab[my] && tab[my][mx - 1] \
+		&& tab[my][mx - 1] != limit && tab[my][mx - 1] != '*')
+		{
+			mx -= (mx > 0);
+			tab[my][mx] = '*';
+		}
+		while (tab && tab[my - 1] && tab[my - 1][mx] \
+		&& tab[my - 1][mx] != limit && tab[my - 1][mx] != '*')
+		{
+			my -= (my > 0);
+			tab[my][mx] = '*';
+		}
+	}
+	return ;
 }
 
 void	me_diffusion(char **tab, long my, long mx, char limit)
