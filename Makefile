@@ -40,7 +40,7 @@ ALL_SRC				= main.c init.c init_map.c reset.c \
 					memory_edit.c memory_edit_bis.c memory_scan.c memory_scan_bis.c \
 					memory_str_edit.c \
 					secure_ft.c \
-					parser.c error.c \
+					parser.c error.c flood_fill.c \
 					misc.c convert.c math_ft.c \
 					keys_bindings.c \
 					ray_casting.c \

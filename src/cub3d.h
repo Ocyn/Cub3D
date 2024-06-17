@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/13 19:16:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/17 20:14:38 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,7 @@ typedef struct s_rc
 	double	b;
 }				t_rc;
 
+
 //	############	FUNCTIONS PROTOTYPES
 
 //		########	DEBUG
@@ -364,8 +365,8 @@ int			me_set_color(int *src, size_t red, size_t green, size_t blue);
 size_t		me_filelen(char *file);
 size_t		me_tablen(char **tab);
 size_t		me_strchrn(char *src, char seek);
-void		me_diffusion(char **tab, long my, long mx, char limit);
-void		me_diffusion2(char **tab, long my, long mx, char limit);
+void		ff_recur_diffusion(char **tab, long my, long mx, char limit);
+int			ff_diffusion(char **tab, long my, long mx, char limit);
 int			me_strcmp(char *s1, char *s2);
 int			me_strcat(char *dest, char *src);
 int			me_str2strcmp(char *src, char *reg);

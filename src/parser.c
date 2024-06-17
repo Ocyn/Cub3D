@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/13 19:35:10 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/17 18:37:43 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	parse_map_borders(t_map map, t_player player)
 	if (misc_player_location(map, &player.ypos, &player.xpos))
 		return (s_freetab(temp, me_tablen(temp)) \
 		, err_return(EXIT_FAILURE, "No player found", 2));
-	me_diffusion(temp, player.ypos, player.xpos, '1');
+	ff_diffusion(temp, player.ypos, player.xpos, '1');
 	for (long i = 0; i < map.ylen; i++)
 		printf("\t\t [%s]\n", temp[i]);
 	if (!temp)
