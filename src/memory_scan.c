@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/17 20:14:21 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/18 20:58:54 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	me_scan_digit(char *s)
 
 	i = -1;
 	temp = ft_split(s, ' ');
+	if (ft_atoi(s) < 0 || ft_atoi(s) > 255)
+		return (1);
 	if (me_tablen(temp) > 1)
 		return (s_freetab(temp, me_tablen(temp)), 1);
 	s_freetab(temp, me_tablen(temp));
@@ -48,6 +50,20 @@ int	me_strcmp(char *s1, char *s2)
 		i++;
 	}
 	return (0);
+}
+
+void	ff_recur_diffusion(char **tab, long my, long mx, char limit)
+{
+	if (tab && tab[my] && tab[my][mx] \
+	&& tab[my][mx] != limit && tab[my][mx] != '*')
+	{
+		tab[my][mx] = '*';
+		ff_recur_diffusion(tab, my, mx + 1, limit);
+		ff_recur_diffusion(tab, my, mx - (mx > 0), limit);
+		ff_recur_diffusion(tab, my + 1, mx, limit);
+		ff_recur_diffusion(tab, my - (my > 0), mx, limit);
+	}
+	return ;
 }
 
 size_t	me_strchrn(char *src, char seek)
