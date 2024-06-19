@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 12:12:30 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 16:08:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	main(int argc, char **argv)
 		res_data_struct(&data, 1);
 		return (EXIT_FAILURE);
 	}
+	for (long i = 0; i < data.map.ylen; i++)
+		printf("%ld [%s]\n", i, data.map.map[i]);
 	graph_main(&data);
 	res_data_struct(&data, 1);
 	return (EXIT_SUCCESS);
