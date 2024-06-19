@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/18 16:26:27 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:42:25 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,6 @@ typedef struct s_rc
 	double	a;
 	double	b;
 }				t_rc;
-
 
 //	############	FUNCTIONS PROTOTYPES
 
