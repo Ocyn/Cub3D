@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 10:42:25 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:06:23 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ typedef struct s_minimap
 typedef struct s_map
 {
 	char		**map;
-	char		**map_bis;
 	t_tex		tex_no;
 	t_tex		tex_so;
 	t_tex		tex_ea;
@@ -272,6 +271,7 @@ int			err_return(int value, char *log, int level);
 
 int			init_data_struct(t_data *data, int argc, char **argv);
 int			init_map_struct(t_data *data, t_map *map, char *file);
+int			init_map_spaces(t_map *map);
 int			init_map_texture(t_tex *asset, char **map, char *set, size_t *pos);
 int			init_map_trim(t_map *map, char **temp, size_t trim);
 int			init_player_struct(t_data *data, t_player *player, t_map map);

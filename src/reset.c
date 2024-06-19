@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:58:04 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/05 18:06:20 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:06:48 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,12 @@ void	res_map_struct(t_map *map, int free)
 		return ;
 	if (free && map->map)
 		map->map = s_freetab(map->map, me_tablen(map->map));
-	if (free && map->map_bis)
-		map->map_bis = s_freetab(map->map_bis, me_tablen(map->map_bis));
 	res_tex_struct(&map->tex_no, free);
 	res_tex_struct(&map->tex_so, free);
 	res_tex_struct(&map->tex_ea, free);
 	res_tex_struct(&map->tex_we, free);
 	ft_memset(map, 0, sizeof(t_map));
 	map->map = NULL;
-	map->map_bis = NULL;
 	map->xlen = 0;
 	map->ylen = 0;
 	me_set_color(map->floor, 0, 0, 0);

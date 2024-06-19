@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:37:32 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/12 16:25:47 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 11:51:28 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**conv_file2tab(char *file)
 	if (!tlen)
 		return (NULL);
 	fd = open(file, O_RDONLY);
-	tab = malloc(sizeof(char *) * (tlen + 1));
+	tab = s_malloc(sizeof(char *) * (tlen + 1));
 	while (tab && id < tlen)
 	{
 		tab[id] = get_next_line(fd);

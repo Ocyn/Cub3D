@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 10:17:44 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:06:34 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ int	init_map_struct(t_data *data, t_map *map, char *file)
 	if (init_map_trim(map, temp, 0))
 		return (s_freetab(temp, me_tablen(temp)) \
 		, err_return(EXIT_FAILURE, "Map trim failed", 1));
-	map->map_bis = me_tabdup(map->map, me_tablen(map->map));
-	if (!map->map_bis)
-		err_return(EXIT_FAILURE, "Failed to clone", 1);
-	return (s_freetab(temp, me_tablen(temp)), !map->map_bis);
+	init_map_spaces(map);
 	map->data = data;
 	map->minimap = &data->minimap;
+	s_freetab(temp, me_tablen(temp));
+	return (EXIT_SUCCESS);
 }
 
 int	init_map_texture_bis(int *asset, char **map, char *set, size_t *pos)
@@ -93,6 +92,26 @@ int	init_map_texture(t_tex *asset, char **map, char *set, size_t *pos)
 	close(fd);
 	if (!asset->file)
 		return (err_return(EXIT_FAILURE, "Asset extract failed", 3));
+	return (EXIT_SUCCESS);
+}
+
+int	init_map_spaces(t_map *map)
+{
+	long	i;
+	long	u;
+
+	i = 0;
+	while (i < map->ylen && map && map->map[i])
+	{
+		u = 0;
+		while (map->map[i][u])
+		{
+			if (map->map[i][u] == ' ')
+				map->map[i][u] = '1';
+			u++;
+		}
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }
 
