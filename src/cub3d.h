@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 14:26:22 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 17:51:18 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,7 @@ int			re_render(t_data *data);
 int			re_draw_image(t_data *data);
 void		re_draw_wall(t_data *data);
 void		re_draw_environnment(t_data *data, int full);
-void		re_pixel_column(t_data *data, double *color, int x, int distance);
+void		re_pixel_column(t_data *data, double *col, int x, double const di);
 void		re_pixeltoimg(t_img *img, int x, int y, int color);
 
 //		########	DRAWINGS

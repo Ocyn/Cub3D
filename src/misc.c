@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 02:24:18 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/11 19:33:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 17:42:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ inline void	misc_default_game(t_data *data, int mode)
 	if (mode == 1)
 	{
 		mlx->gscale = GAME_SCALING;
-		*player->x = player->xpos + 0.01f;
-		*player->y = player->ypos + 0.01f;
+		*player->x = player->xpos;
+		*player->y = player->ypos;
 		player->angle = 90;
 		mlx->fov = PLAYER_FOV;
 		*minimap->y = (minimap->size[1] / 2) - player->ypos * mlx->gscale;

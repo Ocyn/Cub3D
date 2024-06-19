@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 15:10:55 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 17:42:36 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int	init_player_struct(t_data *data, t_player *pl, t_map map)
 	if (pl->xpos == map.xlen && pl->ypos == map.ylen)
 		return (err_return(EXIT_FAILURE, "Player position not found", 1));
 	pl->compass = map.map[pl->ypos][pl->xpos];
-	pl->x_y[0] = (double)pl->xpos + 0.01f;
-	pl->x_y[1] = (double)pl->ypos + 0.01f;
+	pl->x_y[0] = (double)pl->xpos;
+	pl->x_y[1] = (double)pl->ypos;
 	pl->angle = 90;
 	if (pl->compass == 'E')
 		pl->angle = 180;

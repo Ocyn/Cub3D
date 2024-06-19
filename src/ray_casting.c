@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_casting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aammirat <aammirat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/12 14:58:12 by aammirat         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:50:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ double	rc_calc(t_data *data, t_rc *rc, double *size, double angle)
 	rc->xyangle[2] = (angle * M_PI) / 180.0;
 	rc->a = approchx(data, rc->xyangle, rc->stepy, &rc->postx);
 	rc->b = approchy(data, rc->xyangle, rc->stepx, &rc->posty);
-	if ((rc->a > rc->b && rc->b != 0) || rc->a == 0)
+	if ((rc->a > rc->b && rc->stepx != 0) || rc->stepy == 0)
 	{
 		if (rc->stepx == 1)
 			size[0] = 1;
@@ -114,10 +114,10 @@ double	rc_main(t_data *data, double angle, double *size)
 		rc.stepx = 0;
 	else
 		rc.stepx = -1;
-	if (angle < 180)
-		rc.stepy = -1;
-	else if (angle == 0 || angle == 180)
+	if (angle == 0 || angle == 180)
 		rc.stepy = 0;
+	else if (angle < 180)
+		rc.stepy = -1;
 	else
 		rc.stepy = 1;
 	rc.xyangle[0] = *data->player.x;
