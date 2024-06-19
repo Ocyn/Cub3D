@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 12:06:34 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:13:29 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	init_map_texture(t_tex *asset, char **map, char *set, size_t *pos)
 	if (me_find_str_in_tab(0, set, map + id + 1) != -1)
 		return (err_return(EXIT_FAILURE, "Multiple declaration detected", 3));
 	asset->file = ft_strdup(map[id] + ft_strlen(set));
+	if (ft_strncmp(asset->file + (ft_strlen(asset->file) - 3), "xpm", 3))
+		return (err_return(EXIT_FAILURE, "Texture not an xpm", 3));
 	fd = open(asset->file, O_RDONLY);
 	if (fd == -1)
 		return (err_return(EXIT_FAILURE, "Texture file failed to open", 3));
