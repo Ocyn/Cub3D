@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/18 20:51:24 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:29:06 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse_map_borders(t_map map, t_player player)
 		return (err_return(EXIT_FAILURE, "Diffusion failed", 2));
 	while (temp && temp[y] && temp[y])
 	{
-		if (temp[y][0] == '*' || temp[y][ft_strlen(temp[y]) - 1] == '*')
+		if (temp[y][0] == '*' || temp[y][ft_strlen(temp[y]) - 2] == '*')
 			return (s_freetab(temp, me_tablen(temp)) \
 			, err_return(EXIT_FAILURE, "Side wall breach", 2));
 		y++;

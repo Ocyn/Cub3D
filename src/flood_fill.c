@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:43:30 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/18 20:50:36 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:27:17 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ff_check(char **tab, long my, long mx)
 {
-	return (tab && tab[my] && tab[my][mx]);
+	return (my >= 0 && mx >= 0 && tab && tab[my] && tab[my][mx]);
 }
 
 int	ff_prefill(char **tab, long my, long mx, char limit)
@@ -68,7 +68,7 @@ void	ff_diffusion(char **tab, long my, long mx, char limit)
 	tab[my][mx] = '*';
 	while (!ff_isfilled(tab, comp))
 	{
-		yy = 1;
+		yy = 0;
 		s_freetab(comp, me_tablen(comp));
 		comp = me_tabdup(tab, me_tablen(tab));
 		while (tab && tab[yy])
