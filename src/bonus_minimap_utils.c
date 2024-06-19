@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus_minimap_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aammirat <aammirat@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 10:23:32 by aammirat          #+#    #+#             */
-/*   Updated: 2024/06/12 14:56:08 by aammirat         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:06:01 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	rc_minimap_ray(t_data *dt, t_mlx *mlx, int pos[2])
 		math_circle(ray, (dt->player.angle + y) + 180, cf);
 		while (pos[0] / 2 + cf[0] - RPS > 0 && pos[1] / 2 + cf[1] - RPS > 0 \
 		&& pos[0] / 2 + cf[0] + 1 < pos[0] && pos[1] / 2 + cf[1] + 1 < pos[1] \
-		&& *dt->player.y + (cf[1] + (0.5 * RPS)) / mlx->gscale < dt->map.ylen \
-		&& *dt->player.y + (cf[1] - (0.5 * RPS)) / mlx->gscale > 0 \
-		&& *dt->player.x + (cf[0] + (0.5 * RPS)) / mlx->gscale < dt->map.xlen \
-		&& *dt->player.x + (cf[0] - (0.5 * RPS)) / mlx->gscale > 0 \
+		&& round(*dt->player.y + (cf[1] + 0.5) / mlx->gscale) > 0 \
+		&& round(*dt->player.x + (cf[0] + 0.5) / mlx->gscale) > 0 \
+		&& round(*dt->player.y + (cf[1] + 0.5) / mlx->gscale) < dt->map.ylen \
+		&& round(*dt->player.x + (cf[0] + 0.5) / mlx->gscale) < dt->map.xlen \
 		&& dt->map.map[(int)round(*dt->player.y + (cf[1] + 0.5) / mlx->gscale)] \
 		[(int)round(*dt->player.x + (cf[0] + 0.5) / mlx->gscale)] != '1')
 		{

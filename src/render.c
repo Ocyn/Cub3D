@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 13:05:49 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/05 19:16:01 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 15:58:50 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ int	re_render(t_data *data)
 		return (EXIT_FAILURE);
 	fps = data->mlx.fps + 1;
 	if (fps > 60)
-		data->mlx.rps = 1;
+		data->mlx.rps = 2;
 	else if (fps > 30)
 		data->mlx.rps = 4;
 	else if (fps > 10)
 		data->mlx.rps = 8;
 	else if (fps > 5)
-		data->mlx.rps = 16;
+		data->mlx.rps = 12;
 	re_events_loop(data);
 	mlx_put_image_to_window(data->mlx.init, data->mlx.win \
 	, data->mlx.game, 0, 0);

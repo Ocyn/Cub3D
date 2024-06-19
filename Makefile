@@ -72,7 +72,7 @@ DIRS				= $(sort $(dir $(OBJ)))
 #			UTILITIES
 
 CC					= cc
-CFLAGS				= -Wextra -Wall -Werror -g3 -MMD
+CFLAGS				= -Wextra -Wall -Werror -g3 -MMD -fsanitize=address
 
 FLAGS				= $(CFLAGS)
 ALL_INCLUDE			= -I $(SRC_DIR) \
