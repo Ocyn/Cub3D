@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/18 20:58:17 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 10:17:44 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ int	init_map_texture_bis(int *asset, char **map, char *set, size_t *pos)
 int	init_map_texture(t_tex *asset, char **map, char *set, size_t *pos)
 {
 	long long	id;
+	int			fd;
 
 	id = -1;
+	fd = 0;
 	if (!asset)
 		return (err_return(EXIT_FAILURE, "Memory issue", 3));
 	res_tex_struct(asset, 0);
@@ -85,6 +87,10 @@ int	init_map_texture(t_tex *asset, char **map, char *set, size_t *pos)
 	if (me_find_str_in_tab(0, set, map + id + 1) != -1)
 		return (err_return(EXIT_FAILURE, "Multiple declaration detected", 3));
 	asset->file = ft_strdup(map[id] + ft_strlen(set));
+	fd = open(asset->file, O_RDONLY);
+	if (fd == -1)
+		return (err_return(EXIT_FAILURE, "Texture file failed to open", 3));
+	close(fd);
 	if (!asset->file)
 		return (err_return(EXIT_FAILURE, "Asset extract failed", 3));
 	return (EXIT_SUCCESS);
