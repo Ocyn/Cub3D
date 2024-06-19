@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 12:13:29 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 13:57:59 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ int	init_map_struct(t_data *data, t_map *map, char *file)
 		if ((long long)ft_strlen(temp[my]) > map->xlen)
 			map->xlen = ft_strlen(temp[my]);
 	}
-	if (init_map_trim(map, temp, 0))
+	if (init_map_trim(map, temp, 0) || init_map_spaces(map))
 		return (s_freetab(temp, me_tablen(temp)) \
 		, err_return(EXIT_FAILURE, "Map trim failed", 1));
-	init_map_spaces(map);
 	map->data = data;
 	map->minimap = &data->minimap;
 	s_freetab(temp, me_tablen(temp));
@@ -108,8 +107,13 @@ int	init_map_spaces(t_map *map)
 		u = 0;
 		while (map->map[i][u])
 		{
-			if (map->map[i][u] == ' ')
-				map->map[i][u] = '1';
+			if (map->map[i][u] == '0' \
+			&& (map->map[i][u + 1] == ' ' \
+			|| (u > 0 && map->map[i][u - 1] == ' ') \
+			|| map->map[i + 1][u] == ' ' \
+			|| (i > 0 && map->map[i - 1][u] == ' ' )))
+				return (err_return(EXIT_FAILURE \
+				, "Space character in map detected", 2));
 			u++;
 		}
 		i++;

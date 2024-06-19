@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:36:29 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 12:06:23 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 14:26:22 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@
 # define GAME_SCALING		10
 
 # define PLAYER_SPEED		10
-# define PLAYER_FOV			60
+# define PLAYER_FOV			50
 # define PLAYER_DIAG_RATIO	10
 # define CAMERA_SPEED		20
 

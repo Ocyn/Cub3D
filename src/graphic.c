@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 07:39:45 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 11:54:10 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 13:40:18 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	framepersecond(void)
 		previous_time = current_time;
 		current_time = clock();
 	}
-	fps = CLOCKS_PER_SEC / (current_time - previous_time);
+	fps = CLOCKS_PER_SEC / (current_time - previous_time \
+	+ (current_time - previous_time == 0));
 	previous_time = current_time;
 	return (fps);
 }
