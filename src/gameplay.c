@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 15:36:28 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 16:15:53 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	gp_physic_engine(t_data *data)
 	/ (fps * 1.2)));
 	cord[1] = (int)(*data->player.y + (data->mlx.speed * data->player.a_move[1] \
 	/ (fps * 1.2)));
-	if ((cord[0] > data->map.xlen) || !data->map.map[(int)(*data->player.y)][cord[0]] \
+	if ((cord[0] > data->map.xlen) \
+	|| !data->map.map[(int)(*data->player.y)][cord[0]] \
 	|| data->map.map[(int)(*data->player.y)][cord[0]] == '1')
 		data->player.a_move[0] = 0;
 	if ((cord[1] > data->map.ylen) || !data->map.map[cord[1]] \
