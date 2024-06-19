@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/11 19:32:42 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 14:51:58 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	init_mlx_struct(t_data *data, t_mlx *mlx)
 
 int	init_player_struct(t_data *data, t_player *pl, t_map map)
 {
-	if (!pl || !map.map || !map.map[0] || !map.map[0][0])
-		return (err_return(EXIT_FAILURE, "Memory issue", 1));
 	res_player_struct(pl, 0);
 	while (pl->ypos < map.ylen && !ft_strchr(map.map[pl->ypos], 'N') \
 	&& !ft_strchr(map.map[pl->ypos], 'S') && !ft_strchr(map.map[pl->ypos], 'E') \
@@ -101,6 +99,8 @@ int	init_player_struct(t_data *data, t_player *pl, t_map map)
 		pl->angle -= 90;
 	if (pl->compass == 'S')
 		pl->angle += 180;
+	if (pl->compass == 'W')
+		pl->angle -= 180;
 	pl->data = data;
 	return (EXIT_SUCCESS);
 }
