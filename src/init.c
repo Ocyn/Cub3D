@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 20:53:57 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 14:51:58 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 15:10:55 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	init_player_struct(t_data *data, t_player *pl, t_map map)
 	&& !ft_strchr(map.map[pl->ypos], 'S') && !ft_strchr(map.map[pl->ypos], 'E') \
 	&& !ft_strchr(map.map[pl->ypos], 'W'))
 		pl->ypos++;
-	while (map.map[pl->ypos][pl->xpos] && map.map[pl->ypos][pl->xpos] != 'N' \
+	while (pl->xpos < map.xlen && map.map[pl->ypos][pl->xpos] != 'N' \
 	&& map.map[pl->ypos][pl->xpos] != 'S' && map.map[pl->ypos][pl->xpos] != 'E' \
 	&& map.map[pl->ypos][pl->xpos] != 'W')
 		pl->xpos++;
@@ -93,14 +93,12 @@ int	init_player_struct(t_data *data, t_player *pl, t_map map)
 	pl->x_y[0] = (double)pl->xpos + 0.01f;
 	pl->x_y[1] = (double)pl->ypos + 0.01f;
 	pl->angle = 90;
-	if (pl->compass == 'O')
-		pl->angle += 90;
 	if (pl->compass == 'E')
-		pl->angle -= 90;
+		pl->angle = 180;
 	if (pl->compass == 'S')
-		pl->angle += 180;
+		pl->angle = 270;
 	if (pl->compass == 'W')
-		pl->angle -= 180;
+		pl->angle = 0;
 	pl->data = data;
 	return (EXIT_SUCCESS);
 }

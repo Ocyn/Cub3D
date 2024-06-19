@@ -6,7 +6,7 @@
 /*   By: jcuzin <jcuzin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/13 04:57:10 by jcuzin            #+#    #+#             */
-/*   Updated: 2024/06/19 14:21:21 by jcuzin           ###   ########.fr       */
+/*   Updated: 2024/06/19 15:00:46 by jcuzin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	gp_physic_engine(t_data *data)
 	t_player	*mc;
 	t_mlx		*mlx;
 	double		fps;
+	int			cord[2];
 
 	fps = data->mlx.fps + 1;
 	mc = &data->player;
@@ -25,14 +26,14 @@ int	gp_physic_engine(t_data *data)
 		mc->angle = 360;
 	if (mc->angle > 360)
 		mc->angle = 0;
-	if (((int)(*data->player.x + (data->mlx.speed * data->player.a_move[0] \
-	/ (fps * 1.2))) > data->map.xlen) \
-	|| data->map.map[(int)(*data->player.y)][(int)(*data->player.x \
-	+ (data->mlx.speed * data->player.a_move[0] / (fps * 1.2)))] == '1')
+	cord[0] = (int)(*data->player.x + (data->mlx.speed * data->player.a_move[0] \
+	/ (fps * 1.2)));
+	cord[1] = (int)(*data->player.y + (data->mlx.speed * data->player.a_move[1] \
+	/ (fps * 1.2)));
+	if ((cord[0] > data->map.xlen) \
+	|| data->map.map[(int)(*data->player.y)][cord[0]] == '1')
 		data->player.a_move[0] = 0;
-	if (((int)(*data->player.y + (data->mlx.speed * data->player.a_move[1] \
-	/ (fps * 1.2))) > data->map.ylen) || data->map.map[(int)(*data->player.y \
-	+ (data->mlx.speed * data->player.a_move[1] / (fps * 1.2)))] \
+	if ((cord[1] > data->map.ylen) || data->map.map[cord[1]] \
 	[(int)(*data->player.x)] == '1')
 		data->player.a_move[1] = 0;
 	return (EXIT_SUCCESS);
