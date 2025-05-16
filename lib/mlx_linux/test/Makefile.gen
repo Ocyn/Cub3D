@@ -19,10 +19,18 @@ ifeq ($(UNAME), Darwin)
 else ifeq ($(UNAME), FreeBSD)
 	# FreeBSD
 	CC = clang
+else ifeq ($(GCC9),)
+	CC = gcc-9
+	LFLAGS += -lbsd
 else
 	#Linux and others...
-	CC	= gcc
+	CC = gcc
 	LFLAGS += -lbsd
+endif
+
+GCC9 = $(shell gcc-9 --version 2>/dev/null)
+ifneq ($(GCC9),)
+	CC = gcc-9
 endif
 
 all: $(NAME)

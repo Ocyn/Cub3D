@@ -15,13 +15,11 @@
 int	gp_physic_engine(t_data *data)
 {
 	t_player	*mc;
-	t_mlx		*mlx;
 	double		fps;
 	int			cord[2];
 
 	fps = data->mlx.fps + 1;
 	mc = &data->player;
-	mlx = &data->mlx;
 	if (mc->angle < 0)
 		mc->angle = 360;
 	if (mc->angle > 360)
