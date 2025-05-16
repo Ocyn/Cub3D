@@ -18,6 +18,10 @@ CC	= gcc
 ifeq ($(UNAME),FreeBSD)
 	CC = clang
 endif
+GCC9 = $(shell gcc-9 --version 2>/dev/null)
+ifneq ($(GCC9),)
+	CC = gcc-9
+endif
 
 NAME		= libmlx.a
 NAME_UNAME	= libmlx_$(UNAME).a

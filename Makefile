@@ -71,7 +71,13 @@ DIRS				= $(sort $(dir $(OBJ)))
 
 #			UTILITIES
 
-CC					= cc
+GCC9 = $(shell gcc-9 --version 2>/dev/null)
+ifeq ($(GCC9),)
+	CC = cc
+else
+	CC = gcc-9
+endif
+
 CFLAGS				= -Wextra -Wall -Werror -g3 -MMD
 
 FLAGS				= $(CFLAGS)
@@ -117,7 +123,7 @@ $(DIRS) :
 clean : 
 	make clean -sC lib/libft
 	make clean -sC lib/gnl
-	# @make clean -sC $(MLX_DIR)
+	make clean -sC $(MLX_DIR)
 	$(call logs, $(YELLOW),"Cleaning\ OBJ\ files")
 	rm -rf $(OBJ_DIR)
 	$(LOG__SUCCESS)
@@ -131,6 +137,7 @@ fclean : clean
 	rm -rf lib/mlx/libmlx.a
 
 re : fclean all
+	make re -sC $(MLX_DIR)
 
 -include $(DEP)
 

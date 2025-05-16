@@ -16,8 +16,7 @@ int	me_set_color(int *src, size_t red, size_t green, size_t blue)
 {
 	if (!src)
 		return (err_return(EXIT_FAILURE, "Color code unavailable", 4));
-	if (red > 256 || green > 256 || blue > 256 \
-	|| red < 0 || green < 0 || blue < 0)
+	if (red > 256 || green > 256 || blue > 256)
 		return (err_return(EXIT_FAILURE, "Invalid color code", 4));
 	if (red <= 256)
 		src[0] = red;

@@ -13,3 +13,5 @@
 !src/
 !lib/
 !maps/
+*.a
+*.o
